@@ -22,13 +22,13 @@ public class RobotContainer {
     private final Joystick driver = new Joystick(0);
 
     /* Drive Controls */
-    private final int translationAxis = 1;
-    private final int strafeAxis = 0;
+    private final int translationAxis = 0;
+    private final int strafeAxis = 1;
     private final int rotationAxis = 2;
 
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, 11);
-    private final JoystickButton robotCentric = new JoystickButton(driver, 12);
+    private final JoystickButton robotCentric = new JoystickButton(driver, 1);
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
@@ -40,7 +40,7 @@ public class RobotContainer {
             new TeleopSwerve(
                 s_Swerve, 
                 () -> -driver.getRawAxis(translationAxis),
-                () -> driver.getRawAxis(strafeAxis),
+                () -> -driver.getRawAxis(strafeAxis),
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean()
             )
