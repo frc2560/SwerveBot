@@ -22,8 +22,8 @@ public class RobotContainer {
     private final Joystick driver = new Joystick(0);
 
     /* Drive Controls */
-    private final int translationAxis = 0;
-    private final int strafeAxis = 1;
+    private final int translationAxis = 1;
+    private final int strafeAxis = 0;
     private final int rotationAxis = 2;
 
     /* Driver Buttons */
@@ -40,8 +40,8 @@ public class RobotContainer {
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis),
-                () -> -driver.getRawAxis(strafeAxis),
+                () -> driver.getRawAxis(translationAxis),
+                () -> driver.getRawAxis(strafeAxis),
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean()
             )

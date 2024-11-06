@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import frc.robot.SwerveModule;
 import frc.robot.Constants;
 
@@ -23,6 +24,7 @@ public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public AHRS gyro;
+    private final Field2d m_field = new Field2d();
 
     public Swerve() {
         gyro = new AHRS(Constants.Swerve.navX);
@@ -88,6 +90,7 @@ public class Swerve extends SubsystemBase {
         return swerveOdometry.getPoseMeters();
     }
 
+
     public void setPose(Pose2d pose) {
         swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
     }
@@ -105,7 +108,14 @@ public class Swerve extends SubsystemBase {
     }
 
     public Rotation2d getGyroYaw() {
-        return gyro.getRotation2d().times(-1);
+        return Rotation2d.fromDegrees(Math.IEEEremainder(-gyro.getYaw(), 360.0d));
+        //return gyro.getRotation2d().times(-1);
+    }
+    public Rotation2d getYaw() {
+        return Rotation2d.fromDegrees(Math.IEEEremainder(-gyro.getYaw(), 360.0d));
+        /*return (Constants.Swerve.invertGyro)
+                ? Rotation2d.fromDegrees(360 - gyro.getYaw())
+                : Rotation2d.fromDegrees(gyro.getYaw());*/
     }
 
     public void resetModulesToAbsolute(){
@@ -117,6 +127,10 @@ public class Swerve extends SubsystemBase {
     @Override
     public void periodic(){
         swerveOdometry.update(getGyroYaw(), getModulePositions());
+        m_field.setRobotPose(this.getPose());
+
+        SmartDashboard.putData(m_field);
+        SmartDashboard.putData(this.gyro);
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
