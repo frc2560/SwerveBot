@@ -108,14 +108,11 @@ public class Swerve extends SubsystemBase {
     }
 
     public Rotation2d getGyroYaw() {
-        return Rotation2d.fromDegrees(Math.IEEEremainder(-gyro.getYaw(), 360.0d));
-        //return gyro.getRotation2d().times(-1);
+        return Rotation2d.fromDegrees(getGyro()).times(-1);
     }
-    public Rotation2d getYaw() {
-        return Rotation2d.fromDegrees(Math.IEEEremainder(-gyro.getYaw(), 360.0d));
-        /*return (Constants.Swerve.invertGyro)
-                ? Rotation2d.fromDegrees(360 - gyro.getYaw())
-                : Rotation2d.fromDegrees(gyro.getYaw());*/
+    public double getGyro()
+    {
+        return gyro.getYaw();
     }
 
     public void resetModulesToAbsolute(){
@@ -131,6 +128,7 @@ public class Swerve extends SubsystemBase {
 
         SmartDashboard.putData(m_field);
         SmartDashboard.putData(this.gyro);
+        SmartDashboard.putNumber("Gyro ", this.getGyro());
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
