@@ -18,7 +18,7 @@ public final class Constants {
 
     public static final class Swerve {
 
-        public static boolean invertGyro = false;
+        public static boolean invertGyro = true;
         public static SPI.Port navX = SPI.Port.kMXP;
 
         public static final COTSTalonFXSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot

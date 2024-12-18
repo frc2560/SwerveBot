@@ -59,7 +59,14 @@ public class Swerve extends SubsystemBase {
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
         }
-    }    
+    }
+    public void alignStraight() {
+        SwerveModuleState aligned = new SwerveModuleState(0.0, new Rotation2d());
+
+        for(SwerveModule mod : mSwerveMods) {
+            mod.setDesiredState(aligned, false);
+        }
+    }
 
     /* Used by SwerveControllerCommand in Auto */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
@@ -108,11 +115,11 @@ public class Swerve extends SubsystemBase {
     }
 
     public Rotation2d getGyroYaw() {
-        return Rotation2d.fromDegrees(getGyro()).times(-1);
+        return Rotation2d.fromDegrees(getGyro());
     }
     public double getGyro()
     {
-        return gyro.getYaw();
+        return -gyro.getAngle();
     }
 
     public void resetModulesToAbsolute(){
