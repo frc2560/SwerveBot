@@ -59,8 +59,8 @@ public class RobotContainer {
      */
     private void configureButtonBindings() {
         /* Driver Buttons */
-        zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        setWheelsToZero.onTrue(new InstantCommand(() -> s_Swerve.resetModulesToAbsolute()));
+        zeroGyro.onTrue(new InstantCommand(s_Swerve::zeroHeading));
+        setWheelsToZero.onTrue(new InstantCommand(s_Swerve::alignStraight));
     }
 
     /**
