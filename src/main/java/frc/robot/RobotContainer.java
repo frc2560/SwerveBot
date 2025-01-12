@@ -41,8 +41,8 @@ public class RobotContainer {
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
-                () -> driver.getRawAxis(translationAxis),
-                () -> -driver.getRawAxis(strafeAxis),
+                () -> -driver.getRawAxis(translationAxis),
+                () -> driver.getRawAxis(strafeAxis),
                 () -> (driver.getRawAxis(rotationAxis)*0.5),
                 () -> robotCentric.getAsBoolean()
             )
@@ -72,6 +72,6 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new exampleAuto(s_Swerve);
+        return new ExampleCommand(s_Swerve);
     }
 }

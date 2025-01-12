@@ -114,7 +114,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public Pose2d getPose() {
-        return swerveOdometry.getPoseMeters();
+        return poseEstimate.getEstimatedPosition();
     }
 
 
@@ -157,19 +157,24 @@ public class Swerve extends SubsystemBase {
         SmartDashboard.putData(this.gyro);
         SmartDashboard.putNumber("Gyro ", this.getGyro());
 
-        poseEstimate.update(getGyroYaw(), getModulePositions());
+
         //For 2024 and beyond, the origin of your coordinate system should always be the "blue" origin.
         // FRC teams should always use botpose_wpiblue for pose-related functionality
-        LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Sensor.LIMELIGHT);
+        LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Sensor.LIMELIGHT);
         if(limelightMeasurement != null){
-            if (limelightMeasurement.tagCount >= 2)
+            if (limelightMeasurement.tagCount >= 1)
             {
                 poseEstimate.setVisionMeasurementStdDevs(VecBuilder.fill(0.7, 0.7, 9999999));
                 poseEstimate.addVisionMeasurement(
                         limelightMeasurement.pose,
                         limelightMeasurement.timestampSeconds
                 );
+                poseEstimate.update(getGyroYaw(), getModulePositions());
             }
+        }
+        else
+        {
+            poseEstimate.update(getGyroYaw(), getModulePositions());
         }
 
         for(SwerveModule mod : mSwerveMods){
