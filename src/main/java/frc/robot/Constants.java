@@ -14,7 +14,7 @@ import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
-    public static final double stickDeadband = 0.2;
+    public static final double stickDeadband = 0.1;
 
     public static final class Swerve {
 
@@ -82,9 +82,9 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 0.5; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 0.005; //TODO: This must be tuned to specific robot
         /** Radians per Second */
-        public static final double maxAngularVelocity = 2; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = 0.005; //TODO: This must be tuned to specific robot
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -130,7 +130,9 @@ public final class Constants {
             public static final SwerveModuleConstants constants =
                     new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
+
     }
+
 
     public static final class AutoConstants { //TODO: The below constants are used in the example auto, and must be tuned to specific robot
         public static final double kMaxSpeedMetersPerSecond = 3;
@@ -146,5 +148,8 @@ public final class Constants {
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
                 new TrapezoidProfile.Constraints(
                         kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+    }
+    public static final class Sensor{
+        public static String LIMELIGHT = "limelight";
     }
 }

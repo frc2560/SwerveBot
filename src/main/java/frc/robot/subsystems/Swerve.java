@@ -1,7 +1,10 @@
 package frc.robot.subsystems;
 
-import com.kauailabs.navx.frc.AHRS;
+import com.studica.frc.AHRS;
+import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import frc.robot.LimelightHelpers;
 import frc.robot.SwerveModule;
 import frc.robot.Constants;
 
@@ -25,9 +28,10 @@ public class Swerve extends SubsystemBase {
     public SwerveModule[] mSwerveMods;
     public AHRS gyro;
     private final Field2d m_field = new Field2d();
+    private SwerveDrivePoseEstimator poseEstimate;
 
     public Swerve() {
-        gyro = new AHRS(Constants.Swerve.navX);
+        gyro = new AHRS(AHRS.NavXComType.kMXP_SPI);
         gyro.zeroYaw();
 
         mSwerveMods = new SwerveModule[] {
@@ -38,6 +42,7 @@ public class Swerve extends SubsystemBase {
         };
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions());
+        poseEstimate = new SwerveDrivePoseEstimator(Constants.Swerve.swerveKinematics, getGyroYaw(), getModulePositions(), new Pose2d());
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
@@ -58,6 +63,21 @@ public class Swerve extends SubsystemBase {
 
         for(SwerveModule mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
+        }
+    }
+
+    public void stop() {
+        SwerveModuleState[] swerveModuleStates =
+                Constants.Swerve.swerveKinematics.toSwerveModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(
+                        0,
+                        0,
+                        0,
+                        getHeading()
+                ));
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
+
+        for (SwerveModule mod : mSwerveMods) {
+            mod.setDesiredState(swerveModuleStates[mod.moduleNumber], true);
         }
     }
     public void alignStraight() {
@@ -119,7 +139,7 @@ public class Swerve extends SubsystemBase {
     }
     public double getGyro()
     {
-        return -gyro.getAngle();
+        return -gyro.getYaw();
     }
 
     public void resetModulesToAbsolute(){
@@ -136,6 +156,21 @@ public class Swerve extends SubsystemBase {
         SmartDashboard.putData(m_field);
         SmartDashboard.putData(this.gyro);
         SmartDashboard.putNumber("Gyro ", this.getGyro());
+
+        poseEstimate.update(getGyroYaw(), getModulePositions());
+        //For 2024 and beyond, the origin of your coordinate system should always be the "blue" origin.
+        // FRC teams should always use botpose_wpiblue for pose-related functionality
+        LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue(Constants.Sensor.LIMELIGHT);
+        if(limelightMeasurement != null){
+            if (limelightMeasurement.tagCount >= 2)
+            {
+                poseEstimate.setVisionMeasurementStdDevs(VecBuilder.fill(0.7, 0.7, 9999999));
+                poseEstimate.addVisionMeasurement(
+                        limelightMeasurement.pose,
+                        limelightMeasurement.timestampSeconds
+                );
+            }
+        }
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());
