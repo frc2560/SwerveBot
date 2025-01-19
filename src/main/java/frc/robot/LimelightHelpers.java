@@ -2,15 +2,20 @@
 
 package frc.robot;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.wpi.first.math.geometry.*;
+import edu.wpi.first.networktables.DoubleArrayEntry;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.TimestampedDoubleArray;
+import frc.robot.LimelightHelpers.LimelightResults;
+import frc.robot.LimelightHelpers.PoseEstimate;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.networktables.*;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Translation2d;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -18,6 +23,13 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -1554,7 +1566,7 @@ public class LimelightHelpers {
     public static LimelightResults getLatestResults(String limelightName) {
 
         long start = System.nanoTime();
-        LimelightResults results = new LimelightResults();
+        LimelightHelpers.LimelightResults results = new LimelightHelpers.LimelightResults();
         if (mapper == null) {
             mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         }

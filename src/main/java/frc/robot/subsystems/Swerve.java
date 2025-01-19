@@ -84,7 +84,7 @@ public class Swerve extends SubsystemBase {
         SwerveModuleState aligned = new SwerveModuleState(0.0, new Rotation2d());
 
         for(SwerveModule mod : mSwerveMods) {
-            mod.setDesiredState(aligned, false);
+            mod.setDesiredState(aligned, true);
         }
     }
 
@@ -119,7 +119,7 @@ public class Swerve extends SubsystemBase {
 
 
     public void setPose(Pose2d pose) {
-        swerveOdometry.resetPosition(getGyroYaw(), getModulePositions(), pose);
+        poseEstimate.resetPosition(getGyroYaw(), getModulePositions(), pose);
     }
 
     public Rotation2d getHeading(){
@@ -156,26 +156,33 @@ public class Swerve extends SubsystemBase {
         SmartDashboard.putData(m_field);
         SmartDashboard.putData(this.gyro);
         SmartDashboard.putNumber("Gyro ", this.getGyro());
+        SmartDashboard.putNumber("X", getPose().getX());
+        SmartDashboard.putNumber("Y", getPose().getY());
+        SmartDashboard.putNumber("Mod_0_p", mSwerveMods[0].mDriveMotor.get());
+        SmartDashboard.putNumber("Mod_1_p", mSwerveMods[1].mDriveMotor.get());
+        SmartDashboard.putNumber("Mod_2_p", mSwerveMods[2].mDriveMotor.get());
+        SmartDashboard.putNumber("Mod_3_p", mSwerveMods[3].mDriveMotor.get());
 
 
         //For 2024 and beyond, the origin of your coordinate system should always be the "blue" origin.
         // FRC teams should always use botpose_wpiblue for pose-related functionality
+        LimelightHelpers.setPipelineIndex(Constants.Sensor.LIMELIGHT, 0);
+        var temp = LimelightHelpers.getFiducialID(Constants.Sensor.LIMELIGHT);
+        var temp2 = LimelightHelpers.getRawFiducials(Constants.Sensor.LIMELIGHT);
         LimelightHelpers.PoseEstimate limelightMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Sensor.LIMELIGHT);
-        if(limelightMeasurement != null){
-            if (limelightMeasurement.tagCount >= 1)
-            {
+        if(limelightMeasurement != null) {
+            SmartDashboard.putNumber("TagCount", limelightMeasurement.rawFiducials.length);
+            if (limelightMeasurement.rawFiducials.length >= 1) {
                 poseEstimate.setVisionMeasurementStdDevs(VecBuilder.fill(0.7, 0.7, 9999999));
                 poseEstimate.addVisionMeasurement(
                         limelightMeasurement.pose,
                         limelightMeasurement.timestampSeconds
                 );
-                poseEstimate.update(getGyroYaw(), getModulePositions());
             }
         }
-        else
-        {
+
             poseEstimate.update(getGyroYaw(), getModulePositions());
-        }
+
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " CANcoder", mod.getCANcoder().getDegrees());

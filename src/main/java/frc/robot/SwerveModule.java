@@ -18,14 +18,14 @@ public class SwerveModule {
     private Rotation2d angleOffset;
 
     private TalonFX mAngleMotor;
-    private TalonFX mDriveMotor;
+    public TalonFX mDriveMotor;
     private CANcoder angleEncoder;
 
     private final SimpleMotorFeedforward driveFeedForward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
     /* drive motor control requests */
     private final DutyCycleOut driveDutyCycle = new DutyCycleOut(0);
-    private final VelocityVoltage driveVelocity = new VelocityVoltage(0);
+    public final VelocityVoltage driveVelocity = new VelocityVoltage(0);
 
     /* angle motor control requests */
     private final PositionVoltage anglePosition = new PositionVoltage(0);

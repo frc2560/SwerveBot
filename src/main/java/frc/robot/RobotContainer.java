@@ -22,8 +22,8 @@ public class RobotContainer {
     private final Joystick driver = new Joystick(0);
 
     /* Drive Controls */
-    private final int translationAxis = 0;
-    private final int strafeAxis = 1;
+    private final int translationAxis = 1;
+    private final int strafeAxis = 0;
     private final int rotationAxis = 2;
 
     /* Driver Buttons */
@@ -31,6 +31,7 @@ public class RobotContainer {
     private final JoystickButton setWheelsToZero = new JoystickButton(driver, 12);
     private final JoystickButton zeroPose = new JoystickButton(driver, 10);
     private final JoystickButton robotCentric = new JoystickButton(driver, 1);
+    private final JoystickButton enableZ = new JoystickButton(driver, 2);
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
@@ -38,15 +39,25 @@ public class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        s_Swerve.setDefaultCommand(
-            new TeleopSwerve(
-                s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis),
-                () -> driver.getRawAxis(strafeAxis),
-                () -> (driver.getRawAxis(rotationAxis)*0.5),
-                () -> robotCentric.getAsBoolean()
-            )
+        enableZ.whileTrue(
+                new TeleopSwerve(
+                        s_Swerve,
+                        () -> driver.getRawAxis(translationAxis),
+                        () -> driver.getRawAxis(strafeAxis),
+                        () -> (driver.getRawAxis(rotationAxis) * 0.5),
+                        () -> robotCentric.getAsBoolean()
+                )
         );
+
+            s_Swerve.setDefaultCommand(
+                    new TeleopSwerve(
+                            s_Swerve,
+                            () -> -driver.getRawAxis(translationAxis),
+                            () -> driver.getRawAxis(strafeAxis),
+                            () -> 0,
+                            () -> robotCentric.getAsBoolean()
+                    )
+            );
 
         // Configure the button bindings
         configureButtonBindings();
@@ -72,6 +83,6 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new ExampleCommand(s_Swerve);
+        return new ChaseTagCommand(s_Swerve);
     }
 }

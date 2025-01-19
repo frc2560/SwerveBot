@@ -27,7 +27,7 @@ public class ChaseTagCommand extends Command {
 
   private final ProfiledPIDController xController = new ProfiledPIDController(3, 0, 0, X_CONSTRAINTS);
   private final ProfiledPIDController yController = new ProfiledPIDController(3, 0, 0, Y_CONSTRAINTS);
-  private final ProfiledPIDController omegaController = new ProfiledPIDController(2, 0, 0, OMEGA_CONSTRAINTS);
+  private final ProfiledPIDController omegaController = new ProfiledPIDController(0.1, 0, 0, OMEGA_CONSTRAINTS);
 
 
   public ChaseTagCommand(
@@ -111,7 +111,7 @@ public class ChaseTagCommand extends Command {
       }
 
       drivetrainSubsystem.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-              omegaSpeed * Constants.Swerve.maxAngularVelocity,
+              omegaSpeed,
               true,
               true);
     }
