@@ -41,7 +41,7 @@ public class ExampleCommand extends SequentialCommandGroup
                         List.of(new Translation2d(0, -1), new Translation2d(0, -2)),
                         // End 3 meters straight ahead of where we started, facing forward
                         new Pose2d(0, -7, new Rotation2d(0)),
-                        config);
+                        config); 
 
 
         var thetaController =

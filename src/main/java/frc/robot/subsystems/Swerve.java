@@ -135,7 +135,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public Rotation2d getGyroYaw() {
-        return Rotation2d.fromDegrees(getGyro());
+        return Rotation2d.fromDegrees(getGyro()).rotateBy(new Rotation2d(Math.PI));
     }
     public double getGyro()
     {
@@ -189,5 +189,14 @@ public class Swerve extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Angle", mod.getPosition().angle.getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
+
+
+    }
+    public void resetBot() {
+        gyro.zeroYaw();
+        var pose = new Pose2d(getPose().getX(), getPose().getY(), new Rotation2d(Math.PI));
+        setPose(pose);
+        poseEstimate.resetPosition(new Rotation2d(0), getModulePositions(), pose);
+        m_field.setRobotPose(getPose());
     }
 }

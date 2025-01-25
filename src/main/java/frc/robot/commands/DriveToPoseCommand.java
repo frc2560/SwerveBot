@@ -20,10 +20,11 @@ public class DriveToPoseCommand extends Command {
 
     private final Swerve swerve;
     private final Pose2d pose2d;
-    private final PIDController
+    private final PIDController pidController;
 
-    public DriveToPoseCommand(Swerve swerve, Pose2d pose2d) {
+    public DriveToPoseCommand(Swerve swerve, Pose2d pose2d, PIDController pidController) {
         this.swerve = swerve;
         this.pose2d = pose2d;
+        this.pidController = pidController;
     }
 }

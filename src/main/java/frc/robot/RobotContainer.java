@@ -28,10 +28,12 @@ public class RobotContainer {
 
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, 11);
-    private final JoystickButton setWheelsToZero = new JoystickButton(driver, 12);
+//    private final JoystickButton setWheelsToZero = new JoystickButton(driver, 12);
     private final JoystickButton zeroPose = new JoystickButton(driver, 10);
     private final JoystickButton robotCentric = new JoystickButton(driver, 1);
     private final JoystickButton enableZ = new JoystickButton(driver, 2);
+
+    private final JoystickButton resetPose = new JoystickButton(driver, 12);
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
@@ -42,9 +44,9 @@ public class RobotContainer {
         enableZ.whileTrue(
                 new TeleopSwerve(
                         s_Swerve,
-                        () -> driver.getRawAxis(translationAxis),
-                        () -> driver.getRawAxis(strafeAxis),
-                        () -> (driver.getRawAxis(rotationAxis) * 0.5),
+                        () -> -driver.getRawAxis(translationAxis),
+                        () -> -driver.getRawAxis(strafeAxis),
+                        () -> (-driver.getRawAxis(rotationAxis) * 0.5),
                         () -> robotCentric.getAsBoolean()
                 )
         );
@@ -53,7 +55,7 @@ public class RobotContainer {
                     new TeleopSwerve(
                             s_Swerve,
                             () -> -driver.getRawAxis(translationAxis),
-                            () -> driver.getRawAxis(strafeAxis),
+                            () -> -driver.getRawAxis(strafeAxis),
                             () -> 0,
                             () -> robotCentric.getAsBoolean()
                     )
@@ -72,8 +74,9 @@ public class RobotContainer {
     private void configureButtonBindings() {
         /* Driver Buttons */
         zeroGyro.onTrue(new InstantCommand(s_Swerve::zeroHeading));
-        setWheelsToZero.onTrue(new InstantCommand(s_Swerve::alignStraight));
+//        setWheelsToZero.onTrue(new InstantCommand(s_Swerve::alignStraight));
         zeroPose.onTrue(new InstantCommand(s_Swerve::zeroHeading));
+        resetPose.onTrue((new InstantCommand((s_Swerve::resetBot))));
     }
 
     /**
