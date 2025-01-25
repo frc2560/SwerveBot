@@ -2,6 +2,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.*;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -13,9 +15,9 @@ import frc.robot.subsystems.Swerve;
 
 public class ChaseTagCommand extends Command {
   
-  private static final TrapezoidProfile.Constraints X_CONSTRAINTS = new TrapezoidProfile.Constraints(3, 2);
-  private static final TrapezoidProfile.Constraints Y_CONSTRAINTS = new TrapezoidProfile.Constraints(3, 2);
-  private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS =   new TrapezoidProfile.Constraints(8, 8);
+  private static final TrapezoidProfile.Constraints X_CONSTRAINTS = new TrapezoidProfile.Constraints(0.25, 1);
+  private static final TrapezoidProfile.Constraints Y_CONSTRAINTS = new TrapezoidProfile.Constraints(0.25, 1);
+  private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS =   new TrapezoidProfile.Constraints(1, 1);
   
   private static final int TAG_TO_CHASE = 2;
   private static final Transform3d TAG_TO_GOAL = 
@@ -25,19 +27,19 @@ public class ChaseTagCommand extends Command {
 
   private final Swerve drivetrainSubsystem;
 
-  private final ProfiledPIDController xController = new ProfiledPIDController(3, 0, 0, X_CONSTRAINTS);
-  private final ProfiledPIDController yController = new ProfiledPIDController(3, 0, 0, Y_CONSTRAINTS);
-  private final ProfiledPIDController omegaController = new ProfiledPIDController(0.1, 0, 0, OMEGA_CONSTRAINTS);
+  private final PIDController xController = new PIDController(0.1, 0, 0);
+  private final PIDController yController = new PIDController(0.1, 0, 0);
+  private final PIDController omegaController = new PIDController(0.1, 0, 0);
 
 
   public ChaseTagCommand(
         Swerve drivetrainSubsystem) {
     this.drivetrainSubsystem = drivetrainSubsystem;
 
-    xController.setTolerance(0.2);
-    yController.setTolerance(0.2);
-    omegaController.setTolerance(Units.degreesToRadians(3));
-    omegaController.enableContinuousInput(-Math.PI, Math.PI);
+    xController.setTolerance(1);
+    yController.setTolerance(10);
+    omegaController.setTolerance(10);
+    //omegaController.enableContinuousInput(-Math.PI, Math.PI);
 
     addRequirements(drivetrainSubsystem);
   }
@@ -46,67 +48,38 @@ public class ChaseTagCommand extends Command {
   public void initialize() {
     LimelightHelpers.SetFiducialIDFiltersOverride(Constants.Sensor.LIMELIGHT, new int[]{TAG_TO_CHASE});
     LimelightHelpers.SetFiducialDownscalingOverride(Constants.Sensor.LIMELIGHT, 2.0f);
-    var robotPose = drivetrainSubsystem.getPose();
-    omegaController.reset(robotPose.getRotation().getRadians());
-    xController.reset(robotPose.getX());
-    yController.reset(robotPose.getY());
+    xController.setSetpoint(5);
+    yController.setSetpoint(0);
   }
 
   @Override
   public void execute() {
-    var robotPose2d = drivetrainSubsystem.getPose();
-    var robotPose =
-            new Pose3d(
-                    robotPose2d.getX(),
-                    robotPose2d.getY(),
-                    0.0,
-                    new Rotation3d(0.0, 0.0, robotPose2d.getRotation().getRadians()));
     //Check if Limelight is seeing a target
-    if (LimelightHelpers.getTV(Constants.Sensor.LIMELIGHT)) {
-      // What are the current target's pose in relation to the robot?
-      double tx = LimelightHelpers.getTX(Constants.Sensor.LIMELIGHT);  // Horizontal offset from crosshair to target in degrees
-      double ty = LimelightHelpers.getTY(Constants.Sensor.LIMELIGHT);  // Vertical offset from crosshair to target in degrees
-      double ta = LimelightHelpers.getTA(Constants.Sensor.LIMELIGHT);
-
-      AprilTagFieldLayout aprilTagFieldLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
-
-      var aprilTagToDriveTo = aprilTagFieldLayout.getTagPose(TAG_TO_CHASE);
-
-
-      // Set the goals for the controllers
-      if(aprilTagToDriveTo.isPresent())
-      {
-        //Set how far from Tag we want to be
-        var targetOffset = new Translation2d(-1, 0);
-        //Where is the tag
-        var pose2d = aprilTagToDriveTo.get().toPose2d();
-        //Set the goal as the difference between the tag and offset.
-        var targetPose = new Pose2d(pose2d.getTranslation().minus(targetOffset), pose2d.getRotation());
-        xController.setGoal(targetPose.getX());
-        yController.setGoal(targetPose.getY());
-        omegaController.setGoal(targetPose.getRotation().getRadians());
-      }
-
-    }
 
 
     if (!LimelightHelpers.getTV(Constants.Sensor.LIMELIGHT)) {
       // No target has been visible
       drivetrainSubsystem.stop();
-    } else {
+    }
+    else
+    {
+      double tx = LimelightHelpers.getTX(Constants.Sensor.LIMELIGHT);  // Horizontal offset from crosshair to target in degrees
+      double ty = LimelightHelpers.getTY(Constants.Sensor.LIMELIGHT);  // Vertical offset from crosshair to target in degrees
+      double ta = LimelightHelpers.getTA(Constants.Sensor.LIMELIGHT);
+
       // Drive to the target
-      var xSpeed = xController.calculate(robotPose.getX());
-      if (xController.atGoal()) {
+      var xSpeed = MathUtil.clamp(xController.calculate(ta, 5), -0.05, .05);
+      if (xController.atSetpoint()) {
         xSpeed = 0;
       }
 
-      var ySpeed = yController.calculate(robotPose.getY());
-      if (yController.atGoal()) {
+      var ySpeed =  MathUtil.clamp(yController.calculate(ty, 0), -0.05, .05);
+      if (yController.atSetpoint()) {
         ySpeed = 0;
       }
 
-      var omegaSpeed = omegaController.calculate(robotPose2d.getRotation().getRadians());
-      if (omegaController.atGoal()) {
+      var omegaSpeed = MathUtil.clamp(omegaController.calculate(tx, 0), -0.04, 0.04);
+      if (omegaController.atSetpoint()) {
         omegaSpeed = 0;
       }
 
