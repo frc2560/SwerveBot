@@ -9,6 +9,12 @@
           "data": {
             "pathName": "Score 1 Coral and 1 Algae"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AlignToTag"
+          }
         }
       ]
     }
