@@ -2,7 +2,6 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -13,10 +12,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.*;
-import frc.robot.commands.dummycommands.AlgaeOffReefCommand;
-import frc.robot.commands.dummycommands.CoralIntakeCommand;
-import frc.robot.commands.dummycommands.Level4ScoreCommand;
-import frc.robot.commands.dummycommands.ProcessorScoreCommand;
+import frc.robot.commands.dummycommands.*;
 import frc.robot.subsystems.*;
 
 /**
@@ -63,9 +59,12 @@ public class RobotContainer {
 
         NamedCommands.registerCommand("AlignToTag", new ChaseTagCommand(s_Swerve));
         NamedCommands.registerCommand("ScoreOnLevel4", new Level4ScoreCommand(s_Swerve));
-        NamedCommands.registerCommand("GetAlgaeOffReef", new AlgaeOffReefCommand(s_Swerve));
+        NamedCommands.registerCommand("GrabAlgaeL1", new GrabAlgaeL1Command(s_Swerve));
         NamedCommands.registerCommand("IntakeCoral", new CoralIntakeCommand(s_Swerve));
         NamedCommands.registerCommand("ScoreInProcessor", new ProcessorScoreCommand(s_Swerve));
+        NamedCommands.registerCommand("GrabAlgaeL2", new GrabAlgaeL2Command(s_Swerve));
+        NamedCommands.registerCommand("KnockAlgaeOffL1", new KnockAlgaeOffL1Command(s_Swerve));
+        NamedCommands.registerCommand("KnockAlgaeOffL2", new KnockAlgaeOffL2Command(s_Swerve));
 
 
 

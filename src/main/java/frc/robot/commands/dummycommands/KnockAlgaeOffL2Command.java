@@ -1,6 +1,5 @@
 package frc.robot.commands.dummycommands;
 
-
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
@@ -16,10 +15,10 @@ import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.Swerve;
 
-public class AlgaeOffReefCommand extends Command {
+public class KnockAlgaeOffL2Command extends Command {
 
     private final Swerve drivetrainSubsystem;
-    public AlgaeOffReefCommand(Swerve drivetrainSubsystem) {
+    public KnockAlgaeOffL2Command(Swerve drivetrainSubsystem) {
         this.drivetrainSubsystem = drivetrainSubsystem;
 
         addRequirements(drivetrainSubsystem);
