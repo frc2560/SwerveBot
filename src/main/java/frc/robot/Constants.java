@@ -152,4 +152,11 @@ public final class Constants {
     public static final class Sensor{
         public static String LIMELIGHT = "limelight";
     }
+    public static class ElevatorConstants {
+        // Have to wire this all to get ID, set to 0 for now
+        public static final int ELEVATOR_MOTOR = 0;
+        public static final int ELEVATOR_TOP_SWITCH = 0;
+        public static final int ELEVATOR_BOTTOM_SWITCH = 0;
+
+    }
 }
