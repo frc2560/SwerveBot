@@ -1,4 +1,4 @@
-package frc.robot.commands.dummycommands;
+package frc.robot.commands.coral;
 
 
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -14,15 +14,23 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
+import frc.robot.subsystems.CoralIntakeSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Swerve;
 
 public class CoralIntakeCommand extends Command {
 
     private final Swerve drivetrainSubsystem;
-    public CoralIntakeCommand(Swerve drivetrainSubsystem) {
+    private final ElevatorSubsystem elevatorSubsystem;
+    private final CoralIntakeSubsystem coralIntakeSubsystem;
+    public CoralIntakeCommand(Swerve drivetrainSubsystem, ElevatorSubsystem elevatorSubsystem, CoralIntakeSubsystem coralIntakeSubsystem) {
         this.drivetrainSubsystem = drivetrainSubsystem;
+        this.elevatorSubsystem = elevatorSubsystem;
+        this.coralIntakeSubsystem = coralIntakeSubsystem;
 
         addRequirements(drivetrainSubsystem);
+        addRequirements(elevatorSubsystem);
+        addRequirements(coralIntakeSubsystem);
     }
 
     @Override
@@ -32,16 +40,19 @@ public class CoralIntakeCommand extends Command {
 
     @Override
     public void execute() {
-        new WaitCommand(2);
+        coralIntakeSubsystem.intakeCoral();
     }
 
-
+    @Override
+    public boolean isFinished() {
+      return coralIntakeSubsystem.hasCoral();
+    }
 
 
 
     @Override
     public void end(boolean interrupted) {
-        drivetrainSubsystem.stop();
+        coralIntakeSubsystem.stopIntake();
     }
 
 }

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.*;
+import frc.robot.commands.coral.CoralIntakeCommand;
 import frc.robot.commands.dummycommands.*;
 import frc.robot.subsystems.*;
 

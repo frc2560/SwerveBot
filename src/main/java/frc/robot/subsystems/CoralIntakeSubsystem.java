@@ -15,12 +15,18 @@ public class CoralIntakeSubsystem implements Subsystem {
     private SparkMax croalArm;
     private RelativeEncoder armEncoder;
     private DigitalInput lowerSwitch;
+    private DigitalInput hasCoral;
 
     public CoralIntakeSubsystem() {
        coralIntake = new SparkMax(Constants.Coral.IntakeMotor, SparkLowLevel.MotorType.kBrushless);
        croalArm = new SparkMax(Constants.Coral.ArmMotor, SparkLowLevel.MotorType.kBrushless);
        lowerSwitch = new DigitalInput(Constants.Coral.LowerSwitch);
+        hasCoral = new DigitalInput(Constants.Coral.PhotoSensor);
        armEncoder = croalArm.getEncoder();
+    }
+
+    public boolean hasCoral() {
+        return hasCoral.get();
     }
 
     public void intakeCoral()
