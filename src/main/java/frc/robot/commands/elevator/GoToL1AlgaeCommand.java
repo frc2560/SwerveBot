@@ -5,10 +5,10 @@ import frc.robot.Constants;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 
-public class GoToL1Command extends Command {
+public class GoToL1AlgaeCommand extends Command {
     private final ElevatorSubsystem elevatorSubsystem;
 
-    public GoToL1Command(ElevatorSubsystem elevatorSubsystem) {
+    public GoToL1AlgaeCommand(ElevatorSubsystem elevatorSubsystem) {
         this.elevatorSubsystem = elevatorSubsystem;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
