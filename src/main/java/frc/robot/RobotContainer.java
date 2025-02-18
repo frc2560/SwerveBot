@@ -57,7 +57,7 @@ public class RobotContainer {
 
         SmartDashboard.putData("Auto Chooser", autoChooser);
 
-        NamedCommands.registerCommand("AlignToTag", new ChaseTagCommand(s_Swerve));
+        NamedCommands.registerCommand("AlignToTag", new AlignWithTag(s_Swerve));
         NamedCommands.registerCommand("ScoreOnLevel4", new Level4ScoreCommand(s_Swerve));
         NamedCommands.registerCommand("GrabAlgaeL1", new GrabAlgaeL1Command(s_Swerve));
         NamedCommands.registerCommand("IntakeCoral", new CoralIntakeCommand(s_Swerve));

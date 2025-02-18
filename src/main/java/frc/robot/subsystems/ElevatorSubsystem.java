@@ -34,15 +34,15 @@ public  class ElevatorSubsystem implements Subsystem {
     }
 
     public boolean getTopSwitch() {
-        return !elevatorTopSwitch.get();
+        return elevatorTopSwitch.get();
     }
 
     public boolean getBottomSwitch() {
-        return !elevatorBottomSwitch.get();
+        return elevatorBottomSwitch.get();
     }
 
     public double getPosition() {
-        return -(elevatorEncoder.getPosition() / 2);
+        return elevatorEncoder.getPosition();
     }
 
     public void stopElevator() {
@@ -54,14 +54,12 @@ public  class ElevatorSubsystem implements Subsystem {
         SmartDashboard.putNumber("Elevator Position", getPosition());
         SmartDashboard.putBoolean("Bottom Switch", getBottomSwitch());
         SmartDashboard.putBoolean("Top Switch", getTopSwitch());
-
+        //TODO figure out Range of Position for elevator
         if (getTopSwitch()) {
             elevatorEncoder.setPosition(100);
         }
-
         if (getBottomSwitch()) {
             elevatorEncoder.setPosition(0);
-
         }
     }
 }

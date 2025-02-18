@@ -15,6 +15,16 @@ import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
     public static final double stickDeadband = 0.1;
+    public static class Coral{
+        public static final int IntakeMotor = 23;
+        public static final int ArmMotor = 30;
+
+        //TODO make limit switch
+        public static final int LowerSwitch = 0;
+        public static double IntakeSpeed = 0.2;
+        public static double OutTakeSpeed = 0.2;
+        public static double ArmSpeed = 0.2;
+    }
 
     public static final class Swerve {
 
@@ -154,7 +164,7 @@ public final class Constants {
     }
     public static class ElevatorConstants {
         // Have to wire this all to get ID, set to 0 for now
-        public static final int ELEVATOR_MOTOR = 0;
+        public static final int ELEVATOR_MOTOR = 20;
         public static final int ELEVATOR_TOP_SWITCH = 0;
         public static final int ELEVATOR_BOTTOM_SWITCH = 0;
 

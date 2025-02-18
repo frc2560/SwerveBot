@@ -1,19 +1,15 @@
 package frc.robot.commands;
 
-import edu.wpi.first.apriltag.AprilTagFieldLayout;
-import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.*;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.Swerve;
 
-public class ChaseTagCommand extends Command {
+public class AlignWithTag extends Command {
   
   private static final TrapezoidProfile.Constraints X_CONSTRAINTS = new TrapezoidProfile.Constraints(0.25, 1);
   private static final TrapezoidProfile.Constraints Y_CONSTRAINTS = new TrapezoidProfile.Constraints(0.25, 1);
@@ -32,14 +28,13 @@ public class ChaseTagCommand extends Command {
   private final PIDController omegaController = new PIDController(0.1, 0, 0);
 
 
-  public ChaseTagCommand(
+  public AlignWithTag(
         Swerve drivetrainSubsystem) {
     this.drivetrainSubsystem = drivetrainSubsystem;
 
     xController.setTolerance(1);
     yController.setTolerance(10);
     omegaController.setTolerance(10);
-    //omegaController.enableContinuousInput(-Math.PI, Math.PI);
 
     addRequirements(drivetrainSubsystem);
   }
@@ -88,6 +83,12 @@ public class ChaseTagCommand extends Command {
               true,
               true);
     }
+  }
+
+  @Override
+  public boolean isFinished()
+  {
+    return xController.atSetpoint() && yController.atSetpoint() && omegaController.atSetpoint();
   }
 
   @Override
