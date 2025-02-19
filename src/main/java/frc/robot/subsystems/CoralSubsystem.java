@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Constants;
 
-public class CoralIntakeSubsystem implements Subsystem {
+public class CoralSubsystem implements Subsystem {
 
     private SparkMax coralIntake;
     private SparkMax coralArm;
@@ -17,7 +17,7 @@ public class CoralIntakeSubsystem implements Subsystem {
     private DigitalInput lowerSwitch;
     private DigitalInput hasCoral;
 
-    public CoralIntakeSubsystem() {
+    public CoralSubsystem() {
        coralIntake = new SparkMax(Constants.Coral.IntakeMotor, SparkLowLevel.MotorType.kBrushless);
        coralArm = new SparkMax(Constants.Coral.ArmMotor, SparkLowLevel.MotorType.kBrushless);
        lowerSwitch = new DigitalInput(Constants.Coral.LowerSwitch);

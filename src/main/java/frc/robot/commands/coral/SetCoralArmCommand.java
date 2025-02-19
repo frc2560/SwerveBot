@@ -2,20 +2,17 @@ package frc.robot.commands.coral;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
-import frc.robot.subsystems.CoralIntakeSubsystem;
-import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.subsystems.CoralSubsystem;
 
 
 public class SetCoralArmCommand extends Command {
-    private final CoralIntakeSubsystem coralIntakeSubsystem;
-    private final ElevatorSubsystem elevatorSubsystem;
+    private final CoralSubsystem coralSubsystem;
 
-    public SetCoralArmCommand(CoralIntakeSubsystem coralIntakeSubsystem, ElevatorSubsystem elevatorSubsystem) {
-        this.coralIntakeSubsystem = coralIntakeSubsystem;
-        this.elevatorSubsystem = elevatorSubsystem;
+    public SetCoralArmCommand(CoralSubsystem coralSubsystem) {
+        this.coralSubsystem = coralSubsystem;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
-        addRequirements(this.coralIntakeSubsystem, this.elevatorSubsystem);
+        addRequirements(this.coralSubsystem);
     }
 
     @Override
@@ -25,15 +22,15 @@ public class SetCoralArmCommand extends Command {
 
     @Override
     public void execute() {
-        if(coralIntakeSubsystem.getArmLocation() > Constants.Coral.IntakePosition + 1)
+        if(coralSubsystem.getArmLocation() > Constants.Coral.IntakePosition + 1)
         {
-            coralIntakeSubsystem.moveArmDown();
+            coralSubsystem.moveArmDown();
         }
-        else if(coralIntakeSubsystem.getArmLocation() <=  Constants.Coral.IntakePosition - 1)
+        else if(coralSubsystem.getArmLocation() <=  Constants.Coral.IntakePosition - 1)
         {
-            coralIntakeSubsystem.moveArmUp();
+            coralSubsystem.moveArmUp();
         }
-        coralIntakeSubsystem.stopArm();
+        coralSubsystem.stopArm();
 
     }
 
@@ -45,6 +42,6 @@ public class SetCoralArmCommand extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        coralIntakeSubsystem.stopArm();
+        coralSubsystem.stopArm();
     }
 }

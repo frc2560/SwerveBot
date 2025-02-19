@@ -1,17 +1,17 @@
 package frc.robot.commands.coral;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.CoralIntakeSubsystem;
+import frc.robot.subsystems.CoralSubsystem;
 
 
 public class CoralOutTakeCommand extends Command {
-    private final CoralIntakeSubsystem coralIntakeSubsystem;
+    private final CoralSubsystem coralSubsystem;
 
-    public CoralOutTakeCommand(CoralIntakeSubsystem coralIntakeSubsystem) {
-        this.coralIntakeSubsystem = coralIntakeSubsystem;
+    public CoralOutTakeCommand(CoralSubsystem coralSubsystem) {
+        this.coralSubsystem = coralSubsystem;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
-        addRequirements(this.coralIntakeSubsystem);
+        addRequirements(this.coralSubsystem);
     }
 
     @Override
@@ -21,17 +21,17 @@ public class CoralOutTakeCommand extends Command {
 
     @Override
     public void execute() {
-        coralIntakeSubsystem.outtakeCoral();
+        coralSubsystem.outtakeCoral();
     }
 
     @Override
     public boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return coralIntakeSubsystem.hasCoral();
+        return coralSubsystem.hasCoral();
     }
 
     @Override
     public void end(boolean interrupted) {
-        coralIntakeSubsystem.stopIntake();
+        coralSubsystem.stopIntake();
     }
 }

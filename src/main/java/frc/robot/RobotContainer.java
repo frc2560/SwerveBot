@@ -12,9 +12,12 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.*;
-import frc.robot.commands.coral.CoralIntakeCommand;
 import frc.robot.commands.dummycommands.*;
+import frc.robot.commands.coral.*;
+import frc.robot.commands.algae.*;
+import frc.robot.commands.elevator.*;
 import frc.robot.subsystems.*;
+import frc.robot.subsystems.Controllers.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -45,11 +48,14 @@ public class RobotContainer {
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
+    public final CoralSubsystem coralSubsystem = new CoralSubsystem();
+    public final AlgaeSubsystem algaeSubsystem = new AlgaeSubsystem();
+    public final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+    public final OperatorControllerSubsystem operatorControllerSubsystem = new OperatorControllerSubsystem();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-
         // Build an auto chooser. This will use Commands.none() as the default option.
         autoChooser = AutoBuilder.buildAutoChooser();
 
@@ -61,7 +67,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("AlignToTag", new AlignWithTag(s_Swerve));
         NamedCommands.registerCommand("ScoreOnLevel4", new Level4ScoreCommand(s_Swerve));
         NamedCommands.registerCommand("GrabAlgaeL1", new GrabAlgaeL1Command(s_Swerve));
-        NamedCommands.registerCommand("IntakeCoral", new CoralIntakeCommand(s_Swerve));
+        NamedCommands.registerCommand("IntakeCoral", new CoralIntakeCommand(coralSubsystem));
         NamedCommands.registerCommand("ScoreInProcessor", new ProcessorScoreCommand(s_Swerve));
         NamedCommands.registerCommand("GrabAlgaeL2", new GrabAlgaeL2Command(s_Swerve));
         NamedCommands.registerCommand("KnockAlgaeOffL1", new KnockAlgaeOffL1Command(s_Swerve));
@@ -105,6 +111,21 @@ public class RobotContainer {
 //        setWheelsToZero.onTrue(new InstantCommand(s_Swerve::alignStraight));
         zeroPose.onTrue(new InstantCommand(s_Swerve::zeroHeading));
         resetPose.onTrue((new InstantCommand((s_Swerve::resetBot))));
+
+        operatorControllerSubsystem.leftYellowButton.whileTrue(new IntakeCommand(algaeSubsystem));
+        operatorControllerSubsystem.leftGreenButton.whileTrue(new OutTakeCommand(algaeSubsystem));
+        operatorControllerSubsystem.rightYellowButton.onTrue(new RasieArmCommand(algaeSubsystem));
+        operatorControllerSubsystem.rightGreenButton.onTrue(new LowerArmCommand(algaeSubsystem));
+
+        operatorControllerSubsystem.leftBlueButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
+        operatorControllerSubsystem.leftRedButton.whileTrue(new CoralOutTakeCommand(coralSubsystem));
+        operatorControllerSubsystem.rightRedButton.onTrue(new SetCoralArmCommand(coralSubsystem));
+
+        operatorControllerSubsystem.leftWhiteButton.onTrue(new GoToBottomCommand(elevatorSubsystem));
+        operatorControllerSubsystem.leftBlackButton.onTrue(new GoToL1Command(elevatorSubsystem));
+        operatorControllerSubsystem.rightWhiteButton.onTrue(new GoToL3Command(elevatorSubsystem));
+        operatorControllerSubsystem.rightBlackButton.onTrue(new GoToL4Command(elevatorSubsystem));
+
     }
 
     /**

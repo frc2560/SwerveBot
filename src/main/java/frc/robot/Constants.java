@@ -15,6 +15,27 @@ import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
     public static final double stickDeadband = 0.1;
+
+    public static class ControllerConstants {
+        public static final int OPERATOR_PORT = 1;
+
+
+        public static class ButtonConstants {
+            public static final int rightWhiteButton = 13;
+            public static final int rightBlackButton = 12;
+            public static final int rightRedButton = 11;
+            public static final int rightBlueButton = 10;
+            public static final int rightYellowButton = 8;
+            public static final int rightGreenButton = 9;
+            public static final int leftWhiteButton = 5;
+            public static final int leftBlackButton = 7;
+            public static final int leftRedButton = 3;
+            public static final int leftBlueButton = 4;
+            public static final int leftYellowButton = 2;
+            public static final int leftGreenButton = 1;
+        }
+    }
+
     public static class Algae
     {
         //TODO which color was left and right
