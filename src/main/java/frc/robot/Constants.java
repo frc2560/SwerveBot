@@ -189,6 +189,8 @@ public final class Constants {
         public static final int ELEVATOR_BOTTOM_SWITCH = 0;
 
         public static final double SPEED = 0.1;
+        public static double L1AlgaePosition = 25;
+        public static double L2AlgaePosition = 35;
         public static double L1Position = 10;
         public static double L2Position = 20;
         public static double L3Position = 30;

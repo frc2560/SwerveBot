@@ -22,11 +22,11 @@ public class GoToL1AlgaeCommand extends Command {
 
     @Override
     public void execute() {
-        if (elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.L1Position - 1)
+        if (elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.L1AlgaePosition - 1)
         {
             elevatorSubsystem.setSpeed(Constants.ElevatorConstants.SPEED);
         }
-        else if (elevatorSubsystem.getPosition() > Constants.ElevatorConstants.L1Position + 1)
+        else if (elevatorSubsystem.getPosition() > Constants.ElevatorConstants.L1AlgaePosition + 1)
         {
             elevatorSubsystem.setSpeed(-Constants.ElevatorConstants.SPEED);
         }
