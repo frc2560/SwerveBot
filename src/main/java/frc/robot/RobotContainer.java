@@ -58,7 +58,9 @@ public class RobotContainer {
 
         SmartDashboard.putData("Auto Chooser", autoChooser);
 
+        /*
         NamedCommands.registerCommand("AlignToTag", new AlignWithTag(s_Swerve));
+
         NamedCommands.registerCommand("ScoreOnLevel4", new Level4ScoreCommand(s_Swerve));
         NamedCommands.registerCommand("GrabAlgaeL1", new GrabAlgaeL1Command(s_Swerve));
         NamedCommands.registerCommand("IntakeCoral", new CoralIntakeCommand(s_Swerve));
@@ -66,6 +68,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("GrabAlgaeL2", new GrabAlgaeL2Command(s_Swerve));
         NamedCommands.registerCommand("KnockAlgaeOffL1", new KnockAlgaeOffL1Command(s_Swerve));
         NamedCommands.registerCommand("KnockAlgaeOffL2", new KnockAlgaeOffL2Command(s_Swerve));
+        */
+
 
 
 
