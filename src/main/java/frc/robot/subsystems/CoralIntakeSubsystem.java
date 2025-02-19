@@ -12,17 +12,17 @@ import frc.robot.Constants;
 public class CoralIntakeSubsystem implements Subsystem {
 
     private SparkMax coralIntake;
-    private SparkMax croalArm;
+    private SparkMax coralArm;
     private RelativeEncoder armEncoder;
     private DigitalInput lowerSwitch;
     private DigitalInput hasCoral;
 
     public CoralIntakeSubsystem() {
        coralIntake = new SparkMax(Constants.Coral.IntakeMotor, SparkLowLevel.MotorType.kBrushless);
-       croalArm = new SparkMax(Constants.Coral.ArmMotor, SparkLowLevel.MotorType.kBrushless);
+       coralArm = new SparkMax(Constants.Coral.ArmMotor, SparkLowLevel.MotorType.kBrushless);
        lowerSwitch = new DigitalInput(Constants.Coral.LowerSwitch);
         hasCoral = new DigitalInput(Constants.Coral.PhotoSensor);
-       armEncoder = croalArm.getEncoder();
+       armEncoder = coralArm.getEncoder();
     }
 
     public boolean hasCoral() {
@@ -41,12 +41,12 @@ public class CoralIntakeSubsystem implements Subsystem {
 
     public void moveArmUp()
     {
-        croalArm.set(Constants.Coral.ArmSpeed);
+        coralArm.set(Constants.Coral.ArmSpeed);
     }
 
     public void moveArmDown()
     {
-        croalArm.set(-Constants.Coral.ArmSpeed);
+        coralArm.set(-Constants.Coral.ArmSpeed);
     }
 
     public void stopIntake()
@@ -56,7 +56,7 @@ public class CoralIntakeSubsystem implements Subsystem {
 
     public void stopArm()
     {
-        croalArm.set(0);
+        coralArm.set(0);
     }
 
     public double getArmLocation()
