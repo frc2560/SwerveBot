@@ -121,7 +121,7 @@ public class RobotContainer {
 
         operatorControllerSubsystem.leftBlueButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
         operatorControllerSubsystem.leftRedButton.whileTrue(new CoralOutTakeCommand(coralSubsystem));
-        operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmIntakeCommand(coralSubsystem));
+        operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
 
         operatorControllerSubsystem.leftWhiteButton.whileTrue(new GoToBottomCommand(elevatorSubsystem));
         operatorControllerSubsystem.leftBlackButton.whileTrue(new GoToL1Command(elevatorSubsystem));
