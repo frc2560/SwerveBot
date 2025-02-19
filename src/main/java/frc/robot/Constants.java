@@ -15,6 +15,26 @@ import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
     public static final double stickDeadband = 0.1;
+    public static class AlignToTag
+    {
+        //TODO measure with LimeLight Camera
+        public static final double CenterReef_AREA_STAGE = 10;
+        public static final double CenterReef_AREA_REEF = 1;
+        public static final double CenterReef_Y = 10;
+        public static final double CenterReef_OMEGA = 10;
+
+        public static final double LeftReef_AREA_STAGE = 10;
+        public static final double LeftReef_AREA_REEF = 1;
+        public static final double LeftReef_Y = 50;
+        public static final double LeftReef_OMEGA = 10;
+
+        public static final double RightReef_AREA_STAGE = 10;
+        public static final double RightReef_AREA_REEF = 1;
+        public static final double RightReef_Y = 5;
+        public static final double RightReef_OMEGA = 10;
+
+
+    };
 
     public static class ControllerConstants {
         public static final int OPERATOR_PORT = 1;
@@ -63,6 +83,8 @@ public final class Constants {
         public static double ArmSpeed = 0.2;
         //TODO
         public static double IntakePosition = 50;
+        public static double OuttakeL1L2L3Position = 50;
+        public static double OuttakeL4Position = 50;
         //TODO
         public static int PhotoSensor = 0;
     }

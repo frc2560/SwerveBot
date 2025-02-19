@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.movement;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
@@ -10,38 +10,32 @@ import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.Swerve;
 
 public class AlignWithTag extends Command {
-  
-  private static final TrapezoidProfile.Constraints X_CONSTRAINTS = new TrapezoidProfile.Constraints(0.25, 1);
-  private static final TrapezoidProfile.Constraints Y_CONSTRAINTS = new TrapezoidProfile.Constraints(0.25, 1);
-  private static final TrapezoidProfile.Constraints OMEGA_CONSTRAINTS =   new TrapezoidProfile.Constraints(1, 1);
-  
-  private static final int TAG_TO_CHASE = 2;
-  private static final Transform3d TAG_TO_GOAL = 
-      new Transform3d(
-          new Translation3d(1.5, 0.0, 0.0),
-          new Rotation3d(0.0, 0.0, Math.PI));
+
+  //private static final int TAG_TO_CHASE = 2;
 
   private final Swerve drivetrainSubsystem;
-
   private final PIDController xController = new PIDController(0.1, 0, 0);
   private final PIDController yController = new PIDController(0.1, 0, 0);
   private final PIDController omegaController = new PIDController(0.1, 0, 0);
 
 
-  public AlignWithTag(
-        Swerve drivetrainSubsystem) {
+  public AlignWithTag(Swerve drivetrainSubsystem, double area, double y, double omega) {
     this.drivetrainSubsystem = drivetrainSubsystem;
 
-    xController.setTolerance(1);
-    yController.setTolerance(10);
-    omegaController.setTolerance(10);
+    //x was 1
+    //y was 10
+    //omega was 10
+
+    xController.setTolerance(area);
+    yController.setTolerance(y);
+    omegaController.setTolerance(omega);
 
     addRequirements(drivetrainSubsystem);
   }
 
   @Override
   public void initialize() {
-    LimelightHelpers.SetFiducialIDFiltersOverride(Constants.Sensor.LIMELIGHT, new int[]{TAG_TO_CHASE});
+    //LimelightHelpers.SetFiducialIDFiltersOverride(Constants.Sensor.LIMELIGHT, new int[]{TAG_TO_CHASE});
     LimelightHelpers.SetFiducialDownscalingOverride(Constants.Sensor.LIMELIGHT, 2.0f);
     xController.setSetpoint(5);
     yController.setSetpoint(0);

@@ -5,10 +5,10 @@ import frc.robot.Constants;
 import frc.robot.subsystems.CoralSubsystem;
 
 
-public class SetCoralArmCommand extends Command {
+public class SetCoralArmIntakeCommand extends Command {
     private final CoralSubsystem coralSubsystem;
 
-    public SetCoralArmCommand(CoralSubsystem coralSubsystem) {
+    public SetCoralArmIntakeCommand(CoralSubsystem coralSubsystem) {
         this.coralSubsystem = coralSubsystem;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)

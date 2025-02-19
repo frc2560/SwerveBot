@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.movement;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;

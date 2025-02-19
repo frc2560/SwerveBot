@@ -1,7 +1,6 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -11,11 +10,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
-import frc.robot.commands.*;
-import frc.robot.commands.dummycommands.*;
 import frc.robot.commands.coral.*;
 import frc.robot.commands.algae.*;
 import frc.robot.commands.elevator.*;
+import frc.robot.commands.movement.TeleopSwerve;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Controllers.*;
 
@@ -118,17 +116,17 @@ public class RobotContainer {
 
         operatorControllerSubsystem.leftYellowButton.whileTrue(new IntakeCommand(algaeSubsystem));
         operatorControllerSubsystem.leftGreenButton.whileTrue(new OutTakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.rightYellowButton.onTrue(new RasieArmCommand(algaeSubsystem));
-        operatorControllerSubsystem.rightGreenButton.onTrue(new LowerArmCommand(algaeSubsystem));
+        operatorControllerSubsystem.rightYellowButton.whileTrue(new RasieArmCommand(algaeSubsystem));
+        operatorControllerSubsystem.rightGreenButton.whileTrue(new LowerArmCommand(algaeSubsystem));
 
         operatorControllerSubsystem.leftBlueButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
         operatorControllerSubsystem.leftRedButton.whileTrue(new CoralOutTakeCommand(coralSubsystem));
-        operatorControllerSubsystem.rightRedButton.onTrue(new SetCoralArmCommand(coralSubsystem));
+        operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmIntakeCommand(coralSubsystem));
 
-        operatorControllerSubsystem.leftWhiteButton.onTrue(new GoToBottomCommand(elevatorSubsystem));
-        operatorControllerSubsystem.leftBlackButton.onTrue(new GoToL1Command(elevatorSubsystem));
-        operatorControllerSubsystem.rightWhiteButton.onTrue(new GoToL3Command(elevatorSubsystem));
-        operatorControllerSubsystem.rightBlackButton.onTrue(new GoToL4Command(elevatorSubsystem));
+        operatorControllerSubsystem.leftWhiteButton.whileTrue(new GoToBottomCommand(elevatorSubsystem));
+        operatorControllerSubsystem.leftBlackButton.whileTrue(new GoToL1Command(elevatorSubsystem));
+        operatorControllerSubsystem.rightWhiteButton.whileTrue(new GoToL3Command(elevatorSubsystem));
+        operatorControllerSubsystem.rightBlackButton.whileTrue(new GoToL4Command(elevatorSubsystem));
 
     }
 
