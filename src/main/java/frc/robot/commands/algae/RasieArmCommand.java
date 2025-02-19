@@ -32,6 +32,7 @@ public class RasieArmCommand extends Command {
         {
             return true;
         }
+        return false;
     }
 
     @Override
