@@ -1,14 +1,18 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.pathplanner.lib.path.PathConstraints;
 import com.studica.frc.AHRS;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.LimelightHelpers;
 import frc.robot.SwerveModule;
 import frc.robot.Constants;
@@ -28,13 +32,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
-    public AHRS gyro;
+    public Pigeon2 gyro;
     private final Field2d m_field = new Field2d();
     private SwerveDrivePoseEstimator poseEstimate;
 
     public Swerve() {
-        gyro = new AHRS(AHRS.NavXComType.kMXP_SPI);
-        gyro.zeroYaw();
+        gyro = new Pigeon2(10, Constants.CANivore);
+        gyro.setYaw(0);
 
         mSwerveMods = new SwerveModule[] {
             new SwerveModule(0, Constants.Swerve.Mod0.constants),
@@ -199,12 +203,27 @@ public class Swerve extends SubsystemBase {
         poseEstimate.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), new Rotation2d()));
     }
 
+    public Command driveToPose(Pose2d pose)
+    {
+     //Create the constraints to use while pathfinding
+        PathConstraints constraints = new PathConstraints(
+               Constants.Swerve.maxSpeed, 4.0,
+                Constants.Swerve.maxAngularVelocity, Units.degreesToRadians(720));
+
+        // Since AutoBuilder is configured, we can use it to build pathfinding commands
+        return AutoBuilder.pathfindToPose(
+                pose,
+                constraints,
+                edu.wpi.first.units.Units.MetersPerSecond.of(0) // Goal end velocity in meters/sec
+        );
+    }
+
     public Rotation2d getGyroYaw() {
         return Rotation2d.fromDegrees(getGyro()).rotateBy(new Rotation2d(Math.PI));
     }
     public double getGyro()
     {
-        return -gyro.getYaw();
+        return gyro.getYaw().getValueAsDouble();
     }
 
     public void resetModulesToAbsolute(){
@@ -258,7 +277,7 @@ public class Swerve extends SubsystemBase {
 
     }
     public void resetBot() {
-        gyro.zeroYaw();
+        gyro.setYaw(0);
         var pose = new Pose2d(getPose().getX(), getPose().getY(), new Rotation2d(Math.PI));
         setPose(pose);
         poseEstimate.resetPosition(new Rotation2d(0), getModulePositions(), pose);

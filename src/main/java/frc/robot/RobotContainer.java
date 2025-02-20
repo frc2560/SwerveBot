@@ -28,8 +28,6 @@ public class RobotContainer {
 
     private final SendableChooser<Command> autoChooser;
 
-    private final JoystickButton enableZ = new JoystickButton(driver, 2);
-    private final JoystickButton robotCentric = new JoystickButton(driverController, );
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
@@ -62,13 +60,13 @@ public class RobotContainer {
         NamedCommands.registerCommand("KnockAlgaeOffL2", new KnockAlgaeOffL2Command(s_Swerve));
         */
 
-        enableZ.whileTrue(
+        driverControllerSubsystem.button2.whileTrue(
                 new TeleopSwerve(
                         s_Swerve,
                         () -> -driverControllerSubsystem.GetXRawAxis(),
                         () -> -driverControllerSubsystem.GetYRawAxis(),
                         () -> (-driverControllerSubsystem.GetZRawAxis() * 0.5),
-                        () -> robotCentric.getAsBoolean()
+                        () -> driverControllerSubsystem.triggerButton.getAsBoolean()
                 )
         );
 
@@ -78,7 +76,7 @@ public class RobotContainer {
                             () -> -driverControllerSubsystem.GetXRawAxis(),
                             () -> -driverControllerSubsystem.GetYRawAxis(),
                             () -> 0,
-                            () -> robotCentric.getAsBoolean()
+                            () -> driverControllerSubsystem.triggerButton.getAsBoolean()
                     )
             );
 

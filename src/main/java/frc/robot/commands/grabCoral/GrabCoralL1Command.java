@@ -18,15 +18,16 @@ import frc.robot.subsystems.Swerve;
 
 public class GrabCoralL1Command extends SequentialCommandGroup {
     public GrabCoralL1Command(CoralSubsystem coralSubsystem, ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem) {
-            super( new AlignWithTag(swervesubsystem, Constants.AlignToTag.CenterReef_AREA_REEF, Constants.AlignToTag.CenterReef_Y, Constants.AlignToTag.CenterReef_OMEGA),
-                    new SetCoralArmL1L2L3Command(coralSubsystem),
-                    new GoToL1Command(elevatorSubsystem),
-                    new AlignWithTag(swervesubsystem, Constants.AlignToTag.CenterReef_AREA_REEF, Constants.AlignToTag.CenterReef_Y, Constants.AlignToTag.CenterReef_OMEGA),
-                    new CoralOutTakeCommand(coralSubsystem),
-                    new AlignWithTag(swervesubsystem, Constants.AlignToTag.CenterReef_AREA_STAGE, Constants.AlignToTag.CenterReef_Y, Constants.AlignToTag.CenterReef_OMEGA),
-                    new GoToBottomCommand(elevatorSubsystem)
-            );
+        super(new AlignWithTag(swervesubsystem, Constants.AlignToTag.CenterReef_AREA_REEF, Constants.AlignToTag.CenterReef_Y, Constants.AlignToTag.CenterReef_OMEGA),
+                new SetCoralArmL1L2L3Command(coralSubsystem),
+                new GoToL1Command(elevatorSubsystem),
+                new AlignWithTag(swervesubsystem, Constants.AlignToTag.CenterReef_AREA_REEF, Constants.AlignToTag.CenterReef_Y, Constants.AlignToTag.CenterReef_OMEGA),
+                new CoralOutTakeCommand(coralSubsystem),
+                new AlignWithTag(swervesubsystem, Constants.AlignToTag.CenterReef_AREA_STAGE, Constants.AlignToTag.CenterReef_Y, Constants.AlignToTag.CenterReef_OMEGA),
+                new GoToBottomCommand(elevatorSubsystem)
+        );
     }
-}
+    }
+
 
 
