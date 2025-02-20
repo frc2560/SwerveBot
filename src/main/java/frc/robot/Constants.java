@@ -37,10 +37,33 @@ public final class Constants {
     };
 
     public static class ControllerConstants {
+        public static final int DRIVER_PORT = 0;
         public static final int OPERATOR_PORT = 1;
 
+        public static class AxesConstants {
+            public static final int translationAxis = 1;
+            public static final int strafeAxis = 0;
+            public static final int rotationAxis = 2;
+            public static final int SLIDER = 3;
+
+
+        }
 
         public static class ButtonConstants {
+
+            public static final int Trigger = 1;
+            public static final int Button_2 = 2;
+            public static final int Button_3 = 3;
+            public static final int Button_4 = 4;
+            public static final int Button_5 = 5;
+            public static final int Button_6 = 6;
+            public static final int Button_7 = 7;
+            public static final int Button_8 = 8;
+            public static final int Button_9 = 9;
+            public static final int Button_10 = 10;
+            public static final int Button_11 = 11;
+            public static final int Button_12 = 12;
+
             public static final int rightWhiteButton = 13;
             public static final int rightBlackButton = 12;
             public static final int rightRedButton = 11;

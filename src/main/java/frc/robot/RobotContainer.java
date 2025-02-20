@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -27,22 +28,8 @@ public class RobotContainer {
 
     private final SendableChooser<Command> autoChooser;
 
-    /* Controllers */
-    private final Joystick driver = new Joystick(0);
-
-    /* Drive Controls */
-    private final int translationAxis = 1;
-    private final int strafeAxis = 0;
-    private final int rotationAxis = 2;
-
-    /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver, 11);
-//    private final JoystickButton setWheelsToZero = new JoystickButton(driver, 12);
-    private final JoystickButton zeroPose = new JoystickButton(driver, 10);
-    private final JoystickButton robotCentric = new JoystickButton(driver, 1);
     private final JoystickButton enableZ = new JoystickButton(driver, 2);
-
-    private final JoystickButton resetPose = new JoystickButton(driver, 12);
+    private final JoystickButton robotCentric = new JoystickButton(driverController, );
 
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
@@ -50,6 +37,7 @@ public class RobotContainer {
     public final AlgaeSubsystem algaeSubsystem = new AlgaeSubsystem();
     public final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
     public final OperatorControllerSubsystem operatorControllerSubsystem = new OperatorControllerSubsystem();
+    public final DriverControllerSubsystem driverControllerSubsystem = new DriverControllerSubsystem();
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -74,15 +62,12 @@ public class RobotContainer {
         NamedCommands.registerCommand("KnockAlgaeOffL2", new KnockAlgaeOffL2Command(s_Swerve));
         */
 
-
-
-
         enableZ.whileTrue(
                 new TeleopSwerve(
                         s_Swerve,
-                        () -> -driver.getRawAxis(translationAxis),
-                        () -> -driver.getRawAxis(strafeAxis),
-                        () -> (-driver.getRawAxis(rotationAxis) * 0.5),
+                        () -> -driverControllerSubsystem.GetXRawAxis(),
+                        () -> -driverControllerSubsystem.GetYRawAxis(),
+                        () -> (-driverControllerSubsystem.GetZRawAxis() * 0.5),
                         () -> robotCentric.getAsBoolean()
                 )
         );
@@ -90,8 +75,8 @@ public class RobotContainer {
             s_Swerve.setDefaultCommand(
                     new TeleopSwerve(
                             s_Swerve,
-                            () -> -driver.getRawAxis(translationAxis),
-                            () -> -driver.getRawAxis(strafeAxis),
+                            () -> -driverControllerSubsystem.GetXRawAxis(),
+                            () -> -driverControllerSubsystem.GetYRawAxis(),
                             () -> 0,
                             () -> robotCentric.getAsBoolean()
                     )
@@ -108,11 +93,10 @@ public class RobotContainer {
      * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings() {
+
+
         /* Driver Buttons */
-        zeroGyro.onTrue(new InstantCommand(s_Swerve::zeroHeading));
-//        setWheelsToZero.onTrue(new InstantCommand(s_Swerve::alignStraight));
-        zeroPose.onTrue(new InstantCommand(s_Swerve::zeroHeading));
-        resetPose.onTrue((new InstantCommand((s_Swerve::resetBot))));
+        driverControllerSubsystem.button12.whileTrue(Commands.run(s_Swerve::resetBot));
 
         operatorControllerSubsystem.leftYellowButton.whileTrue(new IntakeCommand(algaeSubsystem));
         operatorControllerSubsystem.leftGreenButton.whileTrue(new OutTakeCommand(algaeSubsystem));
