@@ -1,4 +1,4 @@
-package frc.robot.commands.grabCoral.Left;
+package frc.robot.commands.grabCoral.Right;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
@@ -13,27 +13,27 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Swerve;
 
 
-public class GrabCoralL4CommandLeft extends SequentialCommandGroup {
-    public GrabCoralL4CommandLeft(CoralSubsystem coralSubsystem, ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem) {
+public class GrabCoralL4CommandRight extends SequentialCommandGroup {
+    public GrabCoralL4CommandRight(CoralSubsystem coralSubsystem, ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem) {
         super(
                 new AlignWithTag(
                         swervesubsystem,
-                        Constants.AlignToTag.LeftReef_AREA_STAGE,
-                        Constants.AlignToTag.LeftReef_Y,
-                        Constants.AlignToTag.LeftReef_OMEGA),
+                        Constants.AlignToTag.RightReef_AREA_STAGE,
+                        Constants.AlignToTag.RightReef_Y,
+                        Constants.AlignToTag.RightReef_OMEGA),
                 new SetCoralArmL4Command(coralSubsystem),
                 new GoToL4Command(elevatorSubsystem),
                 new AlignWithTag(
                         swervesubsystem,
-                        Constants.AlignToTag.LeftReef_AREA_STAGE,
-                        Constants.AlignToTag.LeftReef_Y,
-                        Constants.AlignToTag.LeftReef_OMEGA),
+                        Constants.AlignToTag.RightReef_AREA_STAGE,
+                        Constants.AlignToTag.RightReef_Y,
+                        Constants.AlignToTag.RightReef_OMEGA),
                 new CoralOutTakeCommand(coralSubsystem),
                 new AlignWithTag(
                         swervesubsystem,
-                        Constants.AlignToTag.LeftReef_AREA_STAGE,
-                        Constants.AlignToTag.LeftReef_Y,
-                        Constants.AlignToTag.LeftReef_OMEGA),
+                        Constants.AlignToTag.RightReef_AREA_STAGE,
+                        Constants.AlignToTag.RightReef_Y,
+                        Constants.AlignToTag.RightReef_OMEGA),
                 new GoToBottomCommand(elevatorSubsystem)
         );
     }
