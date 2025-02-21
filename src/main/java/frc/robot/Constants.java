@@ -87,14 +87,12 @@ public final class Constants {
         public static final int INTAKE_LEFT = 12;
         public static final int INTAKE_RIGHT = 11;
         public static final int ARM_MOTOR = 21;
-
-        //TODO map limit switch
-        public static final int LOWER_LIMIT_SWITCH = 0;
+        public static final int UPPER_LIMIT_SWITCH = 29;
         public static final double INTAKE_SPEED = 0.2;
         public static final double ARM_SPEED = 0.2;
         public static double UpperArmPosition = 20;
         //TODO
-        public static int PhotoSensor = 0;
+        public static int PhotoSensor = 30;
     };
 
     public static class Coral{
@@ -111,7 +109,7 @@ public final class Constants {
         public static double OuttakeL1L2L3Position = 50;
         public static double OuttakeL4Position = 50;
         //TODO
-        public static int PhotoSensor = 0;
+        public static int PhotoSensor = 1;
     }
 
     public static final class Swerve {
@@ -253,10 +251,10 @@ public final class Constants {
     public static class ElevatorConstants {
         // Have to wire this all to get ID, set to 0 for now
         public static final int ELEVATOR_MOTOR = 20;
-        public static final int ELEVATOR_TOP_SWITCH = 0;
-        public static final int ELEVATOR_BOTTOM_SWITCH = 0;
+        public static final int ELEVATOR_TOP_SWITCH = 25;
+        public static final int ELEVATOR_BOTTOM_SWITCH = 2;
 
-        public static final double SPEED = 0.1;
+        public static final double SPEED = 0.3;
         public static double L1AlgaePosition = 25;
         public static double L2AlgaePosition = 35;
         public static double L1Position = 10;

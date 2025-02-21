@@ -26,7 +26,7 @@ public class AlgaeSubsystem implements Subsystem {
         armEncoder = algaeArm.getEncoder();
         algaeIntakeLeft = new WPI_TalonSRX(Constants.Algae.INTAKE_LEFT);
         algaeIntakeRight = new WPI_TalonSRX(Constants.Algae.INTAKE_RIGHT);
-        lowerLimitSwitch = new DigitalInput(Constants.Algae.LOWER_LIMIT_SWITCH);
+        lowerLimitSwitch = new DigitalInput(Constants.Algae.UPPER_LIMIT_SWITCH);
         hasAlgae = new DigitalInput(Constants.Algae.PhotoSensor);
     }
 
