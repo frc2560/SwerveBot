@@ -114,6 +114,7 @@ public final class Constants {
 
     public static final class Swerve {
 
+        public static final double SCORE_DISTANCE = 0.5;
         public static boolean invertGyro = true;
         public static SPI.Port navX = SPI.Port.kMXP;
 
