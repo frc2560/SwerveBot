@@ -31,10 +31,6 @@ public class GoToL1Command extends Command {
       {
          elevatorSubsystem.setSpeed(-Constants.ElevatorConstants.DOWNSPEED);
       }
-      else
-      {
-         elevatorSubsystem.stopElevator();
-      }
 
 
    }

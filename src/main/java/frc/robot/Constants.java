@@ -33,12 +33,12 @@ public final class Constants {
         public static final double RightReef_AREA_STAGE = 2;
         public static final double RightReef_AREA_REEF = 4;
 
+        public static final double RightReef_Y_STAGE = -5;
         public static final double RightReef_Y_REEF = -7;
 
+        public static final double RightReef_OMEGA_STAGE = 1.92;
         public static final double RightReef_OMEGA_REEF = -3.2;
 
-        public static final double RightReef_Y = -5;
-        public static final double RightReef_OMEGA = 1.92;
 
 
     };

@@ -92,8 +92,8 @@ public class RobotContainer {
 
 
         /* Driver Buttons */
-        driverControllerSubsystem.button3.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_REEF, Constants.AlignToTag.RightReef_Y_REEF, Constants.AlignToTag.RightReef_OMEGA_REEF));
-        driverControllerSubsystem.button11.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_STAGE, Constants.AlignToTag.RightReef_Y, Constants.AlignToTag.RightReef_OMEGA));
+        driverControllerSubsystem.button3.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_STAGE, Constants.AlignToTag.RightReef_Y_STAGE, Constants.AlignToTag.RightReef_OMEGA_STAGE));
+        driverControllerSubsystem.button4.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_REEF, Constants.AlignToTag.RightReef_Y_REEF, Constants.AlignToTag.RightReef_OMEGA_REEF));
         driverControllerSubsystem.button12.whileTrue(Commands.run(s_Swerve::resetBot));
 
         operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));

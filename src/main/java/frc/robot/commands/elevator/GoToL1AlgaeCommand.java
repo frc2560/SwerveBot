@@ -30,18 +30,15 @@ public class GoToL1AlgaeCommand extends Command {
         {
             elevatorSubsystem.setSpeed(-Constants.ElevatorConstants.DOWNSPEED);
         }
-        else
-        {
-            elevatorSubsystem.stopElevator();
-        }
-
 
     }
 
     @Override
     public boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return false;
+        boolean test = elevatorSubsystem.getPosition() > Constants.ElevatorConstants.L1AlgaePosition - 1;
+        boolean test2 = elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.L1AlgaePosition + 1;
+        return test && test2;
     }
 
     @Override

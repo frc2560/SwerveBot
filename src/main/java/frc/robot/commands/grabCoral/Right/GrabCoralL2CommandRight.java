@@ -18,21 +18,21 @@ public class GrabCoralL2CommandRight extends SequentialCommandGroup {
                 new AlignWithTag(
                         swervesubsystem,
                         Constants.AlignToTag.RightReef_AREA_STAGE,
-                        Constants.AlignToTag.RightReef_Y,
-                        Constants.AlignToTag.RightReef_OMEGA),
+                        Constants.AlignToTag.RightReef_Y_STAGE,
+                        Constants.AlignToTag.RightReef_OMEGA_STAGE),
                 new SetCoralArmL1L2L3Command(coralSubsystem),
                 new GoToL2Command(elevatorSubsystem),
                 new AlignWithTag(
                         swervesubsystem,
                         Constants.AlignToTag.RightReef_AREA_REEF,
-                        Constants.AlignToTag.RightReef_Y,
-                        Constants.AlignToTag.RightReef_OMEGA),
+                        Constants.AlignToTag.RightReef_Y_STAGE,
+                        Constants.AlignToTag.RightReef_OMEGA_STAGE),
                 new CoralOutTakeCommand(coralSubsystem),
                 new AlignWithTag(
                         swervesubsystem,
                         Constants.AlignToTag.RightReef_AREA_STAGE,
-                        Constants.AlignToTag.RightReef_Y,
-                        Constants.AlignToTag.RightReef_OMEGA),
+                        Constants.AlignToTag.RightReef_Y_STAGE,
+                        Constants.AlignToTag.RightReef_OMEGA_STAGE),
                 new GoToBottomCommand(elevatorSubsystem)
         );
     }
