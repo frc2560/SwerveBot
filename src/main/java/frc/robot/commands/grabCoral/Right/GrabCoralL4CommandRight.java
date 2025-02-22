@@ -25,7 +25,7 @@ public class GrabCoralL4CommandRight extends SequentialCommandGroup {
                 new GoToL4Command(elevatorSubsystem),
                 new AlignWithTag(
                         swervesubsystem,
-                        Constants.AlignToTag.RightReef_AREA_STAGE,
+                        Constants.AlignToTag.RightReef_AREA_REEF,
                         Constants.AlignToTag.RightReef_Y,
                         Constants.AlignToTag.RightReef_OMEGA),
                 new CoralOutTakeCommand(coralSubsystem),
