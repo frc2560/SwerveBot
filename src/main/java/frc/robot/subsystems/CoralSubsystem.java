@@ -26,7 +26,7 @@ public class CoralSubsystem extends SubsystemBase {
     }
 
     public boolean hasCoral() {
-        return hasCoral.get();
+        return !hasCoral.get();
     }
 
     public void intakeCoral()

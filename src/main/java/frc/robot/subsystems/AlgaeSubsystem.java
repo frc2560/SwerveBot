@@ -26,7 +26,7 @@ public class AlgaeSubsystem extends SubsystemBase {
         algaeIntakeLeft = new WPI_TalonSRX(Constants.Algae.INTAKE_LEFT);
         algaeIntakeRight = new WPI_TalonSRX(Constants.Algae.INTAKE_RIGHT);
         upperLimitSwitch = new DigitalInput(Constants.Algae.A_UPPER_LIMIT_SWITCH);
-        hasAlgae = new DigitalInput(Constants.Algae.PhotoSensor);
+        hasAlgae = new DigitalInput(Constants.Algae.hasAlgaeSwitch);
     }
 
     public boolean hasAlgae() {
