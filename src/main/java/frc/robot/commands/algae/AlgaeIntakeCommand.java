@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.AlgaeSubsystem;
 
 
-public class IntakeCommand extends Command {
+public class AlgaeIntakeCommand extends Command {
     private final AlgaeSubsystem algaeSubsystem;
 
-    public IntakeCommand(AlgaeSubsystem algaeSubsystem) {
+    public AlgaeIntakeCommand(AlgaeSubsystem algaeSubsystem) {
         this.algaeSubsystem = algaeSubsystem;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)

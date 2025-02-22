@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import com.revrobotics.*;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public  class ElevatorSubsystem implements Subsystem {
+public  class ElevatorSubsystem extends SubsystemBase {
     private final SparkMax elevatorMotor;
-    private final DigitalInput elevatorTopSwitch;
     private final DigitalInput elevatorBottomSwitch;
     private final RelativeEncoder elevatorEncoder;
 
@@ -23,7 +23,6 @@ public  class ElevatorSubsystem implements Subsystem {
         config
                 .idleMode(SparkBaseConfig.IdleMode.kBrake);
         elevatorMotor = new SparkMax(Constants.ElevatorConstants.ELEVATOR_MOTOR, SparkLowLevel.MotorType.kBrushless);
-        elevatorTopSwitch = new DigitalInput(Constants.ElevatorConstants.ELEVATOR_TOP_SWITCH);
         elevatorBottomSwitch = new DigitalInput(Constants.ElevatorConstants.ELEVATOR_BOTTOM_SWITCH);
         elevatorEncoder = elevatorMotor.getEncoder();
         elevatorMotor.configure(config, SparkBase.ResetMode.kResetSafeParameters, SparkBase.PersistMode.kPersistParameters);
@@ -33,12 +32,9 @@ public  class ElevatorSubsystem implements Subsystem {
         elevatorMotor.set(speed);
     }
 
-    public boolean getTopSwitch() {
-        return elevatorTopSwitch.get();
-    }
 
     public boolean getBottomSwitch() {
-        return elevatorBottomSwitch.get();
+        return !elevatorBottomSwitch.get();
     }
 
     public double getPosition() {
@@ -50,14 +46,10 @@ public  class ElevatorSubsystem implements Subsystem {
     }
 
     @Override
-    public void periodic() {
-        SmartDashboard.putNumber("Elevator Position", getPosition());
-        SmartDashboard.putBoolean("Bottom Switch", getBottomSwitch());
-        SmartDashboard.putBoolean("Top Switch", getTopSwitch());
+    public void periodic(){
+        SmartDashboard.putNumber("ElevatorPosition", getPosition());
+        SmartDashboard.putBoolean("ElevatorSwitch", getBottomSwitch());
         //TODO figure out Range of Position for elevator
-        if (getTopSwitch()) {
-            elevatorEncoder.setPosition(100);
-        }
         if (getBottomSwitch()) {
             elevatorEncoder.setPosition(0);
         }

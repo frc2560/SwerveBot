@@ -1,11 +1,7 @@
 package frc.robot.commands.grabCoral;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.algae.IntakeCommand;
-import frc.robot.commands.algae.LowerArmCommand;
-import frc.robot.commands.coral.CoralIntakeCommand;
 import frc.robot.commands.coral.CoralOutTakeCommand;
 import frc.robot.commands.coral.SetCoralArmL1L2L3Command;
 import frc.robot.commands.elevator.GoToBottomCommand;

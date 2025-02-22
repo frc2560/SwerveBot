@@ -2,14 +2,11 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.commands.coral.*;
 import frc.robot.commands.algae.*;
@@ -64,8 +61,8 @@ public class RobotContainer {
                 new TeleopSwerve(
                         s_Swerve,
                         () -> -driverControllerSubsystem.GetXRawAxis(),
-                        () -> -driverControllerSubsystem.GetYRawAxis(),
-                        () -> (-driverControllerSubsystem.GetZRawAxis() * 0.5),
+                        () -> driverControllerSubsystem.GetYRawAxis(),
+                        () -> (driverControllerSubsystem.GetZRawAxis() * 0.5),
                         () -> driverControllerSubsystem.triggerButton.getAsBoolean()
                 )
         );
@@ -74,7 +71,7 @@ public class RobotContainer {
                     new TeleopSwerve(
                             s_Swerve,
                             () -> -driverControllerSubsystem.GetXRawAxis(),
-                            () -> -driverControllerSubsystem.GetYRawAxis(),
+                            () -> driverControllerSubsystem.GetYRawAxis(),
                             () -> 0,
                             () -> driverControllerSubsystem.triggerButton.getAsBoolean()
                     )
@@ -96,19 +93,20 @@ public class RobotContainer {
         /* Driver Buttons */
         driverControllerSubsystem.button12.whileTrue(Commands.run(s_Swerve::resetBot));
 
-        operatorControllerSubsystem.leftYellowButton.whileTrue(new IntakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.leftGreenButton.whileTrue(new OutTakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.rightYellowButton.whileTrue(new RasieArmCommand(algaeSubsystem));
-        operatorControllerSubsystem.rightGreenButton.whileTrue(new LowerArmCommand(algaeSubsystem));
+        operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
+        operatorControllerSubsystem.leftGreenButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
+        operatorControllerSubsystem.rightYellowButton.whileTrue(new RaiseAlgaeArmCommand(algaeSubsystem));
+        operatorControllerSubsystem.rightGreenButton.whileTrue(new LowerAlgaeArmCommand(algaeSubsystem));
 
         operatorControllerSubsystem.leftBlueButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
         operatorControllerSubsystem.leftRedButton.whileTrue(new CoralOutTakeCommand(coralSubsystem));
         operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
+        operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL4Command(coralSubsystem));
 
         operatorControllerSubsystem.leftWhiteButton.whileTrue(new GoToBottomCommand(elevatorSubsystem));
         operatorControllerSubsystem.leftBlackButton.whileTrue(new GoToL1Command(elevatorSubsystem));
-        operatorControllerSubsystem.rightWhiteButton.whileTrue(new GoToL3Command(elevatorSubsystem));
-        operatorControllerSubsystem.rightBlackButton.whileTrue(new GoToL4Command(elevatorSubsystem));
+        operatorControllerSubsystem.rightBlackButton.whileTrue(new GoToL3Command(elevatorSubsystem));
+        operatorControllerSubsystem.rightWhiteButton.whileTrue(new GoToL4Command(elevatorSubsystem));
 
     }
 

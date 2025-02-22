@@ -87,9 +87,9 @@ public final class Constants {
         public static final int INTAKE_LEFT = 12;
         public static final int INTAKE_RIGHT = 11;
         public static final int ARM_MOTOR = 21;
-        public static final int UPPER_LIMIT_SWITCH = 29;
+        public static final int A_UPPER_LIMIT_SWITCH = 0;
         public static final double INTAKE_SPEED = 0.2;
-        public static final double ARM_SPEED = 0.2;
+        public static final double ARM_SPEED = 0.5;
         public static double UpperArmPosition = 20;
         //TODO
         public static int PhotoSensor = 30;
@@ -100,14 +100,15 @@ public final class Constants {
         public static final int ArmMotor = 30;
 
         //TODO make limit switch
-        public static final int LowerSwitch = 0;
-        public static double IntakeSpeed = 0.2;
+        public static final int C_UPPER_LIMIT = 3;
+        public static double IntakeSpeed = 0.6;
         public static double OutTakeSpeed = 0.2;
-        public static double ArmSpeed = 0.2;
+        public static double ArmSpeed = 0.05;
         //TODO
-        public static double IntakePosition = 50;
-        public static double OuttakeL1L2L3Position = 50;
-        public static double OuttakeL4Position = 50;
+        public static double IntakePosition = 6;
+        public static double OuttakeL1L2L3Position = 15;
+        public static double OuttakeL4Position = 18;
+        public static double ArmUpPosition = 0;
         //TODO
         public static int PhotoSensor = 1;
     }
@@ -251,15 +252,14 @@ public final class Constants {
     public static class ElevatorConstants {
         // Have to wire this all to get ID, set to 0 for now
         public static final int ELEVATOR_MOTOR = 20;
-        public static final int ELEVATOR_TOP_SWITCH = 25;
         public static final int ELEVATOR_BOTTOM_SWITCH = 2;
 
         public static final double SPEED = 0.3;
         public static double L1AlgaePosition = 25;
         public static double L2AlgaePosition = 35;
-        public static double L1Position = 10;
+        public static double L1Position = 15;
         public static double L2Position = 20;
         public static double L3Position = 30;
-        public static double L4Position = 40;
+        public static double L4Position = 85;
     }
 }

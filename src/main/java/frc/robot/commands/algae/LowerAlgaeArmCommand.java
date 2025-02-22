@@ -1,13 +1,13 @@
 package frc.robot.commands.algae;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.AlgaeSubsystem;
 
-
-public class LowerArmCommand extends Command {
+public class LowerAlgaeArmCommand extends Command {
     private final AlgaeSubsystem algaeSubsystem;
 
-    public LowerArmCommand(AlgaeSubsystem algaeSubsystem) {
+    public LowerAlgaeArmCommand(AlgaeSubsystem algaeSubsystem) {
         this.algaeSubsystem = algaeSubsystem;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
@@ -27,11 +27,16 @@ public class LowerArmCommand extends Command {
 
     @Override
     public boolean isFinished() {
-        return algaeSubsystem.isLowerLimitSwitchPressed();
+        if(algaeSubsystem.getArmPosition() > Constants.Algae.UpperArmPosition)
+        {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void end(boolean interrupted) {
         algaeSubsystem.stopArm();
+
     }
 }

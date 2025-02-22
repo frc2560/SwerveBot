@@ -6,21 +6,21 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class CoralSubsystem implements Subsystem {
+public class CoralSubsystem extends SubsystemBase {
 
     private SparkMax coralIntake;
     private SparkMax coralArm;
     private RelativeEncoder armEncoder;
-    private DigitalInput lowerSwitch;
+    private DigitalInput upperSwitch;
     private DigitalInput hasCoral;
 
     public CoralSubsystem() {
        coralIntake = new SparkMax(Constants.Coral.IntakeMotor, SparkLowLevel.MotorType.kBrushless);
        coralArm = new SparkMax(Constants.Coral.ArmMotor, SparkLowLevel.MotorType.kBrushless);
-       lowerSwitch = new DigitalInput(Constants.Coral.LowerSwitch);
+       upperSwitch = new DigitalInput(Constants.Coral.C_UPPER_LIMIT);
         hasCoral = new DigitalInput(Constants.Coral.PhotoSensor);
        armEncoder = coralArm.getEncoder();
     }
@@ -61,18 +61,20 @@ public class CoralSubsystem implements Subsystem {
 
     public double getArmLocation()
     {
-        return armEncoder.getPosition();
+        return -armEncoder.getPosition();
     }
 
-    public boolean isLowerSwitchPressed()
+    public boolean isUpperSwitchPressed()
     {
-        return lowerSwitch.get();
+        return upperSwitch.get();
     }
 
     @Override
-    public void periodic() {
-        SmartDashboard.putNumber("CoralArm", getArmLocation());
-        if(isLowerSwitchPressed())
+    public void periodic(){
+        SmartDashboard.putNumber("CoralArmPosition", getArmLocation());
+        SmartDashboard.putBoolean("CoralSwitch", isUpperSwitchPressed());
+        SmartDashboard.putBoolean("HasCoral", hasCoral());
+        if(isUpperSwitchPressed())
         {
             armEncoder.setPosition(0);
         }

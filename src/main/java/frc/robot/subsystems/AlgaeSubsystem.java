@@ -7,18 +7,17 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class AlgaeSubsystem implements Subsystem {
+public class AlgaeSubsystem extends SubsystemBase {
 
     private SparkMax algaeArm;
 
     private RelativeEncoder armEncoder;
     private WPI_TalonSRX algaeIntakeLeft;
     private WPI_TalonSRX  algaeIntakeRight;
-
-    private DigitalInput lowerLimitSwitch;
+    private DigitalInput upperLimitSwitch;
     private DigitalInput hasAlgae;
 
     public AlgaeSubsystem() {
@@ -26,7 +25,7 @@ public class AlgaeSubsystem implements Subsystem {
         armEncoder = algaeArm.getEncoder();
         algaeIntakeLeft = new WPI_TalonSRX(Constants.Algae.INTAKE_LEFT);
         algaeIntakeRight = new WPI_TalonSRX(Constants.Algae.INTAKE_RIGHT);
-        lowerLimitSwitch = new DigitalInput(Constants.Algae.UPPER_LIMIT_SWITCH);
+        upperLimitSwitch = new DigitalInput(Constants.Algae.A_UPPER_LIMIT_SWITCH);
         hasAlgae = new DigitalInput(Constants.Algae.PhotoSensor);
     }
 
@@ -72,15 +71,16 @@ public class AlgaeSubsystem implements Subsystem {
         algaeArm.set(0);
     }
 
-    public boolean isLowerLimitSwitchPressed()
+    public boolean isUpperLimitSwitchPressed()
     {
-        return lowerLimitSwitch.get();
+        return !upperLimitSwitch.get();
     }
 
     @Override
-    public void periodic() {
+    public void periodic(){
         SmartDashboard.putNumber("AlgaeArmPosition",getArmPosition());
-        if(isLowerLimitSwitchPressed())
+        SmartDashboard.putBoolean("AlgaeSwitch", isUpperLimitSwitchPressed());
+        if(isUpperLimitSwitchPressed())
         {
             armEncoder.setPosition(0);
         }

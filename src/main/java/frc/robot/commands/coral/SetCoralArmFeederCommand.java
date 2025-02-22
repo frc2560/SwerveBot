@@ -22,22 +22,23 @@ public class SetCoralArmFeederCommand extends Command {
 
     @Override
     public void execute() {
-        if(coralSubsystem.getArmLocation() > Constants.Coral.IntakePosition + 1)
+        if(coralSubsystem.getArmLocation() < Constants.Coral.IntakePosition + 1)
         {
             coralSubsystem.moveArmDown();
         }
-        else if(coralSubsystem.getArmLocation() <=  Constants.Coral.IntakePosition - 1)
+        else if(coralSubsystem.getArmLocation() >=  Constants.Coral.IntakePosition - 1)
         {
             coralSubsystem.moveArmUp();
         }
-        coralSubsystem.stopArm();
 
     }
 
     @Override
     public boolean isFinished() {
         // TODO: Make this return true when this Command no longer needs to run execute()
-        return false;
+        boolean test = coralSubsystem.getArmLocation() < Constants.Coral.IntakePosition + 1;
+        boolean test2 = coralSubsystem.getArmLocation() >=  Constants.Coral.IntakePosition - 1;
+        return test && test2;
     }
 
     @Override

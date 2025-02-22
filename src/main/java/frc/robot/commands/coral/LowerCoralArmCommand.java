@@ -1,15 +1,14 @@
 package frc.robot.commands.coral;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
 import frc.robot.subsystems.CoralSubsystem;
 
 
-public class SetCoralArmL4Command extends Command {
+public class LowerCoralArmCommand extends Command {
 
    private final CoralSubsystem coralSubsystem;
 
-   public SetCoralArmL4Command(CoralSubsystem coralSubsystem) {
+   public LowerCoralArmCommand(CoralSubsystem coralSubsystem) {
       this.coralSubsystem = coralSubsystem;
       // each subsystem used by the command must be passed into the
       // addRequirements() method (which takes a vararg of Subsystem)
@@ -23,22 +22,13 @@ public class SetCoralArmL4Command extends Command {
 
    @Override
    public void execute() {
-      if(coralSubsystem.getArmLocation() < Constants.Coral.OuttakeL4Position + 1)
-      {
-         coralSubsystem.moveArmDown();
-      }
-      else if(coralSubsystem.getArmLocation() >=  Constants.Coral.OuttakeL4Position - 1)
-      {
-         coralSubsystem.moveArmUp();
-      }
+      coralSubsystem.moveArmDown();
 
    }
 
    @Override
    public boolean isFinished() {
-      boolean test = coralSubsystem.getArmLocation() < Constants.Coral.OuttakeL4Position + 1;
-      boolean test2 = coralSubsystem.getArmLocation() >=  Constants.Coral.OuttakeL4Position - 1;
-      return test && test2;
+      return coralSubsystem.isUpperSwitchPressed();
    }
 
    @Override
