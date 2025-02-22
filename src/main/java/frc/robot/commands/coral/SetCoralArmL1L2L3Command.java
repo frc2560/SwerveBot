@@ -31,7 +31,6 @@ public class SetCoralArmL1L2L3Command extends Command {
       {
          coralSubsystem.moveArmUp();
       }
-      coralSubsystem.stopArm();
 
    }
 

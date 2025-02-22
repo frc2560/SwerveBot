@@ -103,11 +103,11 @@ public class RobotContainer {
 
         operatorControllerSubsystem.leftBlueButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
         operatorControllerSubsystem.leftRedButton.whileTrue(new CoralOutTakeCommand(coralSubsystem));
-        operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmL4Command(coralSubsystem));
-        operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL1L2L3Command(coralSubsystem));
+        operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL4Command(coralSubsystem));
+        operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmL1L2L3Command(coralSubsystem));
 
-        operatorControllerSubsystem.leftBlackButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
-        operatorControllerSubsystem.leftWhiteButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
+        operatorControllerSubsystem.leftWhiteButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
+        operatorControllerSubsystem.leftBlackButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
       //  operatorControllerSubsystem.rightBlackButton.whileTrue(new GoToL3Command(elevatorSubsystem));
        // operatorControllerSubsystem.rightWhiteButton.whileTrue(new GoToL4Command(elevatorSubsystem));
 
