@@ -218,6 +218,24 @@ public class Swerve extends SubsystemBase {
         );
     }
 
+    public Command driveForwardToScore()
+    {
+        //Create the constraints to use while pathfinding
+        PathConstraints constraints = new PathConstraints(
+                Constants.Swerve.maxSpeed, 4.0,
+                Constants.Swerve.maxAngularVelocity, Units.degreesToRadians(720));
+
+        var currentPose = this.getPose();
+        var x = currentPose.getX() + Constants.Swerve.SCORE_DISTANCE;
+        var target = new Pose2d(x, currentPose.getY(), currentPose.getRotation());
+        // Since AutoBuilder is configured, we can use it to build pathfinding commands
+        return AutoBuilder.pathfindToPose(
+                target,
+                constraints,
+                edu.wpi.first.units.Units.MetersPerSecond.of(0) // Goal end velocity in meters/sec
+        );
+    }
+
     public Rotation2d getGyroYaw() {
         return Rotation2d.fromDegrees(getGyro()).rotateBy(new Rotation2d(Math.PI));
     }

@@ -92,7 +92,7 @@ public final class Constants {
         public static final double ARM_SPEED = 0.5;
         public static double UpperArmPosition = 20;
         //TODO
-        public static int PhotoSensor = 30;
+        public static int hasAlgaeSwitch = 30;
     };
 
     public static class Coral{
@@ -115,6 +115,7 @@ public final class Constants {
 
     public static final class Swerve {
 
+        public static final double SCORE_DISTANCE = 0.5;
         public static boolean invertGyro = true;
         public static SPI.Port navX = SPI.Port.kMXP;
 
