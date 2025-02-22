@@ -92,7 +92,7 @@ public final class Constants {
         public static final double ARM_SPEED = 0.2;
         public static double UpperArmPosition = 20;
         //TODO
-        public static int PhotoSensor = 30;
+        public static int hasAlgaeSwitch = 30;
     };
 
     public static class Coral{
