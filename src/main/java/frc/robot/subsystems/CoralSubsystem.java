@@ -72,7 +72,7 @@ public class CoralSubsystem extends SubsystemBase {
     @Override
     public void periodic(){
         SmartDashboard.putNumber("CoralArmPosition", getArmLocation());
-        SmartDashboard.putBoolean("CoralSwitch", isUpperSwitchPressed());
+        SmartDashboard.putBoolean("UpperCoralSwitch", isUpperSwitchPressed());
         SmartDashboard.putBoolean("HasCoral", hasCoral());
         if(isUpperSwitchPressed())
         {

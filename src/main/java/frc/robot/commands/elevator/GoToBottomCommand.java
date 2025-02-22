@@ -22,17 +22,19 @@ public class GoToBottomCommand extends Command {
 
     @Override
     public void execute() {
-        elevatorSubsystem.setSpeed(-Constants.ElevatorConstants.SPEED);
+        elevatorSubsystem.setSpeed(-Constants.ElevatorConstants.DOWNSPEED);
 
     }
 
     @Override
-    public boolean isFinished() {
+    public boolean isFinished()
+    {
         return elevatorSubsystem.getBottomSwitch();
     }
 
     @Override
-    public void end(boolean interrupted) {
+    public void end(boolean interrupted)
+    {
         elevatorSubsystem.stopElevator();
     }
 }

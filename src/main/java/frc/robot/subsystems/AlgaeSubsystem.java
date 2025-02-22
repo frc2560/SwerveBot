@@ -30,7 +30,7 @@ public class AlgaeSubsystem extends SubsystemBase {
     }
 
     public boolean hasAlgae() {
-        return hasAlgae.get();
+        return !hasAlgae.get();
     }
 
     public void intakeAlgae()
@@ -79,7 +79,8 @@ public class AlgaeSubsystem extends SubsystemBase {
     @Override
     public void periodic(){
         SmartDashboard.putNumber("AlgaeArmPosition",getArmPosition());
-        SmartDashboard.putBoolean("AlgaeSwitch", isUpperLimitSwitchPressed());
+        SmartDashboard.putBoolean("UpperAlgaeSwitch", isUpperLimitSwitchPressed());
+        SmartDashboard.putBoolean("HasAlgae", hasAlgae());
         if(isUpperLimitSwitchPressed())
         {
             armEncoder.setPosition(0);

@@ -48,7 +48,7 @@ public  class ElevatorSubsystem extends SubsystemBase {
     @Override
     public void periodic(){
         SmartDashboard.putNumber("ElevatorPosition", getPosition());
-        SmartDashboard.putBoolean("ElevatorSwitch", getBottomSwitch());
+        SmartDashboard.putBoolean("BottomElevatorSwitch", getBottomSwitch());
         //TODO figure out Range of Position for elevator
         if (getBottomSwitch()) {
             elevatorEncoder.setPosition(0);

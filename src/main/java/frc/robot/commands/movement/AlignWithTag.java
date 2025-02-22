@@ -18,6 +18,9 @@ public class AlignWithTag extends Command {
   private final PIDController yController = new PIDController(0.1, 0, 0);
   private final PIDController omegaController = new PIDController(0.1, 0, 0);
 
+  private final double SET_AREA;
+  private final double SET_Y;
+  private final double SET_OMEGA;
 
   public AlignWithTag(Swerve drivetrainSubsystem, double area, double y, double omega) {
     this.drivetrainSubsystem = drivetrainSubsystem;
@@ -25,10 +28,13 @@ public class AlignWithTag extends Command {
     //x was 1
     //y was 10
     //omega was 10
+    SET_AREA = area;
+    SET_Y = y;
+    SET_OMEGA = omega;
 
-    xController.setTolerance(area);
-    yController.setTolerance(y);
-    omegaController.setTolerance(omega);
+    xController.setTolerance(1);
+    yController.setTolerance(1);
+    omegaController.setTolerance(1);
 
     addRequirements(drivetrainSubsystem);
   }
@@ -37,8 +43,8 @@ public class AlignWithTag extends Command {
   public void initialize() {
     //LimelightHelpers.SetFiducialIDFiltersOverride(Constants.Sensor.LIMELIGHT, new int[]{TAG_TO_CHASE});
     LimelightHelpers.SetFiducialDownscalingOverride(Constants.Sensor.LIMELIGHT, 2.0f);
-    xController.setSetpoint(5);
-    yController.setSetpoint(0);
+    //xController.setSetpoint(5);
+    //yController.setSetpoint(0);
   }
 
   @Override
@@ -57,17 +63,17 @@ public class AlignWithTag extends Command {
       double ta = LimelightHelpers.getTA(Constants.Sensor.LIMELIGHT);
 
       // Drive to the target
-      var xSpeed = MathUtil.clamp(xController.calculate(ta, 5), -0.05, .05);
+      var xSpeed = MathUtil.clamp(xController.calculate(ta, SET_AREA), -0.05, .05);
       if (xController.atSetpoint()) {
         xSpeed = 0;
       }
 
-      var ySpeed =  MathUtil.clamp(yController.calculate(ty, 0), -0.05, .05);
+      var ySpeed =  MathUtil.clamp(yController.calculate(ty, SET_Y), -0.05, .05);
       if (yController.atSetpoint()) {
         ySpeed = 0;
       }
 
-      var omegaSpeed = MathUtil.clamp(omegaController.calculate(tx, 0), -0.04, 0.04);
+      var omegaSpeed = MathUtil.clamp(omegaController.calculate(tx, SET_OMEGA), -0.04, 0.04);
       if (omegaController.atSetpoint()) {
         omegaSpeed = 0;
       }

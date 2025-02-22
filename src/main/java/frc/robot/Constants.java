@@ -20,20 +20,25 @@ public final class Constants {
     public static class AlignToTag
     {
         //TODO measure with LimeLight Camera
-        public static final double CenterReef_AREA_STAGE = 10;
-        public static final double CenterReef_AREA_REEF = 1;
-        public static final double CenterReef_Y = 10;
-        public static final double CenterReef_OMEGA = 10;
+        public static final double CenterReef_AREA_STAGE = 3.22;
+        public static final double CenterReef_AREA_REEF = 6.5;
+        public static final double CenterReef_Y = 0.5;
+        public static final double CenterReef_OMEGA = -0.96;
 
-        public static final double LeftReef_AREA_STAGE = 10;
-        public static final double LeftReef_AREA_REEF = 1;
-        public static final double LeftReef_Y = 50;
-        public static final double LeftReef_OMEGA = 10;
+        public static final double LeftReef_AREA_STAGE = 3.22;
+        public static final double LeftReef_AREA_REEF = 6.5;
+        public static final double LeftReef_Y = 1;
+        public static final double LeftReef_OMEGA = -0.96;
 
-        public static final double RightReef_AREA_STAGE = 10;
-        public static final double RightReef_AREA_REEF = 1;
-        public static final double RightReef_Y = 5;
-        public static final double RightReef_OMEGA = 10;
+        public static final double RightReef_AREA_STAGE = 2;
+        public static final double RightReef_AREA_REEF = 4;
+
+        public static final double RightReef_Y_REEF = -7;
+
+        public static final double RightReef_OMEGA_REEF = -3.2;
+
+        public static final double RightReef_Y = -5;
+        public static final double RightReef_OMEGA = 1.92;
 
 
     };
@@ -89,10 +94,10 @@ public final class Constants {
         public static final int ARM_MOTOR = 21;
         public static final int A_UPPER_LIMIT_SWITCH = 0;
         public static final double INTAKE_SPEED = 0.2;
-        public static final double ARM_SPEED = 0.5;
+        public static final double ARM_SPEED = 0.3;
         public static double UpperArmPosition = 20;
         //TODO
-        public static int hasAlgaeSwitch = 30;
+        public static int hasAlgaeSwitch = 4;
     };
 
     public static class Coral{
@@ -182,7 +187,7 @@ public final class Constants {
         /** Meters per Second */
         public static final double maxSpeed = 1; //TODO: This must be tuned to specific robot
         /** Radians per Second */
-        public static final double maxAngularVelocity = 2; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = Math.PI/2; //TODO: This must be tuned to specific robot
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -255,12 +260,13 @@ public final class Constants {
         public static final int ELEVATOR_MOTOR = 20;
         public static final int ELEVATOR_BOTTOM_SWITCH = 2;
 
-        public static final double SPEED = 0.3;
+        public static final double UPSPEED = 0.3;
+        public static final double DOWNSPEED = 0.1;
         public static double L1AlgaePosition = 25;
         public static double L2AlgaePosition = 35;
         public static double L1Position = 15;
         public static double L2Position = 20;
-        public static double L3Position = 30;
+        public static double L3Position = 42;
         public static double L4Position = 85;
     }
 }

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.coral.*;
 import frc.robot.commands.algae.*;
 import frc.robot.commands.elevator.*;
+import frc.robot.commands.movement.AlignWithTag;
 import frc.robot.commands.movement.TeleopSwerve;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Controllers.*;
@@ -62,7 +63,7 @@ public class RobotContainer {
                         s_Swerve,
                         () -> -driverControllerSubsystem.GetXRawAxis(),
                         () -> driverControllerSubsystem.GetYRawAxis(),
-                        () -> (driverControllerSubsystem.GetZRawAxis() * 0.5),
+                        () -> (driverControllerSubsystem.GetZRawAxis() * 0.25),
                         () -> driverControllerSubsystem.triggerButton.getAsBoolean()
                 )
         );
@@ -91,6 +92,8 @@ public class RobotContainer {
 
 
         /* Driver Buttons */
+        driverControllerSubsystem.button3.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_REEF, Constants.AlignToTag.RightReef_Y_REEF, Constants.AlignToTag.RightReef_OMEGA_REEF));
+        driverControllerSubsystem.button11.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_STAGE, Constants.AlignToTag.RightReef_Y, Constants.AlignToTag.RightReef_OMEGA));
         driverControllerSubsystem.button12.whileTrue(Commands.run(s_Swerve::resetBot));
 
         operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
@@ -100,13 +103,19 @@ public class RobotContainer {
 
         operatorControllerSubsystem.leftBlueButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
         operatorControllerSubsystem.leftRedButton.whileTrue(new CoralOutTakeCommand(coralSubsystem));
-        operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
-        operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL4Command(coralSubsystem));
+        operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmL4Command(coralSubsystem));
+        operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL1L2L3Command(coralSubsystem));
 
-        operatorControllerSubsystem.leftWhiteButton.whileTrue(new GoToBottomCommand(elevatorSubsystem));
-        operatorControllerSubsystem.leftBlackButton.whileTrue(new GoToL1Command(elevatorSubsystem));
-        operatorControllerSubsystem.rightBlackButton.whileTrue(new GoToL3Command(elevatorSubsystem));
-        operatorControllerSubsystem.rightWhiteButton.whileTrue(new GoToL4Command(elevatorSubsystem));
+        operatorControllerSubsystem.leftBlackButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
+        operatorControllerSubsystem.leftWhiteButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
+      //  operatorControllerSubsystem.rightBlackButton.whileTrue(new GoToL3Command(elevatorSubsystem));
+       // operatorControllerSubsystem.rightWhiteButton.whileTrue(new GoToL4Command(elevatorSubsystem));
+
+        driverControllerSubsystem.button7.whileTrue(new GoToBottomCommand(elevatorSubsystem));
+        driverControllerSubsystem.button8.whileTrue(new GoToL1Command(elevatorSubsystem));
+        driverControllerSubsystem.button9.whileTrue(new GoToL3Command(elevatorSubsystem));
+        driverControllerSubsystem.button10.whileTrue(new GoToL4Command(elevatorSubsystem));
+
 
     }
 

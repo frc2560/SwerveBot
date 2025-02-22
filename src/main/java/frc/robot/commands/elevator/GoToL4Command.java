@@ -25,15 +25,11 @@ public class GoToL4Command extends Command {
    public void execute() {
       if (elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.L4Position - 1)
       {
-         elevatorSubsystem.setSpeed(Constants.ElevatorConstants.SPEED);
+         elevatorSubsystem.setSpeed(Constants.ElevatorConstants.UPSPEED);
       }
       else if (elevatorSubsystem.getPosition() > Constants.ElevatorConstants.L4Position + 1)
       {
-         elevatorSubsystem.setSpeed(-Constants.ElevatorConstants.SPEED);
-      }
-      else
-      {
-         elevatorSubsystem.stopElevator();
+         elevatorSubsystem.setSpeed(-Constants.ElevatorConstants.DOWNSPEED);
       }
 
 
@@ -42,11 +38,14 @@ public class GoToL4Command extends Command {
    @Override
    public boolean isFinished() {
       // TODO: Make this return true when this Command no longer needs to run execute()
-      return false;
+      boolean test = elevatorSubsystem.getPosition() > Constants.ElevatorConstants.L4Position - 1;
+      boolean test2 = elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.L4Position + 1;
+      return test && test2;
    }
 
    @Override
-   public void end(boolean interrupted) {
+   public void end(boolean interrupted)
+   {
       elevatorSubsystem.stopElevator();
    }
 }

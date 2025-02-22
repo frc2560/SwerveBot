@@ -38,8 +38,8 @@ public class SetCoralArmL1L2L3Command extends Command {
    @Override
    public boolean isFinished() {
       // TODO: Make this return true when this Command no longer needs to run execute()
-      boolean test = coralSubsystem.getArmLocation() < Constants.Coral.OuttakeL4Position + 1;
-      boolean test2 = coralSubsystem.getArmLocation() >=  Constants.Coral.OuttakeL4Position - 1;
+      boolean test = coralSubsystem.getArmLocation() < Constants.Coral.OuttakeL1L2L3Position + 1;
+      boolean test2 = coralSubsystem.getArmLocation() >=  Constants.Coral.OuttakeL1L2L3Position - 1;
       return test && test2;
    }
 
