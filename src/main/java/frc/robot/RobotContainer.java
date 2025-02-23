@@ -94,27 +94,34 @@ public class RobotContainer {
         /* Driver Buttons */
         driverControllerSubsystem.button3.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_STAGE, Constants.AlignToTag.RightReef_Y_STAGE, Constants.AlignToTag.RightReef_OMEGA_STAGE));
         driverControllerSubsystem.button4.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_REEF, Constants.AlignToTag.RightReef_Y_REEF, Constants.AlignToTag.RightReef_OMEGA_REEF));
-        driverControllerSubsystem.button12.whileTrue(Commands.run(s_Swerve::resetBot));
-
-        operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.leftGreenButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.rightYellowButton.whileTrue(new RaiseAlgaeArmCommand(algaeSubsystem));
-        operatorControllerSubsystem.rightGreenButton.whileTrue(new LowerAlgaeArmCommand(algaeSubsystem));
-
-        operatorControllerSubsystem.leftBlueButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
-        operatorControllerSubsystem.leftRedButton.whileTrue(new CoralOutTakeCommand(coralSubsystem));
-        operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL4Command(coralSubsystem));
-        operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmL1L2L3Command(coralSubsystem));
-
-        operatorControllerSubsystem.leftWhiteButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
-        operatorControllerSubsystem.leftBlackButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
-      //  operatorControllerSubsystem.rightBlackButton.whileTrue(new GoToL3Command(elevatorSubsystem));
-       // operatorControllerSubsystem.rightWhiteButton.whileTrue(new GoToL4Command(elevatorSubsystem));
+        driverControllerSubsystem.button5.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.LeftReef_AREA_STAGE, Constants.AlignToTag.LeftReef_Y_STAGE, Constants.AlignToTag.LeftReef_OMEGA_STAGE));
+        driverControllerSubsystem.button6.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.LeftReef_AREA_REEF, Constants.AlignToTag.LeftReef_Y_REEF, Constants.AlignToTag.LeftReef_OMEGA_REEF));
 
         driverControllerSubsystem.button7.whileTrue(new GoToBottomCommand(elevatorSubsystem));
         driverControllerSubsystem.button8.whileTrue(new GoToL1Command(elevatorSubsystem));
         driverControllerSubsystem.button9.whileTrue(new GoToL3Command(elevatorSubsystem));
         driverControllerSubsystem.button10.whileTrue(new GoToL4Command(elevatorSubsystem));
+
+        driverControllerSubsystem.button12.whileTrue(Commands.run(s_Swerve::resetBot));
+
+
+
+        //operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
+        //operatorControllerSubsystem.leftGreenButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
+        operatorControllerSubsystem.rightYellowButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
+        operatorControllerSubsystem.rightGreenButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
+
+        operatorControllerSubsystem.leftRedButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
+        operatorControllerSubsystem.leftBlueButton.whileTrue(new CoralOutTakeCommand(coralSubsystem));
+        operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL1L2L3Command(coralSubsystem));
+        operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmL4Command(coralSubsystem));
+
+        operatorControllerSubsystem.leftWhiteButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
+        operatorControllerSubsystem.leftBlackButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
+        operatorControllerSubsystem.rightBlackButton.whileTrue(new RaiseAlgaeArmCommand(algaeSubsystem));
+        operatorControllerSubsystem.rightWhiteButton.whileTrue(new LowerAlgaeArmCommand(algaeSubsystem));
+
+
 
 
     }
