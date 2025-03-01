@@ -14,7 +14,6 @@ import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
-
     public static final String CANivore = "canivore";
     public static final double stickDeadband = 0.1;
     public static class AlignToTag
@@ -112,7 +111,7 @@ public final class Constants {
         public static final int C_UPPER_LIMIT = 3;
         public static double IntakeSpeed = 0.6;
         public static double OutTakeSpeed = 0.2;
-        public static double ArmSpeed = 0.05;
+        public static double ArmSpeed = 0.15;
         //TODO
         public static double IntakePosition = 6;
         public static double OuttakeL1L2L3Position = 15;

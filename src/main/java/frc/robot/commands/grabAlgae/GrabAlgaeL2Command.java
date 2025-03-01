@@ -14,7 +14,7 @@ import frc.robot.subsystems.Swerve;
 
 public class GrabAlgaeL2Command extends SequentialCommandGroup {
     public GrabAlgaeL2Command(ElevatorSubsystem elevatorSubsystem, AlgaeSubsystem algaeSubsystem, Swerve swerveSubsystem) {
-        super(   new AlignWithTag(swerveSubsystem, Constants.AlignToTag.CenterReef_AREA_STAGE, Constants.AlignToTag.CenterReef_Y_REEF, Constants.AlignToTag.CenterReef_OMEGA_REEF),
+        super(  new AlignWithTag(swerveSubsystem, Constants.AlignToTag.CenterReef_AREA_STAGE, Constants.AlignToTag.CenterReef_Y_REEF, Constants.AlignToTag.CenterReef_OMEGA_REEF),
                 new LowerAlgaeArmCommand(algaeSubsystem),
                 new GoToL2AlgaeCommand(elevatorSubsystem),
                 new AlignWithTag(swerveSubsystem, Constants.AlignToTag.CenterReef_AREA_REEF, Constants.AlignToTag.CenterReef_Y_REEF, Constants.AlignToTag.CenterReef_OMEGA_REEF),

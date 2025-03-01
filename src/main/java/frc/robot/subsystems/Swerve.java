@@ -6,7 +6,6 @@ import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.pathplanner.lib.path.PathConstraints;
-import com.studica.frc.AHRS;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.util.Units;
@@ -201,6 +200,35 @@ public class Swerve extends SubsystemBase {
 
     public void zeroHeading(){
         poseEstimate.resetPosition(getGyroYaw(), getModulePositions(), new Pose2d(getPose().getTranslation(), new Rotation2d()));
+    }
+
+   public Command driveToFeederLeft() {
+       if (DriverStation.getAlliance().isPresent()) {
+           if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue) {
+               var pose = new Pose2d(1.343, 6.908, new Rotation2d(125.910));
+               return driveToPose(pose);
+           } else {
+               var pose = new Pose2d(16.204, 1.129, new Rotation2d(-51.667));
+               return driveToPose(pose);
+           }
+       }
+       return driveToPose(getPose());
+   }
+
+    public Command driveToFeederRight()
+    {
+        if(DriverStation.getAlliance().isPresent()) {
+            if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue) {
+                var pose = new Pose2d(1.295, 1.226, new Rotation2d(-127.66));
+                driveToPose(pose);
+            }
+            else
+            {
+                var pose = new Pose2d(16.243, 6.853, new Rotation2d(52.306).times(-1));
+                driveToPose(pose);
+            }
+        }
+        return driveToPose(getPose());
     }
 
     public Command driveToPose(Pose2d pose)
