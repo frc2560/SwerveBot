@@ -11,6 +11,10 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.coral.*;
 import frc.robot.commands.algae.*;
 import frc.robot.commands.elevator.*;
+import frc.robot.commands.grabCoral.Left.GrabCoralL3CommandLeft;
+import frc.robot.commands.grabCoral.Left.GrabCoralL4CommandLeft;
+import frc.robot.commands.grabCoral.Right.GrabCoralL3CommandRight;
+import frc.robot.commands.grabCoral.Right.GrabCoralL4CommandRight;
 import frc.robot.commands.movement.AlignWithTag;
 import frc.robot.commands.movement.TeleopSwerve;
 import frc.robot.subsystems.*;
@@ -92,10 +96,10 @@ public class RobotContainer {
 
 
         /* Driver Buttons */
-        driverControllerSubsystem.button3.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_STAGE, Constants.AlignToTag.RightReef_Y_STAGE, Constants.AlignToTag.RightReef_OMEGA_STAGE));
-        driverControllerSubsystem.button4.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.RightReef_AREA_REEF, Constants.AlignToTag.RightReef_Y_REEF, Constants.AlignToTag.RightReef_OMEGA_REEF));
-        driverControllerSubsystem.button5.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.LeftReef_AREA_STAGE, Constants.AlignToTag.LeftReef_Y_STAGE, Constants.AlignToTag.LeftReef_OMEGA_STAGE));
-        driverControllerSubsystem.button6.whileTrue(new AlignWithTag(s_Swerve, Constants.AlignToTag.LeftReef_AREA_REEF, Constants.AlignToTag.LeftReef_Y_REEF, Constants.AlignToTag.LeftReef_OMEGA_REEF));
+        driverControllerSubsystem.button3.whileTrue(new GrabCoralL3CommandLeft(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button4.whileTrue(new GrabCoralL3CommandRight(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button5.whileTrue(new GrabCoralL4CommandLeft(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button6.whileTrue(new GrabCoralL4CommandRight(coralSubsystem, elevatorSubsystem, s_Swerve));
 
         driverControllerSubsystem.button7.whileTrue(new GoToBottomCommand(elevatorSubsystem));
         driverControllerSubsystem.button8.whileTrue(new GoToL1Command(elevatorSubsystem));
@@ -108,7 +112,7 @@ public class RobotContainer {
 
         //operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
         //operatorControllerSubsystem.leftGreenButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.leftGreenButton.whileTrue((s_Swerve.driveToFeederRight()));
+        operatorControllerSubsystem.leftGreenButton.whileTrue((new GrabCoralL4CommandLeft(coralSubsystem, elevatorSubsystem, s_Swerve)));
         operatorControllerSubsystem.leftYellowButton.whileTrue((s_Swerve.driveToFeederLeft()));
         operatorControllerSubsystem.rightYellowButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
         operatorControllerSubsystem.rightGreenButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));

@@ -34,7 +34,7 @@ public class AlignWithTag extends Command {
 
     xController.setTolerance(0.5);
     yController.setTolerance(0.5);
-    omegaController.setTolerance(3);
+    omegaController.setTolerance(2);
 
     addRequirements(drivetrainSubsystem);
   }
@@ -68,7 +68,7 @@ public class AlignWithTag extends Command {
         xSpeed = 0;
       }
 
-      var ySpeed =  MathUtil.clamp(yController.calculate(ty, SET_Y), -0.05, .05);
+      var ySpeed =  MathUtil.clamp(yController.calculate(ty, SET_Y), -0.01, .01);
       if (yController.atSetpoint()) {
         ySpeed = 0;
       }
@@ -79,7 +79,7 @@ public class AlignWithTag extends Command {
       }
 
       drivetrainSubsystem.drive(new Translation2d(xSpeed, omegaSpeed).times(Constants.Swerve.maxSpeed),
-              0,
+              ySpeed,
               true,
               true);
     }

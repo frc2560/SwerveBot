@@ -26,20 +26,20 @@ public final class Constants {
         public static final double CenterReef_OMEGA_STAGE = 3.28;
         public static final double CenterReef_OMEGA_REEF = -4.13;
 
-        public static final double LeftReef_AREA_STAGE = 6.48;
+        public static final double LeftReef_AREA_STAGE = 6.78;
         public static final double LeftReef_AREA_REEF = 1.41;
-        public static final double LeftReef_Y_STAGE = -6.32;
+        public static final double LeftReef_Y_STAGE = -9.57;
         public static final double LeftReef_Y_REEF = 19.77;
-        public static final double LeftReef_OMEGA_STAGE = 25.0;
+        public static final double LeftReef_OMEGA_STAGE = 22.04;
         public static final double LeftReef_OMEGA_REEF = 4.55;
 
-        public static final double RightReef_AREA_STAGE = 1.8;
+        public static final double RightReef_AREA_STAGE = 5.8;
         public static final double RightReef_AREA_REEF = 4.51;
 
-        public static final double RightReef_Y_STAGE = -0.18;
+        public static final double RightReef_Y_STAGE = -8.59;
         public static final double RightReef_Y_REEF = 4.77;
 
-        public static final double RightReef_OMEGA_STAGE = 3.3;
+        public static final double RightReef_OMEGA_STAGE = -17.85;
         public static final double RightReef_OMEGA_REEF = -3.44;
 
 
@@ -115,7 +115,7 @@ public final class Constants {
         //TODO
         public static double IntakePosition = 6;
         public static double OuttakeL1L2L3Position = 15;
-        public static double OuttakeL4Position = 18;
+        public static double OuttakeL4Position = 16;
         public static double ArmUpPosition = 0;
         //TODO
         public static int PhotoSensor = 1;
@@ -264,12 +264,12 @@ public final class Constants {
         public static final int ELEVATOR_BOTTOM_SWITCH = 2;
 
         public static final double UPSPEED = 0.4;
-        public static final double DOWNSPEED = 0.1;
+        public static final double DOWNSPEED = 0.2;
         public static double L1AlgaePosition = 25;
         public static double L2AlgaePosition = 35;
         public static double L1Position = 15;
         public static double L2Position = 20;
-        public static double L3Position = 42;
-        public static double L4Position = 85;
+        public static double L3Position = 38;
+        public static double L4Position = 76;
     }
 }

@@ -3,6 +3,8 @@ package frc.robot.commands.grabCoral.Left;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.coral.CoralOutTakeCommand;
+import frc.robot.commands.coral.RaiseCoralArmCommand;
+import frc.robot.commands.coral.SetCoralArmFeederCommand;
 import frc.robot.commands.coral.SetCoralArmL4Command;
 import frc.robot.commands.elevator.GoToBottomCommand;
 import frc.robot.commands.elevator.GoToL4Command;
@@ -19,20 +21,11 @@ public class GrabCoralL4CommandLeft extends SequentialCommandGroup {
                         swervesubsystem,
                         Constants.AlignToTag.LeftReef_AREA_STAGE,
                         Constants.AlignToTag.LeftReef_Y_STAGE,
-                        Constants.AlignToTag.LeftReef_OMEGA_STAGE),
-                new SetCoralArmL4Command(coralSubsystem),
+                        Constants.AlignToTag.LeftReef_OMEGA_STAGE).withTimeout(3),
                 new GoToL4Command(elevatorSubsystem),
-                new AlignWithTag(
-                        swervesubsystem,
-                        Constants.AlignToTag.LeftReef_AREA_REEF,
-                        Constants.AlignToTag.LeftReef_Y_STAGE,
-                        Constants.AlignToTag.LeftReef_OMEGA_STAGE),
-                new CoralOutTakeCommand(coralSubsystem),
-                new AlignWithTag(
-                        swervesubsystem,
-                        Constants.AlignToTag.LeftReef_AREA_STAGE,
-                        Constants.AlignToTag.LeftReef_Y_STAGE,
-                        Constants.AlignToTag.LeftReef_OMEGA_STAGE),
+                new SetCoralArmL4Command(coralSubsystem),
+                new CoralOutTakeCommand(coralSubsystem).withTimeout(1),
+                new RaiseCoralArmCommand(coralSubsystem).alongWith(new GoToL4Command(elevatorSubsystem)),
                 new GoToBottomCommand(elevatorSubsystem)
         );
     }
