@@ -14,9 +14,9 @@ public class AlignWithTag extends Command {
   //private static final int TAG_TO_CHASE = 2;
 
   private final Swerve drivetrainSubsystem;
-  private final PIDController xController = new PIDController(0.1, 0, 0);
-  private final PIDController yController = new PIDController(0.1, 0, 0);
-  private final PIDController omegaController = new PIDController(0.1, 0, 0);
+  private final PIDController xController = new PIDController(0.05, 0, 0);
+  private final PIDController yController = new PIDController(0.05, 0, 0);
+  private final PIDController omegaController = new PIDController(0.05, 0, 0);
 
   private final double SET_AREA;
   private final double SET_Y;
@@ -32,9 +32,9 @@ public class AlignWithTag extends Command {
     SET_Y = y;
     SET_OMEGA = omega;
 
-    xController.setTolerance(1);
-    yController.setTolerance(1);
-    omegaController.setTolerance(1);
+    xController.setTolerance(0.5);
+    yController.setTolerance(0.5);
+    omegaController.setTolerance(3);
 
     addRequirements(drivetrainSubsystem);
   }
@@ -73,13 +73,13 @@ public class AlignWithTag extends Command {
         ySpeed = 0;
       }
 
-      var omegaSpeed = MathUtil.clamp(omegaController.calculate(tx, SET_OMEGA), -0.04, 0.04);
+      var omegaSpeed = MathUtil.clamp(omegaController.calculate(tx, SET_OMEGA), -0.05, 0.05);
       if (omegaController.atSetpoint()) {
         omegaSpeed = 0;
       }
 
-      drivetrainSubsystem.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),
-              omegaSpeed,
+      drivetrainSubsystem.drive(new Translation2d(xSpeed, omegaSpeed).times(Constants.Swerve.maxSpeed),
+              0,
               true,
               true);
     }

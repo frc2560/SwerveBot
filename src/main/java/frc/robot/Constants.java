@@ -26,11 +26,11 @@ public final class Constants {
         public static final double CenterReef_OMEGA_STAGE = 3.28;
         public static final double CenterReef_OMEGA_REEF = -4.13;
 
-        public static final double LeftReef_AREA_STAGE =1.41;
+        public static final double LeftReef_AREA_STAGE = 6.48;
         public static final double LeftReef_AREA_REEF = 1.41;
-        public static final double LeftReef_Y_STAGE = 19.77;
+        public static final double LeftReef_Y_STAGE = -6.32;
         public static final double LeftReef_Y_REEF = 19.77;
-        public static final double LeftReef_OMEGA_STAGE = 4.55;
+        public static final double LeftReef_OMEGA_STAGE = 25.0;
         public static final double LeftReef_OMEGA_REEF = 4.55;
 
         public static final double RightReef_AREA_STAGE = 1.8;

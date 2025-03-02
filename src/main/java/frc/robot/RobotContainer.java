@@ -1,7 +1,6 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -13,7 +12,6 @@ import frc.robot.commands.coral.*;
 import frc.robot.commands.algae.*;
 import frc.robot.commands.elevator.*;
 import frc.robot.commands.movement.AlignWithTag;
-import frc.robot.commands.movement.DriveToFeederRightCommandGroup;
 import frc.robot.commands.movement.TeleopSwerve;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Controllers.*;
@@ -111,7 +109,8 @@ public class RobotContainer {
         //operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
         //operatorControllerSubsystem.leftGreenButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
         operatorControllerSubsystem.leftGreenButton.whileTrue((s_Swerve.driveToFeederRight()));
-        operatorControllerSubsystem.rightYellowButton.whileTrue((s_Swerve.driveToFeederLeft()));
+        operatorControllerSubsystem.leftYellowButton.whileTrue((s_Swerve.driveToFeederLeft()));
+        operatorControllerSubsystem.rightYellowButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
         operatorControllerSubsystem.rightGreenButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
 
         operatorControllerSubsystem.leftRedButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
