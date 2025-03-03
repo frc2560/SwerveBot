@@ -26,11 +26,11 @@ public final class Constants {
         public static final double CenterReef_OMEGA_STAGE = 3.28;
         public static final double CenterReef_OMEGA_REEF = -4.13;
 
-        public static final double LeftReef_AREA_STAGE = 6.78;
+        public static final double LeftReef_AREA_STAGE = 7.2;
         public static final double LeftReef_AREA_REEF = 1.41;
-        public static final double LeftReef_Y_STAGE = -9.57;
+        public static final double LeftReef_Y_STAGE = -3.58;
         public static final double LeftReef_Y_REEF = 19.77;
-        public static final double LeftReef_OMEGA_STAGE = 22.04;
+        public static final double LeftReef_OMEGA_STAGE = 26.35;
         public static final double LeftReef_OMEGA_REEF = 4.55;
 
         public static final double RightReef_AREA_STAGE = 5.8;
@@ -188,9 +188,9 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 1; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 0.2; //TODO: This must be tuned to specific robot
         /** Radians per Second */
-        public static final double maxAngularVelocity = 2; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = 1; //TODO: This must be tuned to specific robot
 
         /* Neutral Modes */
         public static final NeutralModeValue angleNeutralMode = NeutralModeValue.Coast;
@@ -263,13 +263,13 @@ public final class Constants {
         public static final int ELEVATOR_MOTOR = 20;
         public static final int ELEVATOR_BOTTOM_SWITCH = 2;
 
-        public static final double UPSPEED = 0.4;
-        public static final double DOWNSPEED = 0.2;
+        public static final double UPSPEED = 0.6;
+        public static final double DOWNSPEED = 0.3;
         public static double L1AlgaePosition = 25;
         public static double L2AlgaePosition = 35;
-        public static double L1Position = 15;
+        public static double L1Position = 12;
         public static double L2Position = 20;
-        public static double L3Position = 38;
+        public static double L3Position = 36;
         public static double L4Position = 76;
     }
 }

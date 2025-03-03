@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.coral.*;
 import frc.robot.commands.algae.*;
 import frc.robot.commands.elevator.*;
+import frc.robot.commands.grabCoral.Left.CoralFromFeederCommandGroup;
 import frc.robot.commands.grabCoral.Left.GrabCoralL3CommandLeft;
 import frc.robot.commands.grabCoral.Left.GrabCoralL4CommandLeft;
 import frc.robot.commands.grabCoral.Right.GrabCoralL3CommandRight;
@@ -112,7 +113,7 @@ public class RobotContainer {
 
         //operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
         //operatorControllerSubsystem.leftGreenButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.leftGreenButton.whileTrue((new GrabCoralL4CommandLeft(coralSubsystem, elevatorSubsystem, s_Swerve)));
+        operatorControllerSubsystem.leftGreenButton.whileTrue((new CoralFromFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve)));
         operatorControllerSubsystem.leftYellowButton.whileTrue((s_Swerve.driveToFeederLeft()));
         operatorControllerSubsystem.rightYellowButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
         operatorControllerSubsystem.rightGreenButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
