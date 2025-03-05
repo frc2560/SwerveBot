@@ -7,19 +7,39 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Swerve;
 
+import java.util.Dictionary;
+import java.util.Hashtable;
+
 
 public class TurnToAngleCommand extends Command {
     private final Swerve swerve;
     private final PIDController  omegaController = new PIDController(0.05, 0, 0);
 
-    private double Angle;
+    private static final Dictionary<Integer, Double> tagAngles = new Hashtable<>();
 
-    public TurnToAngleCommand(Swerve swerve, double angle) {
+    static {
+        tagAngles.put(6, 300.0);
+        tagAngles.put(7, 0.0);
+        tagAngles.put(8, 60.0);
+        tagAngles.put(9, 120.0);
+        tagAngles.put(10, 180.0);
+        tagAngles.put(11, 240.0);
+        tagAngles.put(17, 240.0);
+        tagAngles.put(18, 180.0);
+        tagAngles.put(19, 120.0);
+        tagAngles.put(20, 60.0);
+        tagAngles.put(21, 0.0);
+        tagAngles.put(22, 300.0);
+    }
+
+    private double targetAngle;
+
+    public TurnToAngleCommand(Swerve swerve, int tagNumber) {
         this.swerve = swerve;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
         omegaController.setTolerance(3);
-        Angle = angle;
+        this.targetAngle = tagAngles.get(tagNumber);
         addRequirements(this.swerve);
 
     }
@@ -31,7 +51,7 @@ public class TurnToAngleCommand extends Command {
 
     @Override
     public void execute() {
-        var omegaSpeed = MathUtil.clamp(omegaController.calculate(swerve.getGyroYaw().getDegrees(), Angle), -0.05, 0.05);
+        var omegaSpeed = MathUtil.clamp(omegaController.calculate(swerve.getGyroYaw().getDegrees(), targetAngle), -0.05, 0.05);
         if (omegaController.atSetpoint()) {
             omegaSpeed = 0;
         }
