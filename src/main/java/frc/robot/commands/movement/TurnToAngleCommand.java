@@ -39,7 +39,7 @@ public class TurnToAngleCommand extends Command {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
         omegaController.setTolerance(3);
-        this.targetAngle = tagAngles.get(tagNumber);
+        this.targetAngle = tagAngles.get(tagNumber) + 180.0;
         addRequirements(this.swerve);
 
     }
