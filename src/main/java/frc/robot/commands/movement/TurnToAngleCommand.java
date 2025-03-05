@@ -15,6 +15,7 @@ public class TurnToAngleCommand extends Command {
     private final Swerve swerve;
     private final PIDController  omegaController = new PIDController(0.05, 0, 0);
 
+    // all coral tags with field-relative angles
     private static final Dictionary<Integer, Double> tagAngles = new Hashtable<>();
 
     static {
@@ -39,7 +40,8 @@ public class TurnToAngleCommand extends Command {
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
         omegaController.setTolerance(3);
-        this.targetAngle = tagAngles.get(tagNumber) + 180.0;
+        // add 180.0 to each tag
+        this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) + 180.0 : 0.0;
         addRequirements(this.swerve);
 
     }
