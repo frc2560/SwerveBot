@@ -5,6 +5,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.LimelightHelpers;
 import frc.robot.subsystems.Swerve;
 
 import java.util.Dictionary;
@@ -35,12 +36,15 @@ public class TurnToAngleCommand extends Command {
 
     private double targetAngle;
 
-    public TurnToAngleCommand(Swerve swerve, int tagNumber) {
+    public TurnToAngleCommand(Swerve swerve) {
         this.swerve = swerve;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
         omegaController.setTolerance(3);
+        omegaController.enableContinuousInput(-180, 180);
         // add 180.0 to each tag
+        LimelightHelpers.SetFiducialDownscalingOverride(Constants.Sensor.LIMELIGHT, 2.0f);
+        int tagNumber = (int)LimelightHelpers.getFiducialID(Constants.Sensor.LIMELIGHT);
         this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) + 180.0 : 0.0;
         addRequirements(this.swerve);
 

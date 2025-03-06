@@ -80,7 +80,7 @@ public class AlignWithTag extends Command {
 
       drivetrainSubsystem.drive(new Translation2d(xSpeed, omegaSpeed).times(Constants.Swerve.maxSpeed),0
               ,
-              true,
+              false,
               true);
     }
   }

@@ -1,6 +1,7 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -11,12 +12,11 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.coral.*;
 import frc.robot.commands.algae.*;
 import frc.robot.commands.elevator.*;
-import frc.robot.commands.grabCoral.Left.CoralFromFeederCommandGroup;
-import frc.robot.commands.grabCoral.Left.GrabCoralL3CommandLeft;
-import frc.robot.commands.grabCoral.Left.GrabCoralL4CommandLeft;
-import frc.robot.commands.grabCoral.Right.GrabCoralL3CommandRight;
-import frc.robot.commands.grabCoral.Right.GrabCoralL4CommandRight;
-import frc.robot.commands.movement.AlignWithTag;
+import frc.robot.commands.grabCoral.GetCoralFeederCommandGroup;
+import frc.robot.commands.grabCoral.Left.LeftScoreCoralL3Command;
+import frc.robot.commands.grabCoral.Left.LeftScoreCoralL4Command;
+import frc.robot.commands.grabCoral.Right.RightScoreCoralL3Command;
+import frc.robot.commands.grabCoral.Right.RightScoreCoralL4Command;
 import frc.robot.commands.movement.TeleopSwerve;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Controllers.*;
@@ -62,6 +62,11 @@ public class RobotContainer {
         NamedCommands.registerCommand("KnockAlgaeOffL1", new KnockAlgaeOffL1Command(s_Swerve));
         NamedCommands.registerCommand("KnockAlgaeOffL2", new KnockAlgaeOffL2Command(s_Swerve));
         */
+        NamedCommands.registerCommand("ScoreOnLevel4Right", new RightScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
+        NamedCommands.registerCommand("ScoreOnLevel3Right", new RightScoreCoralL3Command(coralSubsystem,elevatorSubsystem, s_Swerve ));
+        NamedCommands.registerCommand("ScoreOnLevel4Left", new LeftScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
+        NamedCommands.registerCommand("ScoreOnLevel3Left", new LeftScoreCoralL3Command(coralSubsystem,elevatorSubsystem, s_Swerve ));
+        NamedCommands.registerCommand("CoralFromFeeder", new GetCoralFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve));
 
         driverControllerSubsystem.button2.whileTrue(
                 new TeleopSwerve(
@@ -97,10 +102,10 @@ public class RobotContainer {
 
 
         /* Driver Buttons */
-        driverControllerSubsystem.button3.whileTrue(new GrabCoralL3CommandLeft(coralSubsystem, elevatorSubsystem, s_Swerve));
-        driverControllerSubsystem.button4.whileTrue(new GrabCoralL3CommandRight(coralSubsystem, elevatorSubsystem, s_Swerve));
-        driverControllerSubsystem.button5.whileTrue(new GrabCoralL4CommandLeft(coralSubsystem, elevatorSubsystem, s_Swerve));
-        driverControllerSubsystem.button6.whileTrue(new GrabCoralL4CommandRight(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button3.whileTrue(new LeftScoreCoralL3Command(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button4.whileTrue(new RightScoreCoralL3Command(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button5.whileTrue(new LeftScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button6.whileTrue(new RightScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
 
         driverControllerSubsystem.button7.whileTrue(new GoToBottomCommand(elevatorSubsystem));
         driverControllerSubsystem.button8.whileTrue(new GoToL1Command(elevatorSubsystem));
@@ -113,7 +118,7 @@ public class RobotContainer {
 
         //operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
         //operatorControllerSubsystem.leftGreenButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.leftGreenButton.whileTrue((new CoralFromFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve)));
+        operatorControllerSubsystem.leftGreenButton.whileTrue((new GetCoralFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve)));
         operatorControllerSubsystem.leftYellowButton.whileTrue((s_Swerve.driveToFeederLeft()));
         operatorControllerSubsystem.rightYellowButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
         operatorControllerSubsystem.rightGreenButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
