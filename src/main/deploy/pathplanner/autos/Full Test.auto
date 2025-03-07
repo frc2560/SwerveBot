@@ -7,37 +7,37 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Barge to Reef ID22"
+            "pathName": "Start Right to Reef 1"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "GrabAlgaeL2"
+            "name": "ScoreOnLevel4Right"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Reef ID 22 to 21 "
+            "pathName": "Reef 1 to Loading Station"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "KnockAlgaeOffL2"
+            "name": "CoralFromFeeder"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Reef ID 21 to 20"
+            "pathName": "Loading Station to Reef 4"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "KnockAlgaeOffL2"
+            "name": "ScoreOnLevel4Right"
           }
         }
       ]
