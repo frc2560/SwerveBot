@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
+import frc.robot.commands.climber.LowerClimberArmCommand;
+import frc.robot.commands.climber.RaiseClimberArmCommand;
 import frc.robot.commands.coral.*;
 import frc.robot.commands.algae.*;
 import frc.robot.commands.elevator.*;
@@ -35,6 +37,7 @@ public class RobotContainer {
     /* Subsystems */
     public final Swerve s_Swerve = new Swerve();
     public final CoralSubsystem coralSubsystem = new CoralSubsystem();
+    public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
     public final AlgaeSubsystem algaeSubsystem = new AlgaeSubsystem();
     public final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
     public final OperatorControllerSubsystem operatorControllerSubsystem = new OperatorControllerSubsystem();
@@ -118,14 +121,17 @@ public class RobotContainer {
 
         //operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
         //operatorControllerSubsystem.leftGreenButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.leftGreenButton.whileTrue((new GetCoralFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve)));
-        operatorControllerSubsystem.leftYellowButton.whileTrue((s_Swerve.driveToFeederLeft()));
-        operatorControllerSubsystem.rightYellowButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
-        operatorControllerSubsystem.rightGreenButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
+       // operatorControllerSubsystem.leftGreenButton.whileTrue((new GetCoralFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve)));
+        //operatorControllerSubsystem.leftYellowButton.whileTrue((s_Swerve.driveToFeederLeft()));
+        operatorControllerSubsystem.leftGreenButton.whileTrue(new RaiseClimberArmCommand(climberSubsystem));
+        operatorControllerSubsystem.leftYellowButton.whileTrue(new LowerClimberArmCommand(climberSubsystem));
+        operatorControllerSubsystem.rightGreenButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
+        operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmFeederCommand(coralSubsystem));
 
         operatorControllerSubsystem.leftRedButton.whileTrue(new CoralIntakeCommand(coralSubsystem));
         operatorControllerSubsystem.leftBlueButton.whileTrue(new CoralOutTakeCommand(coralSubsystem));
-        operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL1L2L3Command(coralSubsystem));
+        operatorControllerSubsystem.rightYellowButton.whileTrue(new GetCoralFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve));
+        //operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL1L2L3Command(coralSubsystem));
         operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmL4Command(coralSubsystem));
 
         operatorControllerSubsystem.leftWhiteButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));

@@ -17,15 +17,15 @@ import frc.robot.subsystems.Swerve;
 public class RightScoreCoralL4Command extends SequentialCommandGroup {
     public RightScoreCoralL4Command(CoralSubsystem coralSubsystem, ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem) {
         super(
+                //new TurnToAngleCommand(swervesubsystem),
                 new AlignWithTag(
                         swervesubsystem,
                         Constants.AlignToTag.RightReef_AREA_STAGE,
                         Constants.AlignToTag.RightReef_Y_STAGE,
-                        Constants.AlignToTag.RightReef_OMEGA_STAGE).withTimeout(3),
-                new TurnToAngleCommand(swervesubsystem),
+                        Constants.AlignToTag.RightReef_OMEGA_STAGE).withTimeout(2),
                 new GoToL4Command(elevatorSubsystem),
                 new SetCoralArmL4Command(coralSubsystem),
-                new CoralOutTakeCommand(coralSubsystem).withTimeout(1),
+                new CoralOutTakeCommand(coralSubsystem).withTimeout(0.75),
                 new RaiseCoralArmCommand(coralSubsystem).alongWith(new GoToL4Command(elevatorSubsystem)),
                 new GoToBottomCommand(elevatorSubsystem)
         );

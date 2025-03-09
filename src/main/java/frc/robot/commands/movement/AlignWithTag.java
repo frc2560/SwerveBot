@@ -34,7 +34,7 @@ public class AlignWithTag extends Command {
 
     xController.setTolerance(0.2);
     yController.setTolerance(0.5);
-    omegaController.setTolerance(1);
+    omegaController.setTolerance(.5);
 
     addRequirements(drivetrainSubsystem);
   }
