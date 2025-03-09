@@ -274,7 +274,7 @@ public final class Constants {
         public static final double DOWNSPEED = 0.4;
         public static double L1AlgaePosition = 25;
         public static double L2AlgaePosition = 35;
-        public static double L1Position = 12;
+        public static double L1Position = 15;
         public static double L2Position = 20;
         public static double L3Position = 38;
         public static double L4Position = 78;
