@@ -54,18 +54,6 @@ public class RobotContainer {
         // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
 
         SmartDashboard.putData("Auto Chooser", autoChooser);
-
-        /*
-        NamedCommands.registerCommand("AlignToTag", new AlignWithTag(s_Swerve));
-
-        NamedCommands.registerCommand("ScoreOnLevel4", new Level4ScoreCommand(s_Swerve));
-        NamedCommands.registerCommand("GrabAlgaeL1", new GrabAlgaeL1Command(s_Swerve));
-        NamedCommands.registerCommand("IntakeCoral", new CoralIntakeCommand(coralSubsystem));
-        NamedCommands.registerCommand("ScoreInProcessor", new ProcessorScoreCommand(s_Swerve));
-        NamedCommands.registerCommand("GrabAlgaeL2", new GrabAlgaeL2Command(s_Swerve));
-        NamedCommands.registerCommand("KnockAlgaeOffL1", new KnockAlgaeOffL1Command(s_Swerve));
-        NamedCommands.registerCommand("KnockAlgaeOffL2", new KnockAlgaeOffL2Command(s_Swerve));
-        */
         NamedCommands.registerCommand("ScoreOnLevel4Right", new RightScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
         NamedCommands.registerCommand("ScoreOnLevel3Right", new RightScoreCoralL3Command(coralSubsystem,elevatorSubsystem, s_Swerve ));
         NamedCommands.registerCommand("ScoreOnLevel4Left", new LeftScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));

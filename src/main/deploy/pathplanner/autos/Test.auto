@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Score 1 Coral and 1 Algae"
+            "pathName": "Start Right to Reef 1"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "GetAlgaeOffReef"
+            "name": "ScoreOnLevel4Right"
           }
         }
       ]
