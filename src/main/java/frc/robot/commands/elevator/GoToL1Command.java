@@ -23,11 +23,11 @@ public class GoToL1Command extends Command {
 
    @Override
    public void execute() {
-      if (elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.L1Position - 1)
+      if (elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.FeederPosition - 1)
       {
          elevatorSubsystem.setSpeed(Constants.ElevatorConstants.UPSPEED);
       }
-      else if (elevatorSubsystem.getPosition() > Constants.ElevatorConstants.L1Position + 1)
+      else if (elevatorSubsystem.getPosition() > Constants.ElevatorConstants.FeederPosition + 1)
       {
          elevatorSubsystem.setSpeed(-Constants.ElevatorConstants.DOWNSPEED);
       }
@@ -38,8 +38,8 @@ public class GoToL1Command extends Command {
    @Override
    public boolean isFinished() {
       // TODO: Make this return true when this Command no longer needs to run execute()
-      boolean test = elevatorSubsystem.getPosition() > Constants.ElevatorConstants.L1Position - 1;
-      boolean test2 = elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.L1Position + 1;
+      boolean test = elevatorSubsystem.getPosition() > Constants.ElevatorConstants.FeederPosition - 1;
+      boolean test2 = elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.FeederPosition + 1;
       return test && test2;
    }
 

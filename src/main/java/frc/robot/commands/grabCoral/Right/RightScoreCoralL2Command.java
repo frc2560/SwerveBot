@@ -18,7 +18,7 @@ public class RightScoreCoralL2Command extends SequentialCommandGroup {
         super(
                 new AlignWithTag(
                         swervesubsystem,
-                        Constants.AlignToTag.RightReef_AREA_STAGE,
+                        Constants.AlignToTag.RightReef_AREA_L2L3,
                         Constants.AlignToTag.RightReef_Y_STAGE,
                         Constants.AlignToTag.RightReef_OMEGA_STAGE),
                 new GoToL2Command(elevatorSubsystem),

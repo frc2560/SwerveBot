@@ -15,6 +15,7 @@ import frc.robot.commands.coral.*;
 import frc.robot.commands.algae.*;
 import frc.robot.commands.elevator.*;
 import frc.robot.commands.grabCoral.GetCoralFeederCommandGroup;
+import frc.robot.commands.grabCoral.Left.LeftScoreCoralL2Command;
 import frc.robot.commands.grabCoral.Left.LeftScoreCoralL3Command;
 import frc.robot.commands.grabCoral.Left.LeftScoreCoralL4Command;
 import frc.robot.commands.grabCoral.Right.RightScoreCoralL3Command;
@@ -114,6 +115,7 @@ public class RobotContainer {
         driverControllerSubsystem.button8.whileTrue(new GoToL1Command(elevatorSubsystem));
         driverControllerSubsystem.button9.whileTrue(new GoToL3Command(elevatorSubsystem));
         driverControllerSubsystem.button10.whileTrue(new GoToL4Command(elevatorSubsystem));
+        driverControllerSubsystem.button11.whileTrue(new LeftScoreCoralL2Command(coralSubsystem, elevatorSubsystem, s_Swerve));
 
         driverControllerSubsystem.button12.whileTrue(Commands.run(s_Swerve::resetBot));
 

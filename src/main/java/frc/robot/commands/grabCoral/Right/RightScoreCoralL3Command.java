@@ -20,7 +20,7 @@ public class RightScoreCoralL3Command extends SequentialCommandGroup {
                // new TurnToAngleCommand(swervesubsystem),
                 new AlignWithTag(
                         swervesubsystem,
-                        Constants.AlignToTag.RightReef_AREA_STAGE,
+                        Constants.AlignToTag.RightReef_AREA_L2L3,
                         Constants.AlignToTag.RightReef_Y_STAGE,
                         Constants.AlignToTag.RightReef_OMEGA_STAGE).withTimeout(2),
                 new GoToL3Command(elevatorSubsystem),

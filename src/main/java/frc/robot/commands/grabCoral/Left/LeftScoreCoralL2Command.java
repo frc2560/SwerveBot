@@ -18,9 +18,9 @@ public class LeftScoreCoralL2Command extends SequentialCommandGroup {
         super(
                 new AlignWithTag(
                         swervesubsystem,
-                        Constants.AlignToTag.LeftReef_AREA_STAGE,
+                        Constants.AlignToTag.LeftReef_AREA_L2L3,
                         Constants.AlignToTag.LeftReef_Y_STAGE,
-                        Constants.AlignToTag.LeftReef_OMEGA_STAGE),
+                        Constants.AlignToTag.LeftReef_OMEGA_STAGE).withTimeout(2),
                 new GoToL2Command(elevatorSubsystem),
                 new SetCoralArmL1L2L3Command(coralSubsystem),
                 new CoralOutTakeCommand(coralSubsystem).withTimeout(1),

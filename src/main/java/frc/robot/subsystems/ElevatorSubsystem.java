@@ -6,6 +6,8 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import com.revrobotics.*;
@@ -18,7 +20,9 @@ public  class ElevatorSubsystem extends SubsystemBase {
     private final DigitalInput elevatorBottomSwitch;
     private final RelativeEncoder elevatorEncoder;
 
+
     public ElevatorSubsystem() {
+
         SparkMaxConfig config = new SparkMaxConfig();
         config
                 .idleMode(SparkBaseConfig.IdleMode.kBrake);
@@ -31,6 +35,7 @@ public  class ElevatorSubsystem extends SubsystemBase {
     public void setSpeed(double speed) {
         elevatorMotor.set(speed);
     }
+
 
 
     public boolean getBottomSwitch() {

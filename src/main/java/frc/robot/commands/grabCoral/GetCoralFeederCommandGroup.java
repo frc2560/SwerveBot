@@ -16,7 +16,8 @@ public class GetCoralFeederCommandGroup extends SequentialCommandGroup {
         // TODO: Add your sequential commands in the super() call, e.g.
         //           super(new OpenClawCommand(), new MoveArmCommand());
         super(
-                new GoToL1Command(elevatorSubsystem).alongWith(new SetCoralArmFeederCommand(coralSubsystem)),
+                new GoToL1Command(elevatorSubsystem),
+                new SetCoralArmFeederCommand(coralSubsystem),
                 new CoralIntakeCommand(coralSubsystem),
                 new RaiseCoralArmCommand(coralSubsystem),
                 new GoToBottomCommand(elevatorSubsystem)
