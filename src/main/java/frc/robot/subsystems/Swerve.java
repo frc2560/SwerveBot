@@ -303,7 +303,7 @@ public class Swerve extends SubsystemBase {
         if(limelightMeasurement != null) {
             SmartDashboard.putNumber("TagCount", limelightMeasurement.rawFiducials.length);
             if (limelightMeasurement.rawFiducials.length >= 1) {
-                poseEstimate.setVisionMeasurementStdDevs(VecBuilder.fill(0.2, 0.2, 9999999));
+                poseEstimate.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
                 poseEstimate.addVisionMeasurement(
                         limelightMeasurement.pose,
                         limelightMeasurement.timestampSeconds

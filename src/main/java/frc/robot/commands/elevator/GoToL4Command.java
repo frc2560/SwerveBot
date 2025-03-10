@@ -27,7 +27,7 @@ public class GoToL4Command extends Command {
 
    @Override
    public void execute() {
-      var elevatorSpeed = MathUtil.clamp(elevatorController.calculate(elevatorSubsystem.getPosition(), Constants.ElevatorConstants.L4Position), -Constants.ElevatorConstants.DOWNSPEED , -Constants.ElevatorConstants.UPSPEED);
+      var elevatorSpeed = MathUtil.clamp(elevatorController.calculate(elevatorSubsystem.getPosition(), Constants.ElevatorConstants.L4Position), -Constants.ElevatorConstants.DOWNSPEED , Constants.ElevatorConstants.UPSPEED);
       if (elevatorController.atSetpoint()){
          elevatorSpeed = 0;
       }
