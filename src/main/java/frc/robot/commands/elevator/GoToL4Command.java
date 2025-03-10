@@ -21,29 +21,25 @@ public class GoToL4Command extends Command {
 
    @Override
    public void initialize() {
+      elevatorController.setTolerance(0.1);
 
    }
 
    @Override
    public void execute() {
-      if (elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.L4Position - 1)
-      {
-         elevatorSubsystem.setSpeed(Constants.ElevatorConstants.UPSPEED);
+      var elevatorSpeed = MathUtil.clamp(elevatorController.calculate(elevatorSubsystem.getPosition(), Constants.ElevatorConstants.L4Position), -Constants.ElevatorConstants.DOWNSPEED , -Constants.ElevatorConstants.UPSPEED);
+      if (elevatorController.atSetpoint()){
+         elevatorSpeed = 0;
       }
-      else if (elevatorSubsystem.getPosition() > Constants.ElevatorConstants.L4Position + 1)
-      {
-         elevatorSubsystem.setSpeed(-Constants.ElevatorConstants.DOWNSPEED);
-      }
-
-
+      elevatorSubsystem.setSpeed(elevatorSpeed);
    }
+
+
 
    @Override
    public boolean isFinished() {
       // TODO: Make this return true when this Command no longer needs to run execute()
-      boolean test = elevatorSubsystem.getPosition() > Constants.ElevatorConstants.L4Position - 1;
-      boolean test2 = elevatorSubsystem.getPosition() <= Constants.ElevatorConstants.L4Position + 1;
-      return test && test2;
+      return elevatorController.atSetpoint();
    }
 
    @Override
