@@ -21,7 +21,7 @@ public class TurnToAngleCommand extends Command {
 
     static {
         tagAngles.put(6, 300.0);
-        tagAngles.put(7, 0.0);
+        tagAngles.put(7, 120.0); //todo fix
         tagAngles.put(8, 60.0);
         tagAngles.put(9, 120.0);
         tagAngles.put(10, 180.0);
@@ -45,7 +45,7 @@ public class TurnToAngleCommand extends Command {
         // add 180.0 to each tag
         LimelightHelpers.SetFiducialDownscalingOverride(Constants.Sensor.LIMELIGHT, 2.0f);
         int tagNumber = (int)LimelightHelpers.getFiducialID(Constants.Sensor.LIMELIGHT);
-        this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) + 180.0 : 0.0;
+        this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) + 180 : 0.0;
         addRequirements(this.swerve);
 
     }

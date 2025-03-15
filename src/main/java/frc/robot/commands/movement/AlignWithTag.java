@@ -14,9 +14,9 @@ public class AlignWithTag extends Command {
   //private static final int TAG_TO_CHASE = 2;
 
   private final Swerve drivetrainSubsystem;
-  private final PIDController taController;
-  private final PIDController tyController;
-  private final PIDController txController;
+  private  PIDController taController;// = new PIDController(0.05, 0, 0);
+  private  PIDController tyController;// = new PIDController(0.05, 0, 0);
+  private  PIDController txController;//= new PIDController(0.05, 0, 0);
 
   private final double SET_AREA;
   private final double SET_Y;
@@ -25,16 +25,16 @@ public class AlignWithTag extends Command {
   public AlignWithTag(Swerve drivetrainSubsystem, double area, double y, double x) {
     this.drivetrainSubsystem = drivetrainSubsystem;
 
-    double p = SmartDashboard.getNumber("AlignWithTag/P",0.05);
-    double i = SmartDashboard.getNumber("AlignWithTag/I",0);
-    double d = SmartDashboard.getNumber("AlignWithTag/D",0);
+    double p = 0.05;
+    double i = 0;
+    double d = 0;
 
-    double taTolerance= SmartDashboard.getNumber("AlignWithTag/TA",0.2);
-    double tyTolerance= SmartDashboard.getNumber("AlignWithTag/TY",0.5);
-    double txTolerance= SmartDashboard.getNumber("AlignWithTag/TA",0.5);
-
-    taController = new PIDController(p, i, d);
-    tyController = new PIDController(p, i, d);
+    double taTolerance= 0.2;
+    double tyTolerance= 0.5;
+    double txTolerance= 0.4;
+//
+   taController = new PIDController(p, i, d);
+   tyController = new PIDController(p, i, d);
     txController = new PIDController(p, i, d);
 
     //x was 1
@@ -45,9 +45,16 @@ public class AlignWithTag extends Command {
     SET_X = x;
 
     taController.setTolerance(taTolerance);
-    tyController.setTolerance(tyTolerance);
-    txController.setTolerance(txTolerance);
+   tyController.setTolerance(tyTolerance);
+   txController.setTolerance(txTolerance);
 
+   taController.setIntegratorRange(0, 10);
+    tyController.setIntegratorRange(-30, 30);
+    txController.setIntegratorRange(-30, 30);
+
+    //taController.setTolerance(0.2);
+    //tyController.setTolerance(0.5);
+    //txController.setTolerance(0.2);
     addRequirements(drivetrainSubsystem);
   }
 
@@ -55,8 +62,6 @@ public class AlignWithTag extends Command {
   public void initialize() {
     //LimelightHelpers.SetFiducialIDFiltersOverride(Constants.Sensor.LIMELIGHT, new int[]{TAG_TO_CHASE});
     LimelightHelpers.SetFiducialDownscalingOverride(Constants.Sensor.LIMELIGHT, 2.0f);
-    //xController.setSetpoint(5);
-    //yController.setSetpoint(0);
   }
 
   @Override
@@ -90,10 +95,10 @@ public class AlignWithTag extends Command {
         omegaSpeed = 0;
       }
 
-      drivetrainSubsystem.drive(new Translation2d(xSpeed, omegaSpeed).times(Constants.Swerve.maxSpeed),0
+      drivetrainSubsystem.drive(new Translation2d(xSpeed,omegaSpeed).times(Constants.Swerve.maxSpeed),0
               ,
               false,
-              false);
+              true);
     }
   }
 

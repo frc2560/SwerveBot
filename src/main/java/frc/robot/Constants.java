@@ -26,20 +26,20 @@ public final class Constants {
         public static final double CenterReef_OMEGA_STAGE = 3.28;
         public static final double CenterReef_OMEGA_REEF = -4.13;
 
-        public static final double LeftReef_AREA_L2L3 = 8;
-        public static final double LeftReef_AREA_L4 = 9.5;
+        public static final double LeftReef_AREA_L2L3 = 8.0;
+        public static final double LeftReef_AREA_L4 = 8.7;
         public static final double LeftReef_Y_STAGE = 0.8;
         public static final double LeftReef_Y_REEF = 19.77;
-        public static final double LeftReef_OMEGA_STAGE = 24.0;
+        public static final double LeftReef_OMEGA_STAGE = 25.0;
         public static final double LeftReef_OMEGA_REEF = 4.55;
 
-        public static final double RightReef_AREA_L2L3 = 8;
-        public static final double RightReef_AREA_L4 = 9.5;
+        public static final double RightReef_AREA_L2L3 = 8.2;
+        public static final double RightReef_AREA_L4 = 8.7;
 
         public static final double RightReef_Y_STAGE = 2.5;
         public static final double RightReef_Y_REEF = 4.77;
 
-        public static final double RightReef_OMEGA_STAGE = -23;
+        public static final double RightReef_OMEGA_STAGE = -22;
         public static final double RightReef_OMEGA_REEF = -3.44;
 
 
@@ -117,12 +117,12 @@ public final class Constants {
         //TODO make limit switch
         public static final int C_UPPER_LIMIT = 3;
         public static double IntakeSpeed = 0.6;
-        public static double OutTakeSpeed = 0.2;
+        public static double OutTakeSpeed = 0.6;
         public static double ArmSpeed = 0.3;
         //TODO
-        public static double IntakePosition = 5;
-        public static double OuttakeL1L2L3Position = 13;
-        public static double OuttakeL4Position = 15;
+        public static double IntakePosition = 7;
+        public static double OuttakeL1L2L3Position = 15;
+        public static double OuttakeL4Position = 16;
         public static double ArmUpPosition = 0;
         //TODO
         public static int PhotoSensor = 1;
@@ -270,15 +270,15 @@ public final class Constants {
         public static final int ELEVATOR_MOTOR = 20;
         public static final int ELEVATOR_BOTTOM_SWITCH = 2;
 
-        public static final double UPSPEED = 0.5;
-        public static final double DOWNSPEED = 0.4;
+        public static final double UPSPEED = 0.7;
+        public static final double DOWNSPEED = 0.5;
 
         public static double BottomPosition = 0;
         public static double L1AlgaePosition = 25;
         public static double L2AlgaePosition = 35;
-        public static double FeederPosition = 14;
-        public static double L2Position = 17;
-        public static double L3Position = 38;
-        public static double L4Position = 78;
+        public static double FeederPosition = 13;
+        public static double L2Position = 20;
+        public static double L3Position = 39;
+        public static double L4Position = 77;
     }
 }

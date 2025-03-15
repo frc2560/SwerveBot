@@ -9,7 +9,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 public class GoToBottomCommand extends Command {
     private final ElevatorSubsystem elevatorSubsystem;
-    private final PIDController elevatorController = new PIDController(0.1, 0, 0);
+    private final PIDController elevatorController = new PIDController(0.5, 0, 0);
 
     public GoToBottomCommand(ElevatorSubsystem elevatorSubsystem) {
         this.elevatorSubsystem = elevatorSubsystem;

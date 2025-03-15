@@ -10,7 +10,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 public class GoToL4Command extends Command {
    private final ElevatorSubsystem elevatorSubsystem;
-   private final PIDController elevatorController = new PIDController(0.05, 0, 0 );
+   private final PIDController elevatorController = new PIDController(1, 0, 0 );
 
    public GoToL4Command(ElevatorSubsystem elevatorSubsystem) {
       this.elevatorSubsystem = elevatorSubsystem;
@@ -21,7 +21,8 @@ public class GoToL4Command extends Command {
 
    @Override
    public void initialize() {
-      elevatorController.setTolerance(0.1);
+      elevatorController.setTolerance(0.5);
+      elevatorController.setIntegratorRange(0, 80);
 
    }
 
