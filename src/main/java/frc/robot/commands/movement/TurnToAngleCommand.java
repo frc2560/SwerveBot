@@ -21,7 +21,7 @@ public class TurnToAngleCommand extends Command {
 
     static {
         tagAngles.put(6, 300.0);
-        tagAngles.put(7, 120.0); //todo fix
+        tagAngles.put(7, 0.0); //todo fix
         tagAngles.put(8, 60.0);
         tagAngles.put(9, 120.0);
         tagAngles.put(10, 180.0);

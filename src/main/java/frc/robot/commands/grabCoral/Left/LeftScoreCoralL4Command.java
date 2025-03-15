@@ -20,9 +20,9 @@ public class LeftScoreCoralL4Command extends SequentialCommandGroup {
         super(
                 //new TurnToAngleCommand(swervesubsystem).withTimeout(0.5),
                 new ParallelCommandGroup(
-                new AlignWithTag(swervesubsystem, Constants.AlignToTag.LeftReef_AREA_L4, Constants.AlignToTag.LeftReef_Y_STAGE, Constants.AlignToTag.LeftReef_OMEGA_STAGE),
-                        new GoToL4Command(elevatorSubsystem)
-                ).withTimeout(1.5),
+                new AlignWithTag(swervesubsystem, Constants.AlignToTag.LeftReef_AREA_L4, Constants.AlignToTag.LeftReef_Y_STAGE, Constants.AlignToTag.LeftReef_OMEGA_STAGE)
+                        //new GoToL4Command(elevatorSubsystem)
+                ),
                 new GoToL4Command(elevatorSubsystem),
                 new SetCoralArmL4Command(coralSubsystem),
                 new CoralOutTakeCommand(coralSubsystem).withTimeout(0.75),
