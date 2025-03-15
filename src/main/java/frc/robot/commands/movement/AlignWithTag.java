@@ -28,7 +28,7 @@ public class AlignWithTag extends Command {
 
     taController = new PIDController(0.5, 0, 0.1);
     tyController = new PIDController(0.5, 0, 0.1);
-    txController = new PIDController(0.5, 0, 0.1);
+    txController = new PIDController(0.05, 0, 0.01);
 
     taController.setIntegratorRange(-0.05, 0.05);
     tyController.setIntegratorRange(-0.05, 0.05);
