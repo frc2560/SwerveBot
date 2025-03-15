@@ -25,17 +25,14 @@ public class AlignWithTag extends Command {
   public AlignWithTag(Swerve drivetrainSubsystem, double area, double y, double x) {
     this.drivetrainSubsystem = drivetrainSubsystem;
 
-    double p = SmartDashboard.getNumber("AlignWithTag/P",0.05);
-    double i = SmartDashboard.getNumber("AlignWithTag/I",0);
-    double d = SmartDashboard.getNumber("AlignWithTag/D",0);
 
-    double taTolerance= SmartDashboard.getNumber("AlignWithTag/TA",0.2);
-    double tyTolerance= SmartDashboard.getNumber("AlignWithTag/TY",0.5);
-    double txTolerance= SmartDashboard.getNumber("AlignWithTag/TA",0.5);
+    taController = new PIDController(0.5, 0, 0.1);
+    tyController = new PIDController(0.5, 0, 0.1);
+    txController = new PIDController(0.5, 0, 0.1);
 
-    taController = new PIDController(p, i, d);
-    tyController = new PIDController(p, i, d);
-    txController = new PIDController(p, i, d);
+    taController.setIntegratorRange(-0.05, 0.05);
+    tyController.setIntegratorRange(-0.05, 0.05);
+    txController.setIntegratorRange(-0.05, 0.05);
 
     //x was 1
     //y was 10
@@ -44,9 +41,9 @@ public class AlignWithTag extends Command {
     SET_Y = y;
     SET_X = x;
 
-    taController.setTolerance(taTolerance);
-    tyController.setTolerance(tyTolerance);
-    txController.setTolerance(txTolerance);
+    taController.setTolerance(0.2);
+    tyController.setTolerance(0.5);
+    txController.setTolerance(0.5);
 
     addRequirements(drivetrainSubsystem);
   }
@@ -75,22 +72,22 @@ public class AlignWithTag extends Command {
       double ta = LimelightHelpers.getTA(Constants.Sensor.LIMELIGHT);
 
       // Drive to the target
-      var xSpeed = MathUtil.clamp(taController.calculate(ta, SET_AREA), -0.05, .05);
+      var xSpeed = MathUtil.clamp(taController.calculate(ta, SET_AREA), -0.1, .1);
       if (taController.atSetpoint()) {
         xSpeed = 0;
       }
 
-      var ySpeed =  MathUtil.clamp(tyController.calculate(ty, SET_Y), -0.01, .01);
+      var turnSpeed =  MathUtil.clamp(tyController.calculate(ty, SET_Y), -0.01, .01);
       if (tyController.atSetpoint()) {
+        turnSpeed = 0;
+      }
+
+      var ySpeed = MathUtil.clamp(txController.calculate(tx, SET_X), -0.1, 0.1);
+      if (txController.atSetpoint()) {
         ySpeed = 0;
       }
 
-      var omegaSpeed = MathUtil.clamp(txController.calculate(tx, SET_X), -0.05, 0.05);
-      if (txController.atSetpoint()) {
-        omegaSpeed = 0;
-      }
-
-      drivetrainSubsystem.drive(new Translation2d(xSpeed, omegaSpeed).times(Constants.Swerve.maxSpeed),0
+      drivetrainSubsystem.drive(new Translation2d(xSpeed, ySpeed).times(Constants.Swerve.maxSpeed),0
               ,
               false,
               false);
@@ -100,7 +97,7 @@ public class AlignWithTag extends Command {
   @Override
   public boolean isFinished()
   {
-    return taController.atSetpoint() && tyController.atSetpoint() && txController.atSetpoint();
+    return taController.atSetpoint()&& txController.atSetpoint();
   }
 
   @Override
