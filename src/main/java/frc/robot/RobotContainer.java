@@ -12,15 +12,14 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.climber.LowerClimberArmCommand;
 import frc.robot.commands.climber.RaiseClimberArmCommand;
 import frc.robot.commands.coral.*;
-import frc.robot.commands.algae.*;
 import frc.robot.commands.elevator.*;
-import frc.robot.commands.grabCoral.GetCoralFeederCommandGroup;
-import frc.robot.commands.grabCoral.Left.LeftScoreCoralL2Command;
-import frc.robot.commands.grabCoral.Left.LeftScoreCoralL3Command;
-import frc.robot.commands.grabCoral.Left.LeftScoreCoralL4Command;
-import frc.robot.commands.grabCoral.Right.RightScoreCoralL2Command;
-import frc.robot.commands.grabCoral.Right.RightScoreCoralL3Command;
-import frc.robot.commands.grabCoral.Right.RightScoreCoralL4Command;
+import frc.robot.commands.scoreCoral.GetCoralFeederCommandGroup;
+import frc.robot.commands.scoreCoral.Left.LeftScoreCoralL2Command;
+import frc.robot.commands.scoreCoral.Left.LeftScoreCoralL3Command;
+import frc.robot.commands.scoreCoral.Left.LeftScoreCoralL4Command;
+import frc.robot.commands.scoreCoral.Right.RightScoreCoralL2Command;
+import frc.robot.commands.scoreCoral.Right.RightScoreCoralL3Command;
+import frc.robot.commands.scoreCoral.Right.RightScoreCoralL4Command;
 import frc.robot.commands.movement.TeleopSwerve;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Controllers.*;
@@ -40,7 +39,7 @@ public class RobotContainer {
     public final Swerve s_Swerve = new Swerve();
     public final CoralSubsystem coralSubsystem = new CoralSubsystem();
     public final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
-    public final AlgaeSubsystem algaeSubsystem = new AlgaeSubsystem();
+    //public final AlgaeSubsystem algaeSubsystem = new AlgaeSubsystem();
     public final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
     public final OperatorControllerSubsystem operatorControllerSubsystem = new OperatorControllerSubsystem();
     public final DriverControllerSubsystem driverControllerSubsystem = new DriverControllerSubsystem();
@@ -60,6 +59,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("ScoreOnLevel4Left", new LeftScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
         NamedCommands.registerCommand("ScoreOnLevel3Left", new LeftScoreCoralL3Command(coralSubsystem,elevatorSubsystem, s_Swerve ));
         NamedCommands.registerCommand("CoralFromFeeder", new GetCoralFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve));
+        NamedCommands.registerCommand("ResetPose", (Commands.run(s_Swerve::resetBot)));
+
         autoChooser = AutoBuilder.buildAutoChooser();
         SmartDashboard.putData("Auto Chooser", autoChooser);
 
@@ -112,10 +113,6 @@ public class RobotContainer {
 
 
 
-        //operatorControllerSubsystem.leftYellowButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
-        //operatorControllerSubsystem.leftGreenButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
-       // operatorControllerSubsystem.leftGreenButton.whileTrue((new GetCoralFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve)));
-        //operatorControllerSubsystem.leftYellowButton.whileTrue((s_Swerve.driveToFeederLeft()));
         operatorControllerSubsystem.leftGreenButton.whileTrue(new RaiseClimberArmCommand(climberSubsystem));
         operatorControllerSubsystem.leftYellowButton.whileTrue(new LowerClimberArmCommand(climberSubsystem));
         operatorControllerSubsystem.rightGreenButton.whileTrue(new RaiseCoralArmCommand(coralSubsystem));
@@ -127,10 +124,10 @@ public class RobotContainer {
         //operatorControllerSubsystem.rightBlueButton.whileTrue(new SetCoralArmL1L2L3Command(coralSubsystem));
         operatorControllerSubsystem.rightRedButton.whileTrue(new SetCoralArmL4Command(coralSubsystem));
 
-        operatorControllerSubsystem.leftWhiteButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.leftBlackButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
-        operatorControllerSubsystem.rightBlackButton.whileTrue(new RaiseAlgaeArmCommand(algaeSubsystem));
-        operatorControllerSubsystem.rightWhiteButton.whileTrue(new LowerAlgaeArmCommand(algaeSubsystem));
+       // operatorControllerSubsystem.leftWhiteButton.whileTrue(new AlgaeIntakeCommand(algaeSubsystem));
+        //operatorControllerSubsystem.leftBlackButton.whileTrue(new AlgaeOutTakeCommand(algaeSubsystem));
+        //operatorControllerSubsystem.rightBlackButton.whileTrue(new RaiseAlgaeArmCommand(algaeSubsystem));
+        //operatorControllerSubsystem.rightWhiteButton.whileTrue(new LowerAlgaeArmCommand(algaeSubsystem));
 
 
 

@@ -26,20 +26,20 @@ public final class Constants {
         public static final double CenterReef_OMEGA_STAGE = 3.28;
         public static final double CenterReef_OMEGA_REEF = -4.13;
 
-        public static final double LeftReef_AREA_L2L3 = 8.0;
-        public static final double LeftReef_AREA_L4 = 8.7;
-        public static final double LeftReef_Y_STAGE = 0.8;
+        public static final double LeftReef_AREA_L2L3 = 8.2;
+        public static final double LeftReef_AREA_L4 = 9;
+        public static final double LeftReef_Y_STAGE = 7.27;
         public static final double LeftReef_Y_REEF = 19.77;
-        public static final double LeftReef_OMEGA_STAGE = 25.0;
+        public static final double LeftReef_OMEGA_STAGE = 29.00;
         public static final double LeftReef_OMEGA_REEF = 4.55;
 
         public static final double RightReef_AREA_L2L3 = 8.2;
-        public static final double RightReef_AREA_L4 = 8.7;
+        public static final double RightReef_AREA_L4 = 9;
 
-        public static final double RightReef_Y_STAGE = 2.5;
+        public static final double RightReef_Y_STAGE = 8.25;
         public static final double RightReef_Y_REEF = 4.77;
 
-        public static final double RightReef_OMEGA_STAGE = -22;
+        public static final double RightReef_OMEGA_STAGE = -15;
         public static final double RightReef_OMEGA_REEF = -3.44;
 
 
@@ -276,9 +276,9 @@ public final class Constants {
         public static double BottomPosition = 0;
         public static double L1AlgaePosition = 25;
         public static double L2AlgaePosition = 35;
-        public static double FeederPosition = 13;
+        public static double FeederPosition = 13.5;
         public static double L2Position = 20;
-        public static double L3Position = 39;
-        public static double L4Position = 77;
+        public static double L3Position = 40;
+        public static double L4Position = 76.3;
     }
 }

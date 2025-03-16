@@ -33,12 +33,6 @@
           "data": {
             "pathName": "Loading Station to Reef 4"
           }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ScoreOnLevel4Right"
-          }
         }
       ]
     }

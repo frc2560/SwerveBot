@@ -78,7 +78,7 @@ public class Swerve extends SubsystemBase {
 
                     var alliance = DriverStation.getAlliance();
                     if (alliance.isPresent()) {
-                        return alliance.get() == DriverStation.Alliance.Red;
+                        return alliance.get() == DriverStation.Alliance.Blue;
                     }
                     return false;
                 },
@@ -303,11 +303,11 @@ public class Swerve extends SubsystemBase {
         if(limelightMeasurement != null) {
             SmartDashboard.putNumber("TagCount", limelightMeasurement.rawFiducials.length);
             if (limelightMeasurement.rawFiducials.length >= 1) {
-                poseEstimate.setVisionMeasurementStdDevs(VecBuilder.fill(.7,.7,9999999));
+                /*poseEstimate.setVisionMeasurementStdDevs(VecBuilder.fill(.9,.9,9999999));
                 poseEstimate.addVisionMeasurement(
                         limelightMeasurement.pose,
                         limelightMeasurement.timestampSeconds
-                );
+                );*/
             }
         }
 

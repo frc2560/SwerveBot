@@ -1,4 +1,4 @@
-package frc.robot.commands.grabCoral.Right;
+package frc.robot.commands.scoreCoral.Right;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -18,11 +18,11 @@ import frc.robot.subsystems.Swerve;
 public class RightScoreCoralL4Command extends SequentialCommandGroup {
     public RightScoreCoralL4Command(CoralSubsystem coralSubsystem, ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem) {
         super(
-                //new TurnToAngleCommand(swervesubsystem).withTimeout(0.5),
+                new TurnToAngleCommand(swervesubsystem),
                 new ParallelCommandGroup(
                         new AlignWithTag(swervesubsystem, Constants.AlignToTag.RightReef_AREA_L4 , Constants.AlignToTag.RightReef_Y_STAGE, Constants.AlignToTag.RightReef_OMEGA_STAGE)
-                        //new GoToL4Command(elevatorSubsystem)
-                ),
+                ).withTimeout(3),
+                new TurnToAngleCommand(swervesubsystem),
                 new GoToL4Command(elevatorSubsystem),
                 new SetCoralArmL4Command(coralSubsystem),
                 new CoralOutTakeCommand(coralSubsystem).withTimeout(0.75),

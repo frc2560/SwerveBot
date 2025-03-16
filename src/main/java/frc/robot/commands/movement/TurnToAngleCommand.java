@@ -3,6 +3,7 @@ package frc.robot.commands.movement;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.LimelightHelpers;
@@ -40,18 +41,30 @@ public class TurnToAngleCommand extends Command {
         this.swerve = swerve;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
-        omegaController.setTolerance(3);
+        omegaController.setTolerance(1);
         omegaController.enableContinuousInput(-180, 180);
         // add 180.0 to each tag
         LimelightHelpers.SetFiducialDownscalingOverride(Constants.Sensor.LIMELIGHT, 2.0f);
-        int tagNumber = (int)LimelightHelpers.getFiducialID(Constants.Sensor.LIMELIGHT);
-        this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) + 180 : 0.0;
+
         addRequirements(this.swerve);
 
     }
 
     @Override
     public void initialize() {
+        int tagNumber = (int)LimelightHelpers.getFiducialID(Constants.Sensor.LIMELIGHT);
+         if (DriverStation.getAlliance().isPresent()){
+             if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red)
+            {
+                this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) + 180  : 0.0;
+
+            }
+             else
+             {
+                 this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber)  : 0.0;
+
+             }
+        }
 
     }
 
