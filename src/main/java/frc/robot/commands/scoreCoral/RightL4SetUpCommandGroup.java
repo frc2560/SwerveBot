@@ -13,8 +13,8 @@ import frc.robot.subsystems.Swerve;
 
 public class RightL4SetUpCommandGroup extends SequentialCommandGroup {
     public RightL4SetUpCommandGroup(ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem) {
-        // TODO: Add your sequential commands in the super() call, e.g.
-        //           super(new OpenClawCommand(), new MoveArmCommand());
+        // TODO: Add your sequential commands in the super()
+        //       super(new OpenClawCommand(), new MoveArmCommand());
         super(
                 new TurnToAngleCommand(swervesubsystem),
                 new ParallelCommandGroup(
