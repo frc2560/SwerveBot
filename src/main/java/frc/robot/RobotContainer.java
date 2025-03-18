@@ -17,10 +17,13 @@ import frc.robot.commands.scoreCoral.GetCoralFeederCommandGroup;
 import frc.robot.commands.scoreCoral.Left.LeftScoreCoralL2Command;
 import frc.robot.commands.scoreCoral.Left.LeftScoreCoralL3Command;
 import frc.robot.commands.scoreCoral.Left.LeftScoreCoralL4Command;
+import frc.robot.commands.scoreCoral.LeftL4SetUpCommandGroup;
 import frc.robot.commands.scoreCoral.Right.RightScoreCoralL2Command;
 import frc.robot.commands.scoreCoral.Right.RightScoreCoralL3Command;
 import frc.robot.commands.scoreCoral.Right.RightScoreCoralL4Command;
 import frc.robot.commands.movement.TeleopSwerve;
+import frc.robot.commands.scoreCoral.RightL4SetUpCommandGroup;
+import frc.robot.commands.scoreCoral.TriggerScoreCommand;
 import frc.robot.subsystems.*;
 import frc.robot.subsystems.Controllers.*;
 
@@ -70,7 +73,7 @@ public class RobotContainer {
                         () -> -driverControllerSubsystem.GetXRawAxis(),
                         () -> driverControllerSubsystem.GetYRawAxis(),
                         () -> (driverControllerSubsystem.GetZRawAxis() * 0.25),
-                        () -> driverControllerSubsystem.triggerButton.getAsBoolean()
+                        () -> false
                 )
         );
 
@@ -80,7 +83,7 @@ public class RobotContainer {
                             () -> -driverControllerSubsystem.GetXRawAxis(),
                             () -> driverControllerSubsystem.GetYRawAxis(),
                             () -> 0,
-                            () -> driverControllerSubsystem.triggerButton.getAsBoolean()
+                            () -> false
                     )
             );
 
@@ -98,10 +101,11 @@ public class RobotContainer {
 
 
         /* Driver Buttons */
+        driverControllerSubsystem.triggerButton.whileTrue(new TriggerScoreCommand(coralSubsystem, elevatorSubsystem));
         driverControllerSubsystem.button3.whileTrue(new LeftScoreCoralL3Command(coralSubsystem, elevatorSubsystem, s_Swerve));
         driverControllerSubsystem.button4.whileTrue(new RightScoreCoralL3Command(coralSubsystem, elevatorSubsystem, s_Swerve));
-        driverControllerSubsystem.button5.whileTrue(new LeftScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
-        driverControllerSubsystem.button6.whileTrue(new RightScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button5.whileTrue(new LeftL4SetUpCommandGroup(elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button6.whileTrue(new RightL4SetUpCommandGroup(elevatorSubsystem, s_Swerve));
 
         driverControllerSubsystem.button7.whileTrue(new GoToBottomCommand(elevatorSubsystem));
         driverControllerSubsystem.button8.whileTrue(new GoToL1Command(elevatorSubsystem));

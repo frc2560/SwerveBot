@@ -120,7 +120,7 @@ public final class Constants {
         public static double OutTakeSpeed = 0.6;
         public static double ArmSpeed = 0.3;
         //TODO
-        public static double IntakePosition = 7;
+        public static double IntakePosition = 6;
         public static double OuttakeL1L2L3Position = 15;
         public static double OuttakeL4Position = 16;
         public static double ArmUpPosition = 0;
@@ -275,8 +275,8 @@ public final class Constants {
 
         public static double BottomPosition = 0;
         public static double L1AlgaePosition = 25;
-        public static double L2AlgaePosition = 35;
-        public static double FeederPosition = 13.5;
+        public static double L2AlgaePosition = 29.98;
+        public static double FeederPosition = 11;
         public static double L2Position = 20;
         public static double L3Position = 40;
         public static double L4Position = 76.3;
