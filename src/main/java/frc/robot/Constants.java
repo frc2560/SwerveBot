@@ -26,20 +26,20 @@ public final class Constants {
         public static final double CenterReef_OMEGA_STAGE = 3.28;
         public static final double CenterReef_OMEGA_REEF = -4.13;
 
-        public static final double LeftReef_AREA_L2L3 = 8.2;
-        public static final double LeftReef_AREA_L4 = 9;
-        public static final double LeftReef_Y_STAGE = 7.27;
+        public static final double LeftReef_AREA_L2L3 = 10.5;
+        public static final double LeftReef_AREA_L4 = 10;
+        public static final double LeftReef_Y_STAGE = 10.85;
         public static final double LeftReef_Y_REEF = 19.77;
-        public static final double LeftReef_OMEGA_STAGE = 29.00;
+        public static final double LeftReef_OMEGA_STAGE = 33;
         public static final double LeftReef_OMEGA_REEF = 4.55;
 
-        public static final double RightReef_AREA_L2L3 = 8.2;
-        public static final double RightReef_AREA_L4 = 9;
+        public static final double RightReef_AREA_L2L3 = 10.5;
+        public static final double RightReef_AREA_L4 = 10;
 
-        public static final double RightReef_Y_STAGE = 8.25;
+        public static final double RightReef_Y_STAGE = 12;
         public static final double RightReef_Y_REEF = 4.77;
 
-        public static final double RightReef_OMEGA_STAGE = -15;
+        public static final double RightReef_OMEGA_STAGE = -17;
         public static final double RightReef_OMEGA_REEF = -3.44;
 
 
@@ -106,6 +106,7 @@ public final class Constants {
         public static final double INTAKE_SPEED = 0.8;
         public static final double ARM_SPEED = 0.3;
         public static double UpperArmPosition = 20;
+        public static double LowerArmPosition = 3;
         //TODO
         public static int hasAlgaeSwitch = 4;
     };

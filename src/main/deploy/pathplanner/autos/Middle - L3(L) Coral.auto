@@ -7,31 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Start Right to Reef 1"
+            "pathName": "Middle Start to Reef 21(L)"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "ScoreOnLevel4Right"
+            "name": "ScoreOnLevel3Left"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Reef 1 to Loading Station"
+            "pathName": "Reef 21(L) to Reset"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "CoralFromFeeder"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Loading Station to Reef 4"
+            "name": "ResetPose"
           }
         }
       ]

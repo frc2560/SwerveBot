@@ -66,7 +66,7 @@ public class CoralSubsystem extends SubsystemBase {
 
     public boolean isUpperSwitchPressed()
     {
-        return upperSwitch.get();
+        return !upperSwitch.get();
     }
 
     @Override

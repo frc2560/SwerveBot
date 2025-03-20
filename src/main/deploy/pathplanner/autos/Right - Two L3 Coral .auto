@@ -1,0 +1,61 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right Start to Reef 22(R)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreOnLevel3Right"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Reef 22(R) to Right Feeder"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "CoralFromFeeder"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right Feeder to Reef 17(L)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreOnLevel3Left"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Reef 17(L) to Reset"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetPose"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

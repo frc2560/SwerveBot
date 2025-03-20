@@ -15,7 +15,7 @@ import java.util.Hashtable;
 
 public class TurnToAngleCommand extends Command {
     private final Swerve swerve;
-    private final PIDController  omegaController = new PIDController(0.05, 0, 0);
+    private final PIDController  omegaController = new PIDController(0.03, 0, 0);
 
     // all coral tags with field-relative angles
     private static final Dictionary<Integer, Double> tagAngles = new Hashtable<>();
@@ -70,7 +70,7 @@ public class TurnToAngleCommand extends Command {
 
     @Override
     public void execute() {
-        var omegaSpeed = MathUtil.clamp(omegaController.calculate(swerve.getGyroYaw().getDegrees(), targetAngle), -0.05, 0.05);
+        var omegaSpeed = MathUtil.clamp(omegaController.calculate(swerve.getGyroYaw().getDegrees(), targetAngle), -0.02, 0.02);
         if (omegaController.atSetpoint()) {
             omegaSpeed = 0;
         }
