@@ -37,6 +37,15 @@ public class Swerve extends SubsystemBase {
 
     public Swerve() {
         gyro = new Pigeon2(10, Constants.CANivore);
+        if (DriverStation.getAlliance().isPresent()) {
+            if (DriverStation.getAlliance().get() == DriverStation.Alliance.Blue) {
+                //gyro.setYaw(180);
+            }
+            else
+            {
+                //gyro.setYaw(0);
+        }
+            }
         //gyro.setYaw(0);
 
         mSwerveMods = new SwerveModule[] {
@@ -79,7 +88,7 @@ public class Swerve extends SubsystemBase {
 
                     var alliance = DriverStation.getAlliance();
                     if (alliance.isPresent()) {
-                        return alliance.get() == DriverStation.Alliance.Red;
+                         return alliance.get() == DriverStation.Alliance.Red;
                     }
                     return false;
                 },
