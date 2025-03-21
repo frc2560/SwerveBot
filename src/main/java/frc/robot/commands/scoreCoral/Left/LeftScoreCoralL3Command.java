@@ -16,9 +16,9 @@ import frc.robot.subsystems.Swerve;
 
 
 public class LeftScoreCoralL3Command extends SequentialCommandGroup {
-    public LeftScoreCoralL3Command(CoralSubsystem coralSubsystem, ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem) {
+    public LeftScoreCoralL3Command(CoralSubsystem coralSubsystem, ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem, boolean isAuto) {
         super(
-                new TurnToAngleCommand(swervesubsystem).withTimeout(5),
+                new TurnToAngleCommand(swervesubsystem, isAuto).withTimeout(5),
                 new ParallelCommandGroup(
                         new AlignWithTag(swervesubsystem, Constants.AlignToTag.LeftReef_AREA_L2L3, Constants.AlignToTag.LeftReef_Y_STAGE, Constants.AlignToTag.LeftReef_OMEGA_STAGE),
                         new GoToL3Command(elevatorSubsystem)

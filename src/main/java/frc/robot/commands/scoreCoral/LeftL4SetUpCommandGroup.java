@@ -11,15 +11,15 @@ import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.Swerve;
 
 public class LeftL4SetUpCommandGroup extends SequentialCommandGroup {
-    public LeftL4SetUpCommandGroup(ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem) {
+    public LeftL4SetUpCommandGroup(ElevatorSubsystem elevatorSubsystem, Swerve swervesubsystem, boolean isAuto) {
         // TODO: Add your sequential commands in the super() call, e.g.
         //           super(new OpenClawCommand(), new MoveArmCommand());
         super(
-                new TurnToAngleCommand(swervesubsystem),
+                new TurnToAngleCommand(swervesubsystem, isAuto),
                 new ParallelCommandGroup(
                         new AlignWithTag(swervesubsystem, Constants.AlignToTag.LeftReef_AREA_L4, Constants.AlignToTag.LeftReef_Y_STAGE, Constants.AlignToTag.LeftReef_OMEGA_STAGE)
                 ).withTimeout(3),
-                new TurnToAngleCommand(swervesubsystem),
+                new TurnToAngleCommand(swervesubsystem, isAuto),
                 new GoToL4Command(elevatorSubsystem)
 
 

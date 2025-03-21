@@ -41,6 +41,7 @@ import frc.robot.subsystems.Controllers.*;
 public class RobotContainer {
 
     private final SendableChooser<Command> autoChooser;
+    public boolean isAutonomous = false;
 
 
     /* Subsystems */
@@ -62,10 +63,10 @@ public class RobotContainer {
         // autoChooser = AutoBuilder.buildAutoChooser("My Default Auto");
 
 
-        NamedCommands.registerCommand("ScoreOnLevel4Right", new RightScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
-        NamedCommands.registerCommand("ScoreOnLevel3Right", new RightScoreCoralL3Command(coralSubsystem,elevatorSubsystem, s_Swerve ));
-        NamedCommands.registerCommand("ScoreOnLevel4Left", new LeftScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve));
-        NamedCommands.registerCommand("ScoreOnLevel3Left", new LeftScoreCoralL3Command(coralSubsystem,elevatorSubsystem, s_Swerve ));
+        NamedCommands.registerCommand("ScoreOnLevel4Right", new RightScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve, isAutonomous));
+        NamedCommands.registerCommand("ScoreOnLevel3Right", new RightScoreCoralL3Command(coralSubsystem,elevatorSubsystem, s_Swerve ,isAutonomous));
+        NamedCommands.registerCommand("ScoreOnLevel4Left", new LeftScoreCoralL4Command(coralSubsystem, elevatorSubsystem, s_Swerve, isAutonomous));
+        NamedCommands.registerCommand("ScoreOnLevel3Left", new LeftScoreCoralL3Command(coralSubsystem,elevatorSubsystem, s_Swerve, isAutonomous));
         NamedCommands.registerCommand("CoralFromFeeder", new GetCoralFeederCommandGroup(coralSubsystem, elevatorSubsystem, s_Swerve));
         NamedCommands.registerCommand("ResetPose", (Commands.run(s_Swerve::resetBot)));
 
@@ -107,18 +108,18 @@ public class RobotContainer {
 
         /* Driver Buttons */
         driverControllerSubsystem.triggerButton.whileTrue(new TriggerScoreCommand(coralSubsystem, elevatorSubsystem));
-        driverControllerSubsystem.button3.whileTrue(new LeftScoreCoralL3Command(coralSubsystem, elevatorSubsystem, s_Swerve));
-        driverControllerSubsystem.button4.whileTrue(new RightScoreCoralL3Command(coralSubsystem, elevatorSubsystem, s_Swerve));
-        driverControllerSubsystem.button5.whileTrue(new LeftL4SetUpCommandGroup(elevatorSubsystem, s_Swerve));
-        driverControllerSubsystem.button6.whileTrue(new RightL4SetUpCommandGroup(elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button3.whileTrue(new LeftScoreCoralL3Command(coralSubsystem, elevatorSubsystem, s_Swerve, isAutonomous));
+        driverControllerSubsystem.button4.whileTrue(new RightScoreCoralL3Command(coralSubsystem, elevatorSubsystem, s_Swerve, isAutonomous));
+        driverControllerSubsystem.button5.whileTrue(new LeftL4SetUpCommandGroup(elevatorSubsystem, s_Swerve, isAutonomous));
+        driverControllerSubsystem.button6.whileTrue(new RightL4SetUpCommandGroup(elevatorSubsystem, s_Swerve, isAutonomous));
 
         driverControllerSubsystem.button7.whileTrue(new GoToBottomCommand(elevatorSubsystem));
         driverControllerSubsystem.button8.whileTrue(new GoToL1Command(elevatorSubsystem));
         driverControllerSubsystem.button9.whileTrue(new GoToL4Command(elevatorSubsystem));
         driverControllerSubsystem.button10.whileTrue(Commands.run(s_Swerve::resetBot));
-        driverControllerSubsystem.button11.whileTrue(new LeftScoreCoralL2Command(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button11.whileTrue(new LeftScoreCoralL2Command(coralSubsystem, elevatorSubsystem, s_Swerve, isAutonomous));
 
-        driverControllerSubsystem.button12.whileTrue(new RightScoreCoralL2Command(coralSubsystem, elevatorSubsystem, s_Swerve));
+        driverControllerSubsystem.button12.whileTrue(new RightScoreCoralL2Command(coralSubsystem, elevatorSubsystem, s_Swerve, isAutonomous));
 
 
 

@@ -16,6 +16,7 @@ import java.util.Hashtable;
 public class TurnToAngleCommand extends Command {
     private final Swerve swerve;
     private final PIDController  omegaController = new PIDController(0.03, 0, 0);
+    private final boolean isAuto;
 
     // all coral tags with field-relative angles
     private static final Dictionary<Integer, Double> tagAngles = new Hashtable<>();
@@ -37,8 +38,9 @@ public class TurnToAngleCommand extends Command {
 
     private double targetAngle;
 
-    public TurnToAngleCommand(Swerve swerve) {
+    public TurnToAngleCommand(Swerve swerve, boolean isAuto) {
         this.swerve = swerve;
+        this.isAuto = isAuto;
         // each subsystem used by the command must be passed into the
         // addRequirements() method (which takes a vararg of Subsystem)
         omegaController.setTolerance(1);
@@ -53,17 +55,28 @@ public class TurnToAngleCommand extends Command {
     @Override
     public void initialize() {
         int tagNumber = (int)LimelightHelpers.getFiducialID(Constants.Sensor.LIMELIGHT);
-         if (DriverStation.getAlliance().isPresent()){
-             if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red)
-            {
-                this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) + 180  : 0.0;
+        if(isAuto)
+        {
+            if (DriverStation.getAlliance().isPresent()) {
+            if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red) {
+                this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) : 0.0;
+
+            } else {
+                this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) + 180 : 0.0;
 
             }
-             else
-             {
-                 this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber)  : 0.0;
+        }
+        }
+        else {
+            if (DriverStation.getAlliance().isPresent()) {
+                if (DriverStation.getAlliance().get() == DriverStation.Alliance.Red) {
+                    this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) + 180 : 0.0;
 
-             }
+                } else {
+                    this.targetAngle = tagAngles.get(tagNumber) != null ? tagAngles.get(tagNumber) : 0.0;
+
+                }
+            }
         }
 
     }
