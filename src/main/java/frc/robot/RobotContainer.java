@@ -90,7 +90,7 @@ public class RobotContainer {
                     )
             );
 
-        // Configure the button bindings
+        // Configure the button binding
         configureButtonBindings();
     }
 
