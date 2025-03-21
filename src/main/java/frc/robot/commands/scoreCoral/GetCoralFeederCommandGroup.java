@@ -18,9 +18,7 @@ public class GetCoralFeederCommandGroup extends SequentialCommandGroup {
         super(
                 new GoToL1Command(elevatorSubsystem),
                 new SetCoralArmFeederCommand(coralSubsystem),
-                new CoralIntakeCommand(coralSubsystem).withTimeout(2),
-                new RaiseCoralArmCommand(coralSubsystem),
-                new GoToBottomCommand(elevatorSubsystem)
+                new CoralIntakeCommand(coralSubsystem).withTimeout(10)
         );
     }
 }

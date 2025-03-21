@@ -15,18 +15,6 @@
           "data": {
             "name": "ScoreOnLevel4Left"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Reef 21(L) to Reset"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ResetPose"
-          }
         }
       ]
     }

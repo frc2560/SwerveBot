@@ -26,15 +26,20 @@ public final class Constants {
         public static final double CenterReef_OMEGA_STAGE = 3.28;
         public static final double CenterReef_OMEGA_REEF = -4.13;
 
-        public static final double LeftReef_AREA_L2L3 = 10.5;
-        public static final double LeftReef_AREA_L4 = 10;
+
+        public static final double LeftReef_AREA_L2 = 9.0;
+        public static final double LeftReef_AREA_L3 = 9.7;
+        public static final double LeftReef_AREA_L4 = 8.5;
         public static final double LeftReef_Y_STAGE = 10.85;
         public static final double LeftReef_Y_REEF = 19.77;
-        public static final double LeftReef_OMEGA_STAGE = 33;
+        public static final double LeftReef_OMEGA_STAGE = 32;
         public static final double LeftReef_OMEGA_REEF = 4.55;
 
-        public static final double RightReef_AREA_L2L3 = 10.5;
-        public static final double RightReef_AREA_L4 = 10;
+
+
+        public static final double RightReef_AREA_L2 = 9.0;
+        public static final double RightReef_AREA_L3 = 9.7;
+        public static final double RightReef_AREA_L4 = 8.5;
 
         public static final double RightReef_Y_STAGE = 12;
         public static final double RightReef_Y_REEF = 4.77;
@@ -271,15 +276,15 @@ public final class Constants {
         public static final int ELEVATOR_MOTOR = 20;
         public static final int ELEVATOR_BOTTOM_SWITCH = 2;
 
-        public static final double UPSPEED = 0.7;
-        public static final double DOWNSPEED = 0.5;
+        public static final double UPSPEED = 0.5;
+        public static final double DOWNSPEED = 0.3;
 
         public static double BottomPosition = 0;
         public static double L1AlgaePosition = 25;
         public static double L2AlgaePosition = 29.98;
-        public static double FeederPosition = 11;
+        public static double FeederPosition = 12;
         public static double L2Position = 20;
-        public static double L3Position = 40;
+        public static double L3Position = 43;
         public static double L4Position = 76.3;
     }
 }
